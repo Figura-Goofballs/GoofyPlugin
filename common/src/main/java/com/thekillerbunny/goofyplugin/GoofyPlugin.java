@@ -1,6 +1,6 @@
-package org.figuramc.goofyplugin;
+package com.thekillerbunny.goofyplugin;
 
-import org.figuramc.goofyplugin.screens.ExampleScreen;
+import com.thekillerbunny.goofyplugin.screens.ExampleScreen;
 import org.figuramc.figura.avatar.Avatar;
 import org.figuramc.figura.entries.FiguraAPI;
 import org.figuramc.figura.entries.annotations.FiguraAPIPlugin;

@@ -1,4 +1,4 @@
-package org.figuramc.goofyplugin;
+package com.thekillerbunny.goofyplugin;
 
 import org.figuramc.figura.entries.FiguraPermissions;
 import org.figuramc.figura.entries.annotations.FiguraPermissionsPlugin;
