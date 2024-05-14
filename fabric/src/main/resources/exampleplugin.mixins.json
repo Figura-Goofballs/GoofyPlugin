@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "org.figuramc.exampleplugin.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "minVersion": "0.8",
+  "client": [
+  ],
+  "mixins": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

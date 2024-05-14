@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "${mod_id}",
+  "version": "${version}",
+  "name": "${display_name}",
+  "description": "${description}",
+  "authors": [
+    "${authors}"
+  ],
+  "contact": {
+    "homepage": "https://fabricmc.net/",
+    "sources": "https://github.com/FabricMC/fabric-example-mod"
+  },
+  "license": "Insert License Here",
+  "icon": "assets/examplemod/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "org.figuramc.exampleplugin.fabric.ExamplePluginFabric"
+    ],
+    "figura_api": [
+      "org.figuramc.exampleplugin.ExamplePlugin"
+    ],
+    "figura_permissions": [
+      "org.figuramc.exampleplugin.ExamplePermissionsPlugin"
+    ],
+    "figura_screen": [
+      "org.figuramc.exampleplugin.ExampleScreensPlugin"
+    ],
+    "figura_vanilla_part": [
+      "org.figuramc.exampleplugin.ExampleVanillaPartPlugin"
+    ],
+    "figura_example": [
+      "org.figuramc.exampleplugin.ExampleEventPlugin"
+    ]
+  },
+  "depends": {
+    "fabric": "*",
+    "minecraft": ">=1.20",
+    "figura": ">=${figura_version}"
+  }
+}

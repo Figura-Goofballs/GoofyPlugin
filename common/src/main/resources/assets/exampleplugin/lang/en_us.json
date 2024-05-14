@@ -1,0 +1,6 @@
+{
+  "examplefiguraplugin.gui.examplescreen.ok.tooltip": "Press this to return to the previous screen",
+  "examplefiguraplugin.gui.examplescreen": "Example Screen",
+  "examplefiguraplugin.permissions.value.example_permission": "Example Permission",
+  "examplefiguraplugin.permissions.value.example_permission.tooltip": "This is an example for a permission"
+}
