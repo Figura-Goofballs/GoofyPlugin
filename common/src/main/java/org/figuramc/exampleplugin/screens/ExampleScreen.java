@@ -1,4 +1,4 @@
-package org.figuramc.exampleplugin.screens;
+package org.figuramc.goofyplugin.screens;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
@@ -12,7 +12,7 @@ import org.figuramc.figura.utils.FiguraIdentifier;
 @LuaWhitelist
 public class ExampleScreen extends AbstractPanelScreen {
     public ExampleScreen(Screen parentScreen) {
-        super(parentScreen, Component.translatable("examplefiguraplugin.gui.examplescreen"));
+        super(parentScreen, Component.translatable("goofyfiguraplugin.gui.goofyscreen"));
     }
     private Button exampleButton;
     @Override
@@ -32,7 +32,7 @@ public class ExampleScreen extends AbstractPanelScreen {
         int buttX = entity.getX() + entity.getWidth() / 2;
         int buttY = entity.getY() + entity.getHeight() + 4;
 
-        addRenderableWidget(exampleButton = new Button(buttX - 48, buttY, 20, 20, 0, 0, 20, new FiguraIdentifier("textures/gui/play.png"), 60, 20, Component.translatable("examplefiguraplugin.gui.examplescreen.ok.tooltip"), button -> {
+        addRenderableWidget(exampleButton = new Button(buttX - 48, buttY, 20, 20, 0, 0, 20, new FiguraIdentifier("textures/gui/play.png"), 60, 20, Component.translatable("goofyfiguraplugin.gui.goofyscreen.ok.tooltip"), button -> {
             onClose();
         }));
     }

@@ -1,6 +1,6 @@
-package org.figuramc.exampleplugin.fabric;
+package org.figuramc.goofypluginric;
 
-import org.figuramc.exampleplugin.ExampleExpectPlatform;
+import org.figuramc.goofypluginmpleExpectPlatform;
 import net.fabricmc.loader.api.FabricLoader;
 
 import java.nio.file.Path;

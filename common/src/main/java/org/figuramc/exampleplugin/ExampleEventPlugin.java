@@ -1,4 +1,4 @@
-package org.figuramc.exampleplugin;
+package org.figuramc.goofyplugin;
 
 import com.mojang.datafixers.util.Pair;
 import org.figuramc.figura.entries.FiguraEvent;
@@ -23,7 +23,7 @@ public class ExampleEventPlugin implements FiguraEvent {
     public static LuaEvent EXAMPLE = new LuaEvent();
     @Override
     public String getID() {
-        return ExamplePlugin.PLUGIN_ID;
+        return goofyplugin.PLUGIN_ID;
     }
 
     /**
