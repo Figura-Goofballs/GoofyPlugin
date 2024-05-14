@@ -1,4 +1,4 @@
-package org.figuramc.goofyplugin.screens;
+package com.thekillerbunny.goofyplugin.screens;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;

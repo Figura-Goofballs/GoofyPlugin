@@ -56,15 +56,15 @@
           '';
         };
 
-        codium = pkgs.mkShell {
+        idea = pkgs.mkShell {
           packages = with pkgs; [
             bashInteractive
             jdk17
-            packages.code
+            jetbrains.idea-community
           ];
 
           shellHook = ''
-            exec codium .
+            exec idea-community build.gradle
           '';
         };
 

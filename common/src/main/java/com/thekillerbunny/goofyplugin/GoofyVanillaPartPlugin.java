@@ -1,4 +1,4 @@
-package org.figuramc.goofyplugin;
+package com.thekillerbunny.goofyplugin;
 
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.client.model.EntityModel;

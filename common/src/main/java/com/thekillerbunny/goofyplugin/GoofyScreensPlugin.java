@@ -1,7 +1,7 @@
-package org.figuramc.goofyplugin;
+package com.thekillerbunny.goofyplugin;
 
 import net.minecraft.client.gui.screens.Screen;
-import org.figuramc.goofyplugin.screens.ExampleScreen;
+import com.thekillerbunny.goofyplugin.screens.ExampleScreen;
 import org.figuramc.figura.entries.FiguraScreen;
 import org.figuramc.figura.entries.annotations.FiguraScreenPlugin;
 import org.figuramc.figura.gui.widgets.PanelSelectorWidget;
