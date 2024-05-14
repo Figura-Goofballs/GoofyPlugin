@@ -4,39 +4,42 @@
   "version": "${version}",
   "name": "${display_name}",
   "description": "${description}",
+  "mixin": [
+    "goofyplugin-common.mixins.json"
+  ],
   "authors": [
     "${authors}"
   ],
   "contact": {
     "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "sources": "https://github.com/Figura-Goofballs/GoofyPlugin"
   },
-  "license": "Insert License Here",
-  "icon": "assets/examplemod/icon.png",
+  "license": "LGPL-2.1",
+  "icon": "assets/goofyplugin/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
-      "org.figuramc.exampleplugin.fabric.ExamplePluginFabric"
+      "org.figuramc.goofyplugin.fabric.GoofyPluginFabric"
     ],
     "figura_api": [
-      "org.figuramc.exampleplugin.ExamplePlugin"
+      "org.figuramc.goofyplugin.GoofyPlugin"
     ],
     "figura_permissions": [
-      "org.figuramc.exampleplugin.ExamplePermissionsPlugin"
+      "org.figuramc.goofyplugin.ExamplePermissionsPlugin"
     ],
     "figura_screen": [
-      "org.figuramc.exampleplugin.ExampleScreensPlugin"
+      "org.figuramc.goofyplugin.ExampleScreensPlugin"
     ],
     "figura_vanilla_part": [
-      "org.figuramc.exampleplugin.ExampleVanillaPartPlugin"
+      "org.figuramc.goofyplugin.ExampleVanillaPartPlugin"
     ],
     "figura_example": [
-      "org.figuramc.exampleplugin.ExampleEventPlugin"
+      "org.figuramc.goofyplugin.ExampleEventPlugin"
     ]
   },
   "depends": {
     "fabric": "*",
-    "minecraft": ">=1.20",
+    "minecraft": "${minecraft_version}",
     "figura": ">=${figura_version}"
   }
 }

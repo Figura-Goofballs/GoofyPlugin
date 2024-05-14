@@ -1,4 +1,4 @@
-package org.figuramc.exampleplugin;
+package org.figuramc.goofyplugin;
 
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.client.model.EntityModel;
@@ -20,7 +20,7 @@ import java.util.function.Function;
 public class ExampleVanillaPartPlugin implements FiguraVanillaPart {
     @Override
     public String getID() {
-        return ExamplePlugin.PLUGIN_ID;
+        return GoofyPlugin.PLUGIN_ID;
     }
 
     /**

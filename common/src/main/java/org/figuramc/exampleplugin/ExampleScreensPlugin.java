@@ -1,7 +1,7 @@
-package org.figuramc.exampleplugin;
+package org.figuramc.goofyplugin;
 
 import net.minecraft.client.gui.screens.Screen;
-import org.figuramc.exampleplugin.screens.ExampleScreen;
+import org.figuramc.goofyplugin.screens.ExampleScreen;
 import org.figuramc.figura.entries.FiguraScreen;
 import org.figuramc.figura.entries.annotations.FiguraScreenPlugin;
 import org.figuramc.figura.gui.widgets.PanelSelectorWidget;

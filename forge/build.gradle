@@ -14,8 +14,8 @@ loom {
         convertAccessWideners = true
         extraAccessWideners.add loom.accessWidenerPath.get().asFile.name
 
-        mixinConfig "exampleplugin-common.mixins.json"
-        mixinConfig "exampleplugin.mixins.json"
+        mixinConfig "goofyplugin-common.mixins.json"
+        mixinConfig "goofyplugin.mixins.json"
     }
 }
 

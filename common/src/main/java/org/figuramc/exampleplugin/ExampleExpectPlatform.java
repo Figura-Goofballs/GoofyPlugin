@@ -1,4 +1,4 @@
-package org.figuramc.exampleplugin;
+package org.figuramc.goofyplugin;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
 
@@ -12,9 +12,9 @@ public class ExampleExpectPlatform {
      * platform sub-package, with its class suffixed with {@code Impl}.
      * <p>
      * Example:
-     * Expect: org.figuramc.exampleplugin.ExampleExpectPlatform#getConfigDirectory()
-     * Actual Fabric: org.figuramc.exampleplugin.fabric.ExampleExpectPlatformImpl#getConfigDirectory()
-     * Actual Forge: org.figuramc.exampleplugin.forge.ExampleExpectPlatformImpl#getConfigDirectory()
+     * Expect: org.figuramc.goofyplugin.ExampleExpectPlatform#getConfigDirectory()
+     * Actual Fabric: org.figuramc.goofyplugin.fabric.ExampleExpectPlatformImpl#getConfigDirectory()
+     * Actual Forge: org.figuramc.goofyplugin.forge.ExampleExpectPlatformImpl#getConfigDirectory()
      * <p>
      * <a href="https://plugins.jetbrains.com/plugin/16210-architectury">You should also get the IntelliJ plugin to help with @ExpectPlatform.</a>
      */

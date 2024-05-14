@@ -44,7 +44,7 @@
           shellHook = ''
             ./gradlew build
           '';
-        }
+        };
 
         build1_20_4 = {
           packages = with pkgs; [
@@ -54,7 +54,7 @@
           shellHook = ''
             ./gradlew build -Dminecraft_version=1.20.4 -Dfabric_api_version=0.85.0+1.20.4 -Dforge_version=1.20.4-47.1.28 -Dfigura_version=0.1.4+1.20.4
           '';
-        }
+        };
 
         codium = pkgs.mkShell {
           packages = with pkgs; [
