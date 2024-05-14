@@ -1,4 +1,4 @@
-package org.figuramc.exampleplugin;
+package com.thekillerbunny.goofyplugin;
 
 import com.mojang.datafixers.util.Pair;
 import org.figuramc.figura.entries.FiguraEvent;
@@ -17,13 +17,13 @@ import java.util.function.Function;
  *  Entrypoint in fabric.mod.json: figura_event
  */
 @FiguraEventPlugin
-public class ExampleEventPlugin implements FiguraEvent {
+public class GoofyEventPlugin implements FiguraEvent {
 
     @LuaWhitelist
     public static LuaEvent EXAMPLE = new LuaEvent();
     @Override
     public String getID() {
-        return ExamplePlugin.PLUGIN_ID;
+        return GoofyPlugin.PLUGIN_ID;
     }
 
     /**

@@ -1,6 +1,6 @@
-package org.figuramc.exampleplugin;
+package com.thekillerbunny.goofyplugin;
 
-import org.figuramc.exampleplugin.screens.ExampleScreen;
+import com.thekillerbunny.goofyplugin.screens.GoofyScreen;
 import org.figuramc.figura.avatar.Avatar;
 import org.figuramc.figura.entries.FiguraAPI;
 import org.figuramc.figura.entries.annotations.FiguraAPIPlugin;
@@ -21,14 +21,14 @@ import java.util.List;
  */
 @FiguraAPIPlugin
 @LuaWhitelist
-public class ExamplePlugin implements FiguraAPI {
-    public static final String PLUGIN_ID = "examplefiguraplugin";
+public class GoofyPlugin implements FiguraAPI {
+    public static final String PLUGIN_ID = "goofyfiguraplugin";
     public static final Logger LOGGER = LoggerFactory.getLogger(PLUGIN_ID);
     private Avatar avatar;
 
-    public ExamplePlugin() {
+    public GoofyPlugin() {
     }
-    public ExamplePlugin(Avatar avatar) {
+    public GoofyPlugin(Avatar avatar) {
         this.avatar = avatar;
     }
 
@@ -41,7 +41,7 @@ public class ExamplePlugin implements FiguraAPI {
 
     @Override
     public FiguraAPI build(Avatar avatar) {
-        return new ExamplePlugin(avatar);
+        return new GoofyPlugin(avatar);
     }
 
     @Override
@@ -55,7 +55,7 @@ public class ExamplePlugin implements FiguraAPI {
     @Override
     public Collection<Class<?>> getWhitelistedClasses() {
         List<Class<?>> classesToRegister = new ArrayList<>();
-        for (Class<?> aClass : EXAMPLE_PLUGIN_CLASSES) {
+        for (Class<?> aClass : GOOFY_PLUGIN_CLASSES) {
             if (aClass.isAnnotationPresent(LuaWhitelist.class)) {
                 classesToRegister.add(aClass);
             }
@@ -71,9 +71,9 @@ public class ExamplePlugin implements FiguraAPI {
         return List.of();
     }
 
-    public static final Class<?>[] EXAMPLE_PLUGIN_CLASSES = new Class[] {
-            ExamplePlugin.class,
-            ExampleScreen.class
+    public static final Class<?>[] GOOFY_PLUGIN_CLASSES = new Class[] {
+            GoofyPlugin.class,
+            GoofyScreen.class
     };
 
 }

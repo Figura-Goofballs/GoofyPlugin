@@ -1,10 +1,10 @@
-package org.figuramc.exampleplugin;
+package com.thekillerbunny.goofyplugin;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
 
 import java.nio.file.Path;
 
-public class ExampleExpectPlatform {
+public class GoofyExpectPlatform {
     /**
      * This is an example of {@link ExpectPlatform}.
      * <p>
@@ -12,9 +12,9 @@ public class ExampleExpectPlatform {
      * platform sub-package, with its class suffixed with {@code Impl}.
      * <p>
      * Example:
-     * Expect: org.figuramc.exampleplugin.ExampleExpectPlatform#getConfigDirectory()
-     * Actual Fabric: org.figuramc.exampleplugin.fabric.ExampleExpectPlatformImpl#getConfigDirectory()
-     * Actual Forge: org.figuramc.exampleplugin.forge.ExampleExpectPlatformImpl#getConfigDirectory()
+     * Expect: com.thekillerbunny.goofyplugin.ExampleExpectPlatform#getConfigDirectory()
+     * Actual Fabric: com.thekillerbunny.goofyplugin.fabric.ExampleExpectPlatformImpl#getConfigDirectory()
+     * Actual Forge: com.thekillerbunny.goofyplugin.forge.ExampleExpectPlatformImpl#getConfigDirectory()
      * <p>
      * <a href="https://plugins.jetbrains.com/plugin/16210-architectury">You should also get the IntelliJ plugin to help with @ExpectPlatform.</a>
      */

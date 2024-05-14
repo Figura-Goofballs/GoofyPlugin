@@ -1,11 +1,11 @@
-package org.figuramc.exampleplugin.fabric;
+package com.thekillerbunny.goofyplugin.fabric;
 
-import org.figuramc.exampleplugin.ExampleExpectPlatform;
+import com.thekillerbunny.goofyplugin.GoofyExpectPlatform;
 import net.fabricmc.loader.api.FabricLoader;
 
 import java.nio.file.Path;
 
-public class ExampleExpectPlatformImpl {
+public class GoofyExpectPlatformImpl {
     /**
      * This is our actual method to {@link ExampleExpectPlatform#getConfigDirectory()}.
      */
