@@ -1,0 +1,54 @@
+# Gradle
+
+.gradle/
+build/
+out/
+classes/
+
+# Eclipse
+
+*.launch
+
+# Idea
+
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Minecraft
+run/
+runV2/
+
+# VScode
+
+.settings/
+.vscode/
+bin/
+.classpath
+.project
+
+# macOS
+
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Fabric
+
+remappedSrc/
+*.cap
+*.rdc
+/Merged/
+
+# Forge MDK
+
+forge*changelog.txt
+
+# Used for testing against other mods
+libs/*
+output/
+libs/
+.metadata
+.vscode
+.settings

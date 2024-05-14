@@ -1,0 +1,35 @@
+modLoader = "javafml"
+loaderVersion = "[45,)"
+#issueTrackerURL = ""
+license = "Insert License Here"
+
+[[mods]]
+modId = "${mod_id}"
+version = "${version}"
+displayName = "${display_name}"
+authors = "${authors}"
+description = '''
+${description}
+'''
+#logoFile = ""
+
+[[dependencies.${mod_id}]]
+modId = "forge"
+mandatory = true
+versionRange = "[45,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.${mod_id}]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.20.,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.${mod_id}]]
+modId = "figura"
+mandatory = true
+versionRange = "[${figura_version},)"
+ordering = "AFTER"
+side = "BOTH"
