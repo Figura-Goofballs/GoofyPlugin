@@ -1,11 +1,11 @@
-package com.thekillerbunny.goofypluginric;
+package com.thekillerbunny.goofyplugin.fabric;
 
-import com.thekillerbunny.goofypluginmpleExpectPlatform;
+import com.thekillerbunny.goofyplugin.GoofyExpectPlatform;
 import net.fabricmc.loader.api.FabricLoader;
 
 import java.nio.file.Path;
 
-public class ExampleExpectPlatformImpl {
+public class GoofyExpectPlatformImpl {
     /**
      * This is our actual method to {@link ExampleExpectPlatform#getConfigDirectory()}.
      */
