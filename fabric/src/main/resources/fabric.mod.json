@@ -31,7 +31,6 @@
       "com.thekillerbunny.goofyplugin.ExampleScreensPlugin"
     ],
     "figura_vanilla_part": [
-      "com.thekillerbunny.goofyplugin.ExampleVanillaPartPlugin"
     ],
     "figura_example": [
       "com.thekillerbunny.goofyplugin.ExampleEventPlugin"
