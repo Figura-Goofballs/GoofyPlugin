@@ -1,7 +1,7 @@
-package org.figuramc.goofyplugin.forge;
+package com.thekillerbunny.goofyplugin.forge;
 
 import net.minecraftforge.fml.common.Mod;
-import org.figuramc.goofyplugin.GoofyPlugin;
+import com.thekillerbunny.goofyplugin.GoofyPlugin;
 
 /**
  * A mod class is needed for Forge to load the Plugin

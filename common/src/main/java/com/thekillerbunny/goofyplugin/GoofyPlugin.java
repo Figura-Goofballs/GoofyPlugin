@@ -1,6 +1,6 @@
 package com.thekillerbunny.goofyplugin;
 
-import com.thekillerbunny.goofyplugin.screens.ExampleScreen;
+import com.thekillerbunny.goofyplugin.screens.GoofyScreen;
 import org.figuramc.figura.avatar.Avatar;
 import org.figuramc.figura.entries.FiguraAPI;
 import org.figuramc.figura.entries.annotations.FiguraAPIPlugin;
@@ -55,7 +55,7 @@ public class GoofyPlugin implements FiguraAPI {
     @Override
     public Collection<Class<?>> getWhitelistedClasses() {
         List<Class<?>> classesToRegister = new ArrayList<>();
-        for (Class<?> aClass : EXAMPLE_PLUGIN_CLASSES) {
+        for (Class<?> aClass : GOOFY_PLUGIN_CLASSES) {
             if (aClass.isAnnotationPresent(LuaWhitelist.class)) {
                 classesToRegister.add(aClass);
             }
@@ -71,9 +71,9 @@ public class GoofyPlugin implements FiguraAPI {
         return List.of();
     }
 
-    public static final Class<?>[] EXAMPLE_PLUGIN_CLASSES = new Class[] {
+    public static final Class<?>[] GOOFY_PLUGIN_CLASSES = new Class[] {
             GoofyPlugin.class,
-            ExampleScreen.class
+            GoofyScreen.class
     };
 
 }

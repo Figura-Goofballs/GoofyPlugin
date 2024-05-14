@@ -1,6 +1,6 @@
-package org.figuramc.goofyplugin.forge;
+package com.thekillerbunny.goofyplugin.forge;
 
-import org.figuramc.goofyplugin.ExampleExpectPlatform;
+import com.thekillerbunny.goofyplugin.ExampleExpectPlatform;
 import net.minecraftforge.fml.loading.FMLPaths;
 
 import java.nio.file.Path;

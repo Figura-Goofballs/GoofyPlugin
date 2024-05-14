@@ -1,6 +1,6 @@
-package org.figuramc.goofypluginric;
+package com.thekillerbunny.goofypluginric;
 
-import org.figuramc.goofypluginmpleExpectPlatform;
+import com.thekillerbunny.goofypluginmpleExpectPlatform;
 import net.fabricmc.loader.api.FabricLoader;
 
 import java.nio.file.Path;

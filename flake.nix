@@ -20,7 +20,6 @@
           mhutchie.git-graph
           aaron-bond.better-comments
           pkgs.vscode-extensions.redhat.java
-          pkgs.vscode-extensions.vscjava.vscode-maven
           pkgs.vscode-extensions.vscjava.vscode-java-test
           pkgs.vscode-extensions.vscjava.vscode-java-dependency
           pkgs.vscode-extensions.vscjava.vscode-java-debug
@@ -56,15 +55,15 @@
           '';
         };
 
-        idea = pkgs.mkShell {
+        code = pkgs.mkShell {
           packages = with pkgs; [
             bashInteractive
             jdk17
-            jetbrains.idea-community
+            packages.code
           ];
 
           shellHook = ''
-            exec idea-community build.gradle
+            exec codium --verbose .
           '';
         };
 
