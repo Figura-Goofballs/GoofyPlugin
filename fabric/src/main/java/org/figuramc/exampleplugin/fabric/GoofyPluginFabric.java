@@ -1,7 +1,7 @@
-package org.figuramc.goofyplugin.fabric;
+package com.thekillerbunny.goofyplugin.fabric;
 
 import net.fabricmc.api.ModInitializer;
-import org.figuramc.goofyplugin.GoofyPlugin;
+import com.thekillerbunny.goofyplugin.GoofyPlugin;
 
 /**
  * A mod class is not technically needed for Fabric to load the Plugin, but it's still nice to have.

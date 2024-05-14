@@ -1,7 +1,7 @@
 package com.thekillerbunny.goofyplugin;
 
 import net.minecraft.client.gui.screens.Screen;
-import com.thekillerbunny.goofyplugin.screens.ExampleScreen;
+import com.thekillerbunny.goofyplugin.screens.GoofyScreen;
 import org.figuramc.figura.entries.FiguraScreen;
 import org.figuramc.figura.entries.annotations.FiguraScreenPlugin;
 import org.figuramc.figura.gui.widgets.PanelSelectorWidget;
@@ -12,10 +12,10 @@ import org.figuramc.figura.gui.widgets.PanelSelectorWidget;
  *  Entrypoint in fabric.mod.json: figura_screen
  */
 @FiguraScreenPlugin
-public class ExampleScreensPlugin implements FiguraScreen {
+public class GoofyScreensPlugin implements FiguraScreen {
     @Override
     public Screen getScreen(Screen parentScreen) {
-        return new ExampleScreen(parentScreen);
+        return new GoofyScreen(parentScreen);
     }
 
     @Override

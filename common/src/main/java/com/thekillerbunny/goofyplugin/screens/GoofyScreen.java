@@ -10,8 +10,8 @@ import org.figuramc.figura.lua.LuaWhitelist;
 import org.figuramc.figura.utils.FiguraIdentifier;
 
 @LuaWhitelist
-public class ExampleScreen extends AbstractPanelScreen {
-    public ExampleScreen(Screen parentScreen) {
+public class GoofyScreen extends AbstractPanelScreen {
+    public GoofyScreen(Screen parentScreen) {
         super(parentScreen, Component.translatable("goofyfiguraplugin.gui.goofyscreen"));
     }
     private Button exampleButton;

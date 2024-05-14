@@ -19,22 +19,22 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "org.figuramc.goofyplugin.fabric.GoofyPluginFabric"
+      "com.thekillerbunny.goofyplugin.fabric.GoofyPluginFabric"
     ],
     "figura_api": [
-      "org.figuramc.goofyplugin.GoofyPlugin"
+      "com.thekillerbunny.goofyplugin.GoofyPlugin"
     ],
     "figura_permissions": [
-      "org.figuramc.goofyplugin.ExamplePermissionsPlugin"
+      "com.thekillerbunny.goofyplugin.ExamplePermissionsPlugin"
     ],
     "figura_screen": [
-      "org.figuramc.goofyplugin.ExampleScreensPlugin"
+      "com.thekillerbunny.goofyplugin.ExampleScreensPlugin"
     ],
     "figura_vanilla_part": [
-      "org.figuramc.goofyplugin.ExampleVanillaPartPlugin"
+      "com.thekillerbunny.goofyplugin.ExampleVanillaPartPlugin"
     ],
     "figura_example": [
-      "org.figuramc.goofyplugin.ExampleEventPlugin"
+      "com.thekillerbunny.goofyplugin.ExampleEventPlugin"
     ]
   },
   "depends": {

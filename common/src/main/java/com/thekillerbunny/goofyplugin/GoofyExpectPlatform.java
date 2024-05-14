@@ -4,7 +4,7 @@ import dev.architectury.injectables.annotations.ExpectPlatform;
 
 import java.nio.file.Path;
 
-public class ExampleExpectPlatform {
+public class GoofyExpectPlatform {
     /**
      * This is an example of {@link ExpectPlatform}.
      * <p>
