@@ -9,19 +9,32 @@ import org.figuramc.figura.lua.FiguraLuaRuntime;
 import org.figuramc.figura.lua.LuaNotNil;
 import org.figuramc.figura.lua.LuaWhitelist;
 import org.figuramc.figura.lua.docs.LuaMethodDoc;
+import org.figuramc.figura.lua.docs.LuaMethodOverload;
 
 @LuaWhitelist
 public class GoofyAPI {
     private final FiguraLuaRuntime runtime;
     private final Avatar owner;
 
-    public GoofyAPI(Avatar avatar, FiguraLuaRuntime runtime) {
+    public GoofyAPI(FiguraLuaRuntime runtime) {
         this.runtime = runtime;
         this.owner = runtime.owner;
     }
 
     @LuaWhitelist
-    @LuaMethodDoc("goofy.regex_match")
+    @LuaMethodDoc(
+        overloads = {
+            @LuaMethodOverload(
+                argumentTypes = String.class,
+                argumentNames = "str"
+            ),
+            @LuaMethodOverload(
+                argumentTypes = String.class,
+                argumentNames = "pattern"
+            )
+        },
+        value = "goofy.regex_match"
+    )
     public String[] regexMatch(@LuaNotNil String str, @LuaNotNil String pattern) {
         Pattern goofyPattern = Pattern.compile(pattern);
         Matcher matcher = goofyPattern.matcher(str);
@@ -36,7 +49,23 @@ public class GoofyAPI {
     }
 
     @LuaWhitelist
-    @LuaMethodDoc("goofy.regex_sub")
+    @LuaMethodDoc(
+        overloads = {
+            @LuaMethodOverload(
+                argumentTypes = String.class,
+                argumentNames = "str"
+            ),
+            @LuaMethodOverload(
+                argumentTypes = String.class,
+                argumentNames = "pattern"
+            ),
+            @LuaMethodOverload(
+                argumentTypes = String.class,
+                argumentNames = "replacement"
+            )
+        },
+        value = "goofy.regex_sub"
+    )
     public String regexSub(@LuaNotNil String str, @LuaNotNil String pattern, @LuaNotNil String replacement) {
         return str.replaceAll(pattern, replacement);
     }
