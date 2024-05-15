@@ -10,8 +10,10 @@ import org.figuramc.figura.lua.LuaNotNil;
 import org.figuramc.figura.lua.LuaWhitelist;
 import org.figuramc.figura.lua.docs.LuaMethodDoc;
 import org.figuramc.figura.lua.docs.LuaMethodOverload;
+import org.figuramc.figura.lua.docs.LuaTypeDoc;
 
 @LuaWhitelist
+@LuaTypeDoc(name = "GoofyAPI", value = "goofy")
 public class GoofyAPI {
     private final FiguraLuaRuntime runtime;
     private final Avatar owner;
