@@ -27,12 +27,8 @@ public class GoofyAPI {
     @LuaMethodDoc(
         overloads = {
             @LuaMethodOverload(
-                argumentTypes = String.class,
-                argumentNames = "str"
-            ),
-            @LuaMethodOverload(
-                argumentTypes = String.class,
-                argumentNames = "pattern"
+                argumentTypes = {String.class, String.class},
+                argumentNames = {"str", "pattern"}
             )
         },
         value = "goofy.regex_match"
@@ -54,16 +50,8 @@ public class GoofyAPI {
     @LuaMethodDoc(
         overloads = {
             @LuaMethodOverload(
-                argumentTypes = String.class,
-                argumentNames = "str"
-            ),
-            @LuaMethodOverload(
-                argumentTypes = String.class,
-                argumentNames = "pattern"
-            ),
-            @LuaMethodOverload(
-                argumentTypes = String.class,
-                argumentNames = "replacement"
+                argumentTypes = {String.class, String.class, String.class},
+                argumentNames = {"str", "pattern", "replacement"}
             )
         },
         value = "goofy.regex_sub"
