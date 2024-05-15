@@ -11,5 +11,5 @@
   "figura.docs.goofy.info_to_log": "Logs data to the Minecraft Log as an info mesage.",
   "figura.docs.goofy.warn_to_log": "Logs data to the Minecraft Log as a warning.",
   "figura.docs.goofy.error_to_log": "Logs data to the Minecraft Log as an error.",
-  "figura.docs.goofy.trace_to_log": "Logs data to the Minecraft Log as a stacktrace."
+  "figura.docs.goofy.trace_to_log": "Logs data to the Minecraft Log as a stacktrace.\nThis will only show up if your Minecraft instance has\ndebug logging enabled."
 }
