@@ -1,4 +1,4 @@
-#vim:ft=nix:ts=2:sts=2:sw=2:et:
+# vim:ft=nix:ts=2:sts=2:sw=2:et:
 {
   description = "A dev environment for java";
 
@@ -15,6 +15,7 @@
     nix-vscode-extensions,
   }:
     flake-utils.lib.eachDefaultSystem (
+      
       system: let
         pkgs = import nixpkgs {
           system = "${system}";
@@ -35,24 +36,43 @@
       in rec {
         name = "goofy-plugin";
         apps = rec {
-          buildFor = vers: {
+          taskFor = vers: task: {
             type = "app";
             program = "${pkgs.writeScript "${name}-build-${vers}" ''
-#!${pkgs.bash}/bin/bash
-              JAVA_HOME=${pkgs.jdk17} ${pkgs.gradle}/bin/gradle build -Dminecraft_version=${vers} -Dfabric_api_version=0.85.0+${vers} -Dfigura_version=0.1.4+${vers}
+              #!${pkgs.bash}/bin/bash
+              JAVA_HOME=${pkgs.jdk17} ${pkgs.gradle}/bin/gradle ${task} -Dminecraft_version=${vers}
             ''}";
           };
-          build = buildFor "1.20.1";
-          build4 = buildFor "1.20.4";
+          build1 = taskFor "1.20.1" "build";
+          build4 = taskFor "1.20.4" "build";
+          run1 = taskFor "1.20.1" "runClient";
+          run4 = taskFor "1.20.4" "runClient";
+          default = run1;
 
           code.type = "app";
           code.program = with pkgs; "${writeScript "${name}-code" ''
-#!${bash}/bin/bash
-            export PATH=${bashInteractive}/bin:${git}/bin:${gradle}/bin:${jdk17}/bin:$PATH
-            exec ${vscodium}/bin/codium --verbose -w .
+            #!${bash}/bin/bash
+            exec nix develop -c ${vscodium}/bin/codium --verbose -w .
           ''}";
         };
+        checks = {
+          dev = pkgs.runCommand "${name}-devShell-check" { inherit (devShells.default) buildInputs; } ''
+            exec > $out
+            command -v java
+            command -v gradle
+            command -v git
+            command -v bash
+          '';
+          fmt = pkgs.runCOmmand "${name}-fmt-check" { buildInputs = [pkgs.nix]; } ''
+            nix fmt -- --check .
+          '';
+        };
         formatter = pkgs.alejandra;
+        devShells.default =
+          pkgs.mkShell {
+            buildInputs = [pkgs.nix pkgs.jdk17 pkgs.gradle pkgs.git pkgs.bashInteractive];
+            shellHook = ''alias nix="nix --experimental-features 'nix-command flakes impure-derivations ca-derivations'"'';
+          };
       }
     );
 }
