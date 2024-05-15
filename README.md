@@ -6,9 +6,5 @@
 </p>
 
 # Links
-[<img src="https://discord.com/api/guilds/1240038278212878436/widget.png">](https://discord.com/invite/7RQYvXDXDQ)  
-[<img src="https://img.shields.io/badge/Modrinth-1bd96a?logo=modrinth&logoColor=ffffff&labelColor=1bd96a">](https://modrinth.com/mod/figura-goofyplugin/)
-
-## Social: [ ![discord][] ](https://discord.com/invite/7RQYvXDXDQ)
-
-## Download: [ ![modrinth] ](https://modrinth.com/mod/figura-goofyplugin/)
+Discord - [<img src="https://discord.com/api/guilds/1240038278212878436/widget.png">](https://discord.com/invite/7RQYvXDXDQ)  
+Download - [<img src="https://img.shields.io/badge/Modrinth-1bd96a?logo=modrinth&logoColor=ffffff&labelColor=1bd96a">](https://modrinth.com/mod/figura-goofyplugin/)
