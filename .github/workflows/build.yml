@@ -26,7 +26,7 @@ jobs:
         run: ./gradlew build -Dminecraft_version=1.20.4
 
       - name: Rename 1.20.1 files (this is a hack)
-        run: find fabric/build/libs/ -type f -name \*1.20.1\* -run rename "s/1.20.1/1.20.4/" {} \;
+        run: find fabric/build/libs/ -type f -name \*1.20.1\* -exec rename "s/1.20.1/1.20.4/" {} \;
 
       - name: Build 1.20.1 using Gradle
         run: ./gradlew build
