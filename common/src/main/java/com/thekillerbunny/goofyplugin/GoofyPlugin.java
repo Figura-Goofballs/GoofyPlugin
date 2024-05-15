@@ -22,7 +22,7 @@ import java.util.List;
 @FiguraAPIPlugin
 @LuaWhitelist
 public class GoofyPlugin implements FiguraAPI {
-    public static final String PLUGIN_ID = "goofyfiguraplugin";
+    public static final String PLUGIN_ID = "GoofyPlugin";
     public static final Logger LOGGER = LoggerFactory.getLogger(PLUGIN_ID);
     private Avatar avatar;
 

@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.figuramc.figura.FiguraMod;
 import org.figuramc.figura.avatar.Avatar;
+import org.figuramc.figura.config.Configs;
 import org.figuramc.figura.lua.FiguraLuaRuntime;
 import org.figuramc.figura.lua.LuaNotNil;
 import org.figuramc.figura.lua.LuaWhitelist;
@@ -13,6 +15,8 @@ import org.figuramc.figura.lua.docs.LuaMethodOverload;
 import org.figuramc.figura.lua.docs.LuaTypeDoc;
 import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
+
+import com.thekillerbunny.goofyplugin.GoofyPlugin;
 
 @LuaWhitelist
 @LuaTypeDoc(name = "GoofyAPI", value = "goofy")
@@ -66,6 +70,86 @@ public class GoofyAPI {
     )
     public String regexSub(@LuaNotNil String str, @LuaNotNil String pattern, @LuaNotNil String replacement) {
         return str.replaceAll(pattern, replacement);
+    }
+
+    @LuaWhitelist
+    @LuaMethodDoc(
+        overloads = {
+            @LuaMethodOverload(
+                argumentTypes = {String.class},
+                argumentNames = {"data"}
+            )
+        },
+        value = "goofy.debug_to_log"
+    )
+    public void debugToLog(@LuaNotNil String data) {
+        if (Configs.LOG_OTHERS.value || FiguraMod.isLocal(owner.owner)) {
+            GoofyPlugin.LOGGER.debug("[" + owner.entityName + "] - " + data);
+        }
+    }
+
+    @LuaWhitelist
+    @LuaMethodDoc(
+        overloads = {
+            @LuaMethodOverload(
+                argumentTypes = {String.class},
+                argumentNames = {"data"}
+            )
+        },
+        value = "goofy.info_to_log"
+    )
+    public void infoToLog(@LuaNotNil String data) {
+        if (Configs.LOG_OTHERS.value || FiguraMod.isLocal(owner.owner)) {
+            GoofyPlugin.LOGGER.info("[" + owner.entityName + "] - " + data);
+        }
+    }
+
+    @LuaWhitelist
+    @LuaMethodDoc(
+        overloads = {
+            @LuaMethodOverload(
+                argumentTypes = {String.class},
+                argumentNames = {"data"}
+            )
+        },
+        value = "goofy.warn_to_log"
+    )
+    public void warnToLog(@LuaNotNil String data) {
+        if (Configs.LOG_OTHERS.value || FiguraMod.isLocal(owner.owner)) {
+            GoofyPlugin.LOGGER.warn("[" + owner.entityName + "] - " + data);
+        }
+    }
+
+    @LuaWhitelist
+    @LuaMethodDoc(
+        overloads = {
+            @LuaMethodOverload(
+                argumentTypes = {String.class},
+                argumentNames = {"data"}
+            )
+        },
+        value = "goofy.error_to_log"
+    )
+    public void errorToLog(@LuaNotNil String data) {
+        if (Configs.LOG_OTHERS.value || FiguraMod.isLocal(owner.owner)) {
+            GoofyPlugin.LOGGER.error("[" + owner.entityName + "] - " + data);
+        }
+    }
+
+    @LuaWhitelist
+    @LuaMethodDoc(
+        overloads = {
+            @LuaMethodOverload(
+                argumentTypes = {String.class},
+                argumentNames = {"data"}
+            )
+        },
+        value = "goofy.trace_to_log"
+    )
+    public void traceToLog(@LuaNotNil String data) {
+        if (Configs.LOG_OTHERS.value || FiguraMod.isLocal(owner.owner)) {
+            GoofyPlugin.LOGGER.trace("[" + owner.entityName + "] - " + data);
+        }
     }
 
     @Override
