@@ -9,4 +9,4 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Ensure TheKillerBunny's email is not exposed
-        run: "! [[ $(git log --author ${ secrets.BUNNY_PERSONAL_EMAIL }) ]]"
+        run: "! [[ $(git log --author ${{ secrets.BUNNY_PERSONAL_EMAIL }}) ]]"
