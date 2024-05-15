@@ -9,7 +9,6 @@
     "FiguraAPIManagerMixin",
     "FiguraDocsManagerMixin",
     "FiguraGlobalsDocsMixin"
-
   ],
   "injectors": {
     "defaultRequire": 1
