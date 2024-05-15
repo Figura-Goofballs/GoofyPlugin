@@ -51,4 +51,10 @@ output/
 libs/
 .metadata
 .vscode
-.settings
+.settings.
+
+# Vim swapfiles
+*.sw?
+
+# Nathan backups
+*~
