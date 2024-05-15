@@ -25,11 +25,11 @@ dependencies {
     compileOnly("com.github.FiguraMC.luaj:luaj-jse:$luaj-figura")
     compileOnly("com.neovisionaries:nv-websocket-client:$nv_websocket")
 
-    modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
-    modApi "net.fabricmc.fabric-api:fabric-api:${rootProject.fabric_api_version}"
+    modImplementation "net.fabricmc:fabric-loader:$fabric_loader_version"
+    modApi "net.fabricmc.fabric-api:fabric-api:$fabric_api_version+$minecraft_version"
 
     // Figura fabric
-    modImplementation("org.figuramc:figura-fabric:$figura_version")
+    modImplementation("org.figuramc:figura-fabric:$figura_version+$minecraft_version")
 
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
