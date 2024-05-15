@@ -11,6 +11,8 @@ import org.figuramc.figura.lua.LuaWhitelist;
 import org.figuramc.figura.lua.docs.LuaMethodDoc;
 import org.figuramc.figura.lua.docs.LuaMethodOverload;
 import org.figuramc.figura.lua.docs.LuaTypeDoc;
+import org.luaj.vm2.LuaTable;
+import org.luaj.vm2.LuaValue;
 
 @LuaWhitelist
 @LuaTypeDoc(name = "GoofyAPI", value = "goofy")
@@ -33,7 +35,7 @@ public class GoofyAPI {
         },
         value = "goofy.regex_match"
     )
-    public String[] regexMatch(@LuaNotNil String str, @LuaNotNil String pattern) {
+    public LuaTable regexMatch(@LuaNotNil String str, @LuaNotNil String pattern) {
         Pattern goofyPattern = Pattern.compile(pattern);
         Matcher matcher = goofyPattern.matcher(str);
         
@@ -43,7 +45,13 @@ public class GoofyAPI {
             matches.add(matcher.group());
         }
 
-        return matches.toArray(new String[0]);
+        LuaTable tbl = new LuaTable();
+        
+        for (int i = 0; i < matches.size(); i++) {
+            tbl.set(i + 1, LuaValue.valueOf(matches.get(i)));
+        }
+
+        return tbl;
     }
 
     @LuaWhitelist
