@@ -71,4 +71,9 @@ public class GoofyAPI {
     public String regexSub(@LuaNotNil String str, @LuaNotNil String pattern, @LuaNotNil String replacement) {
         return str.replaceAll(pattern, replacement);
     }
+
+    @Override
+    public String toString() {
+        return "GoofyAPI";
+    }
 }
