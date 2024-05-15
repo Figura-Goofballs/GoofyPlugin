@@ -152,6 +152,46 @@ public class GoofyAPI {
         }
     }
 
+    @LuaWhitelist
+    @LuaMethodDoc(
+        value = "goofy.is_debug_enabled"
+    )
+    public boolean isDebugEnabled() {
+        return !((!Configs.LOG_OTHERS.value && !FiguraMod.isLocal(owner.owner)) || !GoofyPlugin.LOGGER.isDebugEnabled());
+    }
+
+    @LuaWhitelist
+    @LuaMethodDoc(
+        value = "goofy.is_info_enabled"
+    )
+    public boolean isInfoEnabled() {
+        return !((!Configs.LOG_OTHERS.value && !FiguraMod.isLocal(owner.owner)) || !GoofyPlugin.LOGGER.isInfoEnabled());
+    }
+
+    @LuaWhitelist
+    @LuaMethodDoc(
+        value = "goofy.is_warn_enabled"
+    )
+    public boolean isWarnEnabled() {
+        return !((!Configs.LOG_OTHERS.value && !FiguraMod.isLocal(owner.owner)) || !GoofyPlugin.LOGGER.isWarnEnabled());
+    }
+
+    @LuaWhitelist
+    @LuaMethodDoc(
+        value = "goofy.is_error_enabled"
+    )
+    public boolean isErrorEnabled() {
+        return !((!Configs.LOG_OTHERS.value && !FiguraMod.isLocal(owner.owner)) || !GoofyPlugin.LOGGER.isErrorEnabled());
+    }
+
+    @LuaWhitelist
+    @LuaMethodDoc(
+        value = "goofy.is_trace_enabled"
+    )
+    public boolean isTraceEnabled() {
+        return !((!Configs.LOG_OTHERS.value && !FiguraMod.isLocal(owner.owner)) || !GoofyPlugin.LOGGER.isTraceEnabled());
+    }
+
     @Override
     public String toString() {
         return "GoofyAPI";
