@@ -40,7 +40,7 @@
             type = "app";
             program = "${pkgs.writeScript "${name}-build-${vers}" ''
               #!${pkgs.bash}/bin/bash
-              JAVA_HOME=${pkgs.jdk17} ${pkgs.gradle}/bin/gradle ${task} -Dminecraft_version=${vers}
+              JAVA_HOME=${pkgs.jdk17} ${pkgs.gradle}/bin/gradle ${task} -Dminecraft_version=${vers} "$@"
             ''}";
           };
           build1 = taskFor "1.20.1" "build";
@@ -52,7 +52,7 @@
           code.type = "app";
           code.program = with pkgs; "${writeScript "${name}-code" ''
             #!${bash}/bin/bash
-            exec nix develop -c ${vscodium}/bin/codium --verbose -w .
+            exec nix develop -c ${vscodium}/bin/codium --verbose -w . "$@"
           ''}";
         };
         checks = {
