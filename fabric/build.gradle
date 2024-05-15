@@ -25,11 +25,11 @@ dependencies {
     compileOnly("com.github.FiguraMC.luaj:luaj-jse:$luaj-figura")
     compileOnly("com.neovisionaries:nv-websocket-client:$nv_websocket")
 
-    modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
-    modApi "net.fabricmc.fabric-api:fabric-api:${rootProject.fabric_api_version}"
+    modImplementation "net.fabricmc:fabric-loader:$fabric_loader_version"
+    modApi "net.fabricmc.fabric-api:fabric-api:$fabric_api_version+$minecraft_version"
 
     // Figura fabric
-    modImplementation("org.figuramc:figura-fabric:$figura_version")
+    modImplementation("org.figuramc:figura-fabric:$figura_version+$minecraft_version")
 
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
@@ -39,15 +39,15 @@ processResources {
 Map<String, Object> properties = new HashMap<>()
 
     properties.put("version", project.version)
-    properties.put("java_version", rootProject.java_version)
-    properties.put("minecraft_version", rootProject.minecraft_version)
-    properties.put("figura_version", rootProject.figura_version)
-    properties.put("fabric_api_version", rootProject.fabric_api_version)
-    properties.put("mod_id", rootProject.plugin_id)
-    properties.put("display_name", rootProject.display_name)
-    properties.put("description", rootProject.description)
-    properties.put("authors", rootProject.authors)
-    properties.put("figura_version", rootProject.figura_version)
+    properties.put("java_version", java_version)
+    properties.put("minecraft_version", minecraft_version)
+    properties.put("figura_version", figura_version)
+    properties.put("fabric_api_version", fabric_api_version)
+    properties.put("mod_id", plugin_id)
+    properties.put("display_name", display_name)
+    properties.put("description", description)
+    properties.put("authors", authors)
+    properties.put("figura_version", figura_version)
 
     properties.forEach((k, v) -> inputs.property(k, v.toString()))
     filesMatching("fabric.mod.json") {
@@ -88,7 +88,7 @@ components.java {
 publishing {
     publications {
         mavenFabric(MavenPublication) {
-            artifactId = rootProject.archives_base_name + "-" + project.name
+            artifactId = archives_base_name + "-" + project.name
             from components.java
         }
     }
