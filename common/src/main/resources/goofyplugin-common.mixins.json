@@ -6,7 +6,10 @@
   "client": [
   ],
   "mixins": [
-    "FiguraAPIManagerMixin"
+    "FiguraAPIManagerMixin",
+    "FiguraDocsManagerMixin",
+    "FiguraGlobalsDocsMixin"
+
   ],
   "injectors": {
     "defaultRequire": 1
