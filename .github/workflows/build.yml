@@ -26,7 +26,7 @@ jobs:
         run: ./gradlew build
 
       - name: Upload Fabric artifacts to GitHub
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Fabric-Artifacts
           path: fabric/build/libs/
