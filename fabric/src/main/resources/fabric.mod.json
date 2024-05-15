@@ -4,7 +4,7 @@
   "version": "${version}",
   "name": "${display_name}",
   "description": "${description}",
-  "mixin": [
+  "mixins": [
     "goofyplugin-common.mixins.json"
   ],
   "authors": [
@@ -25,15 +25,15 @@
       "com.thekillerbunny.goofyplugin.GoofyPlugin"
     ],
     "figura_permissions": [
-      "com.thekillerbunny.goofyplugin.ExamplePermissionsPlugin"
+      "com.thekillerbunny.goofyplugin.GoofyPermissionsPlugin"
     ],
     "figura_screen": [
-      "com.thekillerbunny.goofyplugin.ExampleScreensPlugin"
+      "com.thekillerbunny.goofyplugin.GoofyScreensPlugin"
     ],
     "figura_vanilla_part": [
     ],
-    "figura_example": [
-      "com.thekillerbunny.goofyplugin.ExampleEventPlugin"
+    "figura_event": [
+      "com.thekillerbunny.goofyplugin.GoofyEventPlugin"
     ]
   },
   "depends": {
