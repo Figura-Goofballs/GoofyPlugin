@@ -30,7 +30,7 @@ public class GoofyAPI {
         this.owner = runtime.owner;
     }
 
-    public void canLog() {
+    public boolean canLog() {
         return ((Configs.LOG_OTHERS.value || FiguraMod.isLocal(owner.owner)) && owner.permissions.get(GoofyPermissionsPlugin.CAN_LOG) == 1);
     }
 
