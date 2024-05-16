@@ -3,7 +3,7 @@
 # Finally, If the compiled files have been pushed out to the "(something)/build/libs/" directory - It gets uploaded to GitHub.
 
 name: Build GoofyPlugin with Gradle
-on: [pull_request, push]
+on: [push, pull_request]
 
 jobs:
   build:
@@ -22,7 +22,7 @@ jobs:
         run: nix run .#build4
 
       - name: Upload Fabric artifacts to GitHub
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Fabric-Artifacts
           path: fabric/build/libs/

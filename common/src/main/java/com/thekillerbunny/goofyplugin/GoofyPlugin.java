@@ -1,6 +1,5 @@
 package com.thekillerbunny.goofyplugin;
 
-import com.thekillerbunny.goofyplugin.screens.GoofyScreen;
 import org.figuramc.figura.avatar.Avatar;
 import org.figuramc.figura.entries.FiguraAPI;
 import org.figuramc.figura.entries.annotations.FiguraAPIPlugin;
@@ -22,8 +21,8 @@ import java.util.List;
 @FiguraAPIPlugin
 @LuaWhitelist
 public class GoofyPlugin implements FiguraAPI {
-    public static final String PLUGIN_ID = "goofyfiguraplugin";
-    public static final Logger LOGGER = LoggerFactory.getLogger(PLUGIN_ID);
+    public static final String PLUGIN_ID = "goofyplugin";
+    public static final Logger LOGGER = LoggerFactory.getLogger("GoofyPlugin");
     private Avatar avatar;
 
     public GoofyPlugin() {
@@ -73,7 +72,6 @@ public class GoofyPlugin implements FiguraAPI {
 
     public static final Class<?>[] GOOFY_PLUGIN_CLASSES = new Class[] {
             GoofyPlugin.class,
-            GoofyScreen.class
     };
 
 }
