@@ -66,7 +66,7 @@
           fmt = pkgs.runCommand "check-fmt" {
             buildInputs = [pkgs.nix];
           } ''
-            nix fmt -- --check . > $out
+            ${formatter}/bin/${formatter.pname} --check &> $out
           '';
         };
         formatter = pkgs.alejandra;
