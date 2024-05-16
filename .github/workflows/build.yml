@@ -19,6 +19,9 @@ jobs:
       - name: Install Nix
         uses: cachix/install-nix-action@v27
 
+      - name: Run checks
+        run: nix flake check
+
       - name: Build 1.20.1 using Nix
         run: nix run .#build1
 
