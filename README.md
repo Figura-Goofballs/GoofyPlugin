@@ -7,4 +7,4 @@
 
 # Links
 Discord - [<img src="https://discord.com/api/guilds/1240038278212878436/widget.png">](https://discord.com/invite/7RQYvXDXDQ)  
-Download - [<img src="https://img.shields.io/badge/Modrinth-1bd96a?logo=modrinth&logoColor=ffffff&labelColor=1bd96a">](https://modrinth.com/mod/figura-goofyplugin/)
+Download - [<img src="https://img.shields.io/github/actions/workflow/status/Figura-Goofballs/GoofyPlugin/build.yml?labelColor=1bd96a">](https://github.com/Figura-Goofballs/GoofyPlugin/actions/workflows/build.yml)
