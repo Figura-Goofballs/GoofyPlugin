@@ -1,0 +1,20 @@
+{
+  "goofyfiguraplugin.gui.goofyscreen.ok.tooltip": "Press this to return to the previous screen",
+  "goofyfiguraplugin.gui.goofyscreen": "Example Screen",
+  "goofyfiguraplugin.permissions.value.example_permission": "permission",
+  "goofyfiguraplugin.permissions.value.example_permission.tooltip": "permission tooltip",
+  "figura.docs.goofy": "The dumping ground of the figura goofballs",
+  "figura.docs.globals.goofy": "The global instance of GoofyAPI",
+  "figura.docs.goofy.regex_match": "Returns a list of matches based on the specified\npattern.",
+  "figura.docs.goofy.regex_sub": "Returns a string with all matches of the specified\npattern replaced.",
+  "figura.docs.goofy.debug_to_log": "Logs data to the Minecraft Log as a debug message.\nThis will only show up if your Minecraft instance has\ndebug logging enabled.\nCheck with goofy:isDebugEnabled()",
+  "figura.docs.goofy.info_to_log": "Logs data to the Minecraft Log as an info mesage.\nThis will only show up if your Minecraft instance has\ninfo logging enabled (it is by default).\nCheck with goofy:isInfoEnabled()",
+  "figura.docs.goofy.warn_to_log": "Logs data to the Minecraft Log as a warning.\nThis will only show up if your Minecraft instance has\nwarn logging enabled (it is by default).\nCheck with goofy:isWarnEnabled()",
+  "figura.docs.goofy.error_to_log": "Logs data to the Minecraft Log as an error.\nThis will only show up if your Minecraft instance has\nerror logging enabled (it is by default).\nCheck with goofy:isErrorEnabled()",
+  "figura.docs.goofy.trace_to_log": "Logs data to the Minecraft Log as a stacktrace.\nThis will only show up if your Minecraft instance has\ntrace logging enabled.\nCheck with goofy:isTraceEnabled()",
+  "figura.docs.goofy.is_debug_enabled": "Checks if debug logging is enabled",
+  "figura.docs.goofy.is_info_enabled": "Checks if info logging is enabled",
+  "figura.docs.goofy.is_warn_enabled": "Checks if warn logging is enabled",
+  "figura.docs.goofy.is_error_enabled": "Checks if error logging is enabled",
+  "figura.docs.goofy.is_trace_enabled": "Checks if trace logging is enabled"
+}

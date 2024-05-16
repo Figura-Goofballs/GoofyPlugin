@@ -3,7 +3,7 @@
 # Finally, If the compiled files have been pushed out to the "(something)/build/libs/" directory - It gets uploaded to GitHub.
 
 name: Build GoofyPlugin with Gradle
-on: [push]
+on: [push, pull_request]
 
 jobs:
   build:
