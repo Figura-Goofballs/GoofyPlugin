@@ -18,6 +18,9 @@ jobs:
 
       - name: Install Nix
         uses: cachix/install-nix-action@v27
+        with:
+          extra_nix_config: |
+            extra-experimental-features = nix-command flakes
 
       - name: Run checks
         run: nix flake check
