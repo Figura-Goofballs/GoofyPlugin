@@ -40,7 +40,7 @@
             type = "app";
             program = "${pkgs.writeScript "${name}-build-${vers}" ''
               #!${pkgs.bash}/bin/bash
-              JAVA_HOME=${pkgs.jdk17} ${pkgs.gradle}/bin/gradle ${task} -Dminecraft_version=${vers} "$@"
+              JAVA_HOME=${pkgs.jdk17} ${pkgs.gradle}/bin/gradle -Pgradle_name=${pkgs.gradle} -Pminecraft_version=${vers} ${task} "$@"
             ''}";
           };
           build1 = taskFor "1.20.1" "build";
@@ -70,8 +70,7 @@
         formatter = pkgs.alejandra;
         devShells.default =
           pkgs.mkShell {
-            buildInputs = [pkgs.nix pkgs.jdk17 pkgs.gradle pkgs.git pkgs.bashInteractive];
-            shellHook = ''alias nix="nix --experimental-features 'nix-command flakes impure-derivations ca-derivations'"'';
+            buildInputs = [pkgs.nix pkgs.jdk17 pkgs.gradle pkgs.git pkgs.nix pkgs.bashInteractive];
           };
       }
     );
