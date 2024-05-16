@@ -56,7 +56,7 @@
         };
         checks = {
           dev = pkgs.runCommand "check-dev" {inherit (devShells.default) buildInputs;} ''
-            exec > $out
+            exec > >(tee $out)
             command -v java
             command -v gradle
             command -v git
@@ -66,7 +66,7 @@
             pkgs.runCommand "check-fmt" {
               buildInputs = [pkgs.nix];
             } ''
-              ${formatter}/bin/${formatter.pname} --check .
+              ${formatter}/bin/${formatter.pname} --check . | tee $out
             '';
         };
         formatter = pkgs.alejandra;
