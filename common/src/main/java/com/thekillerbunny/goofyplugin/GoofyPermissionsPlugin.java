@@ -19,14 +19,14 @@ public class GoofyPermissionsPlugin implements FiguraPermissions {
      *  Toggleable Permission: Permissions(name {String}, blocked {0, 1}, low {0, 1}, default {0, 1}, high {0,1 }, maximum {0,1})
      *  Slider Permission : Permissions(name {String}, sliderMin {int}, sliderMax {int}, blocked {int}, low {int}, default {int}, high {int}, maximum {int})
      */
-    public static final Permissions EXAMPLE_PERMISSION = new Permissions("example_permission", 0,0,0,1,1);
+    public static final Permissions CAN_LOG = new Permissions("can_log", 0,0,0,1,1);
     @Override
     public String getTitle() {
-        return GoofyPlugin.PLUGIN_ID;
+        return "Goofy Plugin";
     }
 
     @Override
     public Collection<Permissions> getPermissions() {
-        return List.of(EXAMPLE_PERMISSION);
+        return List.of(CAN_LOG);
     }
 }
