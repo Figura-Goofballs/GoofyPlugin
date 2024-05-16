@@ -20,7 +20,7 @@ import java.util.function.Function;
 public class GoofyEventPlugin implements FiguraEvent {
 
     @LuaWhitelist
-    public static LuaEvent EXAMPLE = new LuaEvent();
+    public static LuaEvent EXAMPLE = new LuaEvent()
     @Override
     public String getID() {
         return GoofyPlugin.PLUGIN_ID;
