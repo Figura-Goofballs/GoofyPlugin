@@ -162,7 +162,7 @@ public class GoofyAPI {
         value = "goofy.is_debug_enabled"
     )
     public boolean isDebugEnabled() {
-        return !(!canLog() || !GoofyPlugin.LOGGER.isDebugEnabled());
+        return !(!canLog() || GoofyPlugin.LOGGER.isDebugEnabled());
     }
 
     @LuaWhitelist
@@ -170,7 +170,7 @@ public class GoofyAPI {
         value = "goofy.is_info_enabled"
     )
     public boolean isInfoEnabled() {
-        return !(!canLog() || !GoofyPlugin.LOGGER.isInfoEnabled());
+        return !(!canLog() || GoofyPlugin.LOGGER.isInfoEnabled());
     }
 
     @LuaWhitelist
@@ -178,7 +178,7 @@ public class GoofyAPI {
         value = "goofy.is_warn_enabled"
     )
     public boolean isWarnEnabled() {
-        return !(!canLog() || !GoofyPlugin.LOGGER.isWarnEnabled());
+        return canLog() && GoofyPlugin.LOGGER.isWarnEnabled();
     }
 
     @LuaWhitelist
@@ -186,7 +186,7 @@ public class GoofyAPI {
         value = "goofy.is_error_enabled"
     )
     public boolean isErrorEnabled() {
-        return !(!canLog() || !GoofyPlugin.LOGGER.isErrorEnabled());
+        return canLog() && GoofyPlugin.LOGGER.isErrorEnabled();
     }
 
     @LuaWhitelist
@@ -194,7 +194,7 @@ public class GoofyAPI {
         value = "goofy.is_trace_enabled"
     )
     public boolean isTraceEnabled() {
-        return !(!canLog() || !GoofyPlugin.LOGGER.isTraceEnabled());
+        return canLog() && GoofyPlugin.LOGGER.isTraceEnabled();
     }
 
     @Override
