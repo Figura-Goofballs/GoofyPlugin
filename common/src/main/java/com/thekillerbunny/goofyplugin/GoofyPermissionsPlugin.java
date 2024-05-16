@@ -22,7 +22,7 @@ public class GoofyPermissionsPlugin implements FiguraPermissions {
     public static final Permissions CAN_LOG = new Permissions("can_log", 0,0,0,1,1);
     @Override
     public String getTitle() {
-        return "Goofy Plugin";
+        return GoofyPlugin.PLUGIN_ID;
     }
 
     @Override
