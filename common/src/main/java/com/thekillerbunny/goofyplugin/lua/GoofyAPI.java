@@ -162,7 +162,7 @@ public class GoofyAPI {
         value = "goofy.is_debug_enabled"
     )
     public boolean isDebugEnabled() {
-        return !(!canLog() || GoofyPlugin.LOGGER.isDebugEnabled());
+        return canLog() && GoofyPlugin.LOGGER.isDebugEnabled();
     }
 
     @LuaWhitelist
