@@ -56,7 +56,7 @@
         };
         checks = {
           dev = pkgs.runCommand "check-dev" {inherit (devShells.default) buildInputs;} ''
-            exec > >(tee $out)
+            exec > $out
             command -v java
             command -v gradle
             command -v git
