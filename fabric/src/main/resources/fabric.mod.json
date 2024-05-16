@@ -27,9 +27,6 @@
     "figura_permissions": [
       "com.thekillerbunny.goofyplugin.GoofyPermissionsPlugin"
     ],
-    "figura_screen": [
-      "com.thekillerbunny.goofyplugin.GoofyScreensPlugin"
-    ],
     "figura_vanilla_part": [
     ],
     "figura_event": [
