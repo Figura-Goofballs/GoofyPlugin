@@ -15,7 +15,6 @@
     nix-vscode-extensions,
   }:
     flake-utils.lib.eachDefaultSystem (
-      
       system: let
         pkgs = import nixpkgs {
           system = "${system}";
@@ -56,24 +55,24 @@
           ''}";
         };
         checks = {
-          dev = pkgs.runCommand "check-dev" { inherit (devShells.default) buildInputs; } ''
+          dev = pkgs.runCommand "check-dev" {inherit (devShells.default) buildInputs;} ''
             exec > $out
             command -v java
             command -v gradle
             command -v git
             command -v bash
           '';
-          fmt = pkgs.runCommand "check-fmt" {
-            buildInputs = [pkgs.nix];
-          } ''
-            ${formatter}/bin/${formatter.pname} --check &> $out
-          '';
+          fmt =
+            pkgs.runCommand "check-fmt" {
+              buildInputs = [pkgs.nix];
+            } ''
+              ${formatter}/bin/${formatter.pname} --check .
+            '';
         };
         formatter = pkgs.alejandra;
-        devShells.default =
-          pkgs.mkShell {
-            buildInputs = with pkgs; [nix jdk17 gradle git nix bashInteractive];
-          };
+        devShells.default = pkgs.mkShell {
+          buildInputs = with pkgs; [nix jdk17 gradle git nix bashInteractive];
+        };
       }
     );
 }
