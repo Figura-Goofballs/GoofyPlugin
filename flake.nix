@@ -21,7 +21,7 @@
           system = "${system}";
         };
 
-        packages.code = pkgs.vscode-with-extensions.override {
+        codium = pkgs.vscode-with-extensions.override {
           vscode = pkgs.vscodium;
           vscodeExtensions = with nix-vscode-extensions.extensions.${system}.vscode-marketplace; [
             mhutchie.git-graph
@@ -40,7 +40,7 @@
             type = "app";
             program = "${pkgs.writeScript "${name}-build-${vers}" ''
               #!${pkgs.bash}/bin/bash
-              JAVA_HOME=${pkgs.jdk17} ${pkgs.gradle}/bin/gradle -Pgradle_name=${pkgs.gradle} -Pminecraft_version=${vers} ${task} "$@"
+              JAVA_HOME=${pkgs.jdk17} ${pkgs.gradle}/bin/gradle -Pminecraft_version=${vers} ${task} "$@"
             ''}";
           };
           build1 = taskFor "1.20.1" "build";
@@ -52,25 +52,27 @@
           code.type = "app";
           code.program = with pkgs; "${writeScript "${name}-code" ''
             #!${bash}/bin/bash
-            exec nix develop -c ${vscodium}/bin/codium --verbose -w . "$@"
+            exec nix develop -c ${codium}/bin/codium --verbose -w . "$@"
           ''}";
         };
         checks = {
-          dev = pkgs.runCommand "${name}-devShell-check" { inherit (devShells.default) buildInputs; } ''
+          dev = pkgs.runCommand "check-dev" { inherit (devShells.default) buildInputs; } ''
             exec > $out
             command -v java
             command -v gradle
             command -v git
             command -v bash
           '';
-          fmt = pkgs.runCOmmand "${name}-fmt-check" { buildInputs = [pkgs.nix]; } ''
-            nix fmt -- --check .
+          fmt = pkgs.runCommand "check-fmt" {
+            buildInputs = [pkgs.nix];
+          } ''
+            nix fmt -- --check . > $out
           '';
         };
         formatter = pkgs.alejandra;
         devShells.default =
           pkgs.mkShell {
-            buildInputs = [pkgs.nix pkgs.jdk17 pkgs.gradle pkgs.git pkgs.nix pkgs.bashInteractive];
+            buildInputs = with pkgs; [nix jdk17 gradle git nix bashInteractive];
           };
       }
     );
