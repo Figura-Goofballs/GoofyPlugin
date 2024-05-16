@@ -16,6 +16,7 @@ import org.figuramc.figura.lua.docs.LuaTypeDoc;
 import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
 
+import com.thekillerbunny.goofyplugin.GoofyPermissionsPlugin;
 import com.thekillerbunny.goofyplugin.GoofyPlugin;
 
 @LuaWhitelist
@@ -83,7 +84,7 @@ public class GoofyAPI {
         value = "goofy.debug_to_log"
     )
     public void debugToLog(@LuaNotNil String data) {
-        if (Configs.LOG_OTHERS.value || FiguraMod.isLocal(owner.owner)) {
+        if ((Configs.LOG_OTHERS.value || FiguraMod.isLocal(owner.owner) && (owner.permissions.get(GoofyPermissionsPlugin.CAN_LOG) == 1))) {
             GoofyPlugin.LOGGER.debug("[" + owner.entityName + "] - " + data);
         }
     }
@@ -99,7 +100,7 @@ public class GoofyAPI {
         value = "goofy.info_to_log"
     )
     public void infoToLog(@LuaNotNil String data) {
-        if (Configs.LOG_OTHERS.value || FiguraMod.isLocal(owner.owner)) {
+        if ((Configs.LOG_OTHERS.value || FiguraMod.isLocal(owner.owner) && (owner.permissions.get(GoofyPermissionsPlugin.CAN_LOG) == 1))) {
             GoofyPlugin.LOGGER.info("[" + owner.entityName + "] - " + data);
         }
     }
@@ -115,7 +116,7 @@ public class GoofyAPI {
         value = "goofy.warn_to_log"
     )
     public void warnToLog(@LuaNotNil String data) {
-        if (Configs.LOG_OTHERS.value || FiguraMod.isLocal(owner.owner)) {
+        if ((Configs.LOG_OTHERS.value || FiguraMod.isLocal(owner.owner) && (owner.permissions.get(GoofyPermissionsPlugin.CAN_LOG) == 1))) {
             GoofyPlugin.LOGGER.warn("[" + owner.entityName + "] - " + data);
         }
     }
@@ -131,7 +132,7 @@ public class GoofyAPI {
         value = "goofy.error_to_log"
     )
     public void errorToLog(@LuaNotNil String data) {
-        if (Configs.LOG_OTHERS.value || FiguraMod.isLocal(owner.owner)) {
+        if ((Configs.LOG_OTHERS.value || FiguraMod.isLocal(owner.owner) && (owner.permissions.get(GoofyPermissionsPlugin.CAN_LOG) == 1))) {
             GoofyPlugin.LOGGER.error("[" + owner.entityName + "] - " + data);
         }
     }
@@ -147,7 +148,7 @@ public class GoofyAPI {
         value = "goofy.trace_to_log"
     )
     public void traceToLog(@LuaNotNil String data) {
-        if (Configs.LOG_OTHERS.value || FiguraMod.isLocal(owner.owner)) {
+        if ((Configs.LOG_OTHERS.value || FiguraMod.isLocal(owner.owner) && (owner.permissions.get(GoofyPermissionsPlugin.CAN_LOG) == 1))) {
             GoofyPlugin.LOGGER.trace("[" + owner.entityName + "] - " + data);
         }
     }
@@ -157,7 +158,7 @@ public class GoofyAPI {
         value = "goofy.is_debug_enabled"
     )
     public boolean isDebugEnabled() {
-        return !((!Configs.LOG_OTHERS.value && !FiguraMod.isLocal(owner.owner)) || !GoofyPlugin.LOGGER.isDebugEnabled());
+        return !(!(owner.permissions.get(GoofyPermissionsPlugin.CAN_LOG) == 1) || (!Configs.LOG_OTHERS.value && !FiguraMod.isLocal(owner.owner)) || !GoofyPlugin.LOGGER.isDebugEnabled());
     }
 
     @LuaWhitelist
@@ -165,7 +166,7 @@ public class GoofyAPI {
         value = "goofy.is_info_enabled"
     )
     public boolean isInfoEnabled() {
-        return !((!Configs.LOG_OTHERS.value && !FiguraMod.isLocal(owner.owner)) || !GoofyPlugin.LOGGER.isInfoEnabled());
+        return !(!(owner.permissions.get(GoofyPermissionsPlugin.CAN_LOG) == 1) || (!Configs.LOG_OTHERS.value && !FiguraMod.isLocal(owner.owner)) || !GoofyPlugin.LOGGER.isInfoEnabled());
     }
 
     @LuaWhitelist
@@ -173,7 +174,7 @@ public class GoofyAPI {
         value = "goofy.is_warn_enabled"
     )
     public boolean isWarnEnabled() {
-        return !((!Configs.LOG_OTHERS.value && !FiguraMod.isLocal(owner.owner)) || !GoofyPlugin.LOGGER.isWarnEnabled());
+        return !(!(owner.permissions.get(GoofyPermissionsPlugin.CAN_LOG) == 1) || (!Configs.LOG_OTHERS.value && !FiguraMod.isLocal(owner.owner)) || !GoofyPlugin.LOGGER.isWarnEnabled());
     }
 
     @LuaWhitelist
@@ -181,7 +182,7 @@ public class GoofyAPI {
         value = "goofy.is_error_enabled"
     )
     public boolean isErrorEnabled() {
-        return !((!Configs.LOG_OTHERS.value && !FiguraMod.isLocal(owner.owner)) || !GoofyPlugin.LOGGER.isErrorEnabled());
+        return !(!(owner.permissions.get(GoofyPermissionsPlugin.CAN_LOG) == 1) || (!Configs.LOG_OTHERS.value && !FiguraMod.isLocal(owner.owner)) || !GoofyPlugin.LOGGER.isErrorEnabled());
     }
 
     @LuaWhitelist
@@ -189,7 +190,7 @@ public class GoofyAPI {
         value = "goofy.is_trace_enabled"
     )
     public boolean isTraceEnabled() {
-        return !((!Configs.LOG_OTHERS.value && !FiguraMod.isLocal(owner.owner)) || !GoofyPlugin.LOGGER.isTraceEnabled());
+        return !(!(owner.permissions.get(GoofyPermissionsPlugin.CAN_LOG) == 1) || (!Configs.LOG_OTHERS.value && !FiguraMod.isLocal(owner.owner)) || !GoofyPlugin.LOGGER.isTraceEnabled());
     }
 
     @Override
