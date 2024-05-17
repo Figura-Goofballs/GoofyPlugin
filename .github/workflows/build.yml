@@ -49,7 +49,7 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: fabric/build/libs/*
           file_glob: true
-          asset_name: mything
+          asset_name: goofyplugin
           tag: ${{ github.ref }}
           overwrite: true
           body: "This is my release text"
