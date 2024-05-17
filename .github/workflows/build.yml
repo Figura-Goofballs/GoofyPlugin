@@ -41,16 +41,3 @@ jobs:
         with:
           name: Fabric-Artifacts
           path: fabric/build/libs/
-
-      - name: Upload Fabirc artifacts to release
-        if: github.event_name == "release"
-        uses: svenstaro/upload-release-action@v2
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: fabric/build/libs/*
-          file_glob: true
-          asset_name: goofyplugin
-          tag: ${{ github.ref }}
-          overwrite: true
-          body: "This is my release text"
-            
