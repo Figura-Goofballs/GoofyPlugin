@@ -1,4 +1,4 @@
-<!-- vim:ft=markdown:ts=2:sts=2:sw=2:et: -->
-<link href=styles.css rel=stylesheet />
+## Welcome to the GoofyPlugin wiki!
+This is a WIP while we create it, but for now feel free to look at what we already have
 
-# Index Dot MD
+<link href=styles.css rel=stylesheet />
