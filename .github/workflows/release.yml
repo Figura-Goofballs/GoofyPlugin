@@ -1,0 +1,50 @@
+# Clones the repository which then begins with validating the Gradle Wrapper checksum,
+# If the checksum completes, the script then sets up the JDK we need and begins compiling the software,
+# Finally, If the compiled files have been pushed out to the "(something)/build/libs/" directory - It gets uploaded to GitHub.
+# vim:ft=yaml:ts=2:sts=2:sw=2:et:
+
+name: Build GoofyPlugin with Gradle
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  release:
+    types:
+      - created
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v27
+        with:
+          extra_nix_config: |
+            extra-experimental-features = nix-command flakes
+
+      - name: Run checks
+        run: nix flake check --log-format bar-with-logs
+
+      - name: Build 1.20.1 using Nix
+        run: nix run --log-format bar-with-logs .#build1
+
+      - name: Build 1.20.4 using Nix
+        if: false
+        run: nix run --log-format bar-with-logs .#build4
+        
+      - name: Upload Fabirc artifacts to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: fabric/build/libs/*
+          file_glob: true
+          asset_name: goofyplugin
+          tag: ${{ github.ref }}
+          overwrite: true
+          body: "This is my release text"
+
+            
