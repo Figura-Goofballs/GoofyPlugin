@@ -1,0 +1,20 @@
+@font-face {
+  font-family: jetbrainsmono;
+  src: url(fonts/jetbrains-mono.ttf);
+}
+@font-face {
+  font-family: opensans;
+  src: url(fonts/open-sans.ttf);
+}
+@font-face {
+  font-family: redditsans;
+  src: url(fonts/reddit-sans.ttf);
+  unicode-range: U+2192;
+}
+
+body {
+  font-family: redditsans, opensans;
+}
+code {
+  font-family: jetbrainsmono;
+}
