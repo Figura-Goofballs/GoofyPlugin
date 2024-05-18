@@ -54,6 +54,10 @@ allprojects {
     figura_version = rootProject.figura_version
 
     repositories {
+        maven {
+    		name = "Terraformers"
+		    url = "https://maven.terraformersmc.com/"
+	    }
         // Add repositories to retrieve artifacts from in here.
         // You should only use this when depending on other mods because
         // Loom adds the essential maven repositories to download Minecraft and libraries from automatically.

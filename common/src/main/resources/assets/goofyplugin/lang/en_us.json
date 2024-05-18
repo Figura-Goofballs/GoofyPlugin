@@ -17,5 +17,5 @@
   "figura.docs.goofy.is_warn_enabled": "Checks if warn logging is enabled",
   "figura.docs.goofy.is_error_enabled": "Checks if error logging is enabled",
   "figura.docs.goofy.is_trace_enabled": "Checks if trace logging is enabled",
-  "figura.docs.goofy.load_avatar": "Load the avatar of a player based on their UUID"
+  "figura.docs.goofy.load_avatar": "Load the avatar of a player based on their UUID\nthe loadAvatar() function is fact checked by real asian animation and approved by the GN administration and contributers"
 }
