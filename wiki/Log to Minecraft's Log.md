@@ -23,4 +23,3 @@ Scripts can log using any supported log type, if enabled. The following log type
 * `debug`, which is hidden from latest.log and your launcher's logs (but still present in debug.log iirc), and can be used for verbose output
 * `trace`, which is hidden by default everywhere, so not sure why you'd use this.
 
-
