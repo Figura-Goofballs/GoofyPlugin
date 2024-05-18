@@ -221,29 +221,6 @@ public class GoofyAPI {
         NetworkStuff.getUser(new UserData(uuid));
     }
 
-    @LuaWhitelist
-    public void onError(String msg) {
-        LuaError err = new LuaError(msg);
-        msg = err.getMessage();
-
-        Varargs args = LuaValue.varargsOf(new LuaValue[]{
-            LuaValue.valueOf(msg)
-        });
-
-        Varargs shouldStopError = runtime.events.getEvents().get("ERROR").call(args);
-
-        try {
-            boolean stopError = shouldStopError.checkboolean(1);
-
-            if (stopError == false) {
-                // ci.cancel();
-                throw new LuaError("Cancel event");
-            }
-        }catch (Exception e) {
-            throw new LuaError("Must return a boolean");
-        }
-    }
-
     @Override
     public String toString() {
         return "GoofyAPI";
