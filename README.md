@@ -22,3 +22,5 @@
 ## Download: [ ![modrinth] ](https://modrinth.com/mod/figura) [ ![curseforge][] ](https://curseforge.com/minecraft/mc-mods/figura)
 
 ## Donate: [ ![collective][] ](https://opencollective.com/figura) [ ![kofi][] ](https://ko-fi.com/skyrina)
+
+Docs: https://www.thekillerbunny.com/GoofyPlugin-Pages-Test/docs/
