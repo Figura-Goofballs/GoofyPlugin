@@ -12,6 +12,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-22.04
+    permissions:
+          contents: write
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -34,8 +36,6 @@ jobs:
         
       - name: Upload Fabirc artifacts to release
         uses: svenstaro/upload-release-action@v2
-        permissions:
-          contents: write
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: fabric/build/libs/*
