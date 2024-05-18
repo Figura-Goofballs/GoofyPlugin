@@ -35,17 +35,39 @@
       in rec {
         name = "goofy-plugin";
         apps = rec {
-          taskFor = vers: task: {
+          taskFor = { task, minecraft, minecraft-out ? minecraft, fabric-api, loom }: {
             type = "app";
-            program = "${pkgs.writeScript "${name}-build-${vers}" ''
+            program = "${pkgs.writeScript "${name}-build-${minecraft}-${fabric-api}" ''
               #!${pkgs.bash}/bin/bash
-              JAVA_HOME=${pkgs.jdk17} ${pkgs.gradle}/bin/gradle -Pminecraft_version=${vers} ${task} "$@"
+              JAVA_HOME=${pkgs.jdk17} ${pkgs.gradle}/bin/gradle -Pminecraft_version=${minecraft} -Pminecraft_version_out=${minecraft-out} -P fabric_api_version=${fabric-api} -P loom_version=${loom} ${task} "$@"
             ''}";
           };
-          build1 = taskFor "1.20.1" "build";
-          build4 = taskFor "1.20.4" "build";
-          run1 = taskFor "1.20.1" "runClient";
-          run4 = taskFor "1.20.4" "runClient";
+          build1 = taskFor {
+            task = "build";
+            minecraft = "1.20.1";
+            fabric-api = "0.83.0";
+            loom = "1.2-SNAPSHOT";
+          };
+          build4 = taskFor {
+            task = "build";
+            minecraft = "1.20.1";
+            minecraft-out = "1.20.4";
+            fabric-api = "0.83.0";
+            loom = "1.2-SNAPSHOT";
+          };
+          run1 = taskFor {
+            task = "runClient";
+            minecraft = "1.20.1";
+            fabric-api = "0.83.0";
+            loom = "1.2-SNAPSHOT";
+          };
+          run4 = taskFor {
+            task = "runClient";
+            minecraft = "1.20.1";
+            minecraft-out = "1.20.4";
+            fabric-api = "0.83.0";
+            loom = "1.2-SNAPSHOT";
+          };
           default = run1;
 
           code.type = "app";
