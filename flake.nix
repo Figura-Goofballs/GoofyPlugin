@@ -71,7 +71,7 @@
         };
         formatter = pkgs.alejandra;
         devShells.default = pkgs.mkShell {
-          buildInputs = with pkgs; [nix jdk17 gradle git nix bashInteractive];
+          buildInputs = with pkgs; [nix jdk17 gradle git gh nix bashInteractive];
         };
       }
     );

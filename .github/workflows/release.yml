@@ -5,27 +5,9 @@
 
 name: Build GoofyPlugin with Gradle
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - common/**
-      - fabric/**
-      - build.gradle
-      - gradle.properties
-      - flake.nix
-      - flake.lock
-      - .github/workflows/build.yml
-  pull_request:
-    paths:
-    paths:
-      - common/**
-      - fabric/**
-      - build.gradle
-      - gradle.properties
-      - flake.nix
-      - flake.lock
-      - .github/workflows/build.yml
+  release:
+    types:
+      - created
 
 jobs:
   build:
@@ -49,9 +31,16 @@ jobs:
       - name: Build 1.20.4 using Nix
         if: false
         run: nix run --log-format bar-with-logs .#build4
-
-      - name: Upload Fabric artifacts to GitHub
-        uses: actions/upload-artifact@v4
+        
+      - name: Upload Fabirc artifacts to release
+        uses: svenstaro/upload-release-action@v2
         with:
-          name: Fabric-Artifacts
-          path: fabric/build/libs/
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: fabric/build/libs/*
+          file_glob: true
+          asset_name: goofyplugin
+          tag: ${{ github.ref }}
+          overwrite: true
+          body: "This is my release text"
+
+            
