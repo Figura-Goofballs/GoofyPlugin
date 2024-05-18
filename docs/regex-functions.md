@@ -2,6 +2,7 @@
 layout: page
 title: Regex Functions
 ---
+<link href="css/style.css" rel="stylesheet">
 # Regex Functions
 `goofy:regexMatch(str, pattern)`: Returns all matches in `str` based on `pattern` (a  Java flavor regex pattern)
 
