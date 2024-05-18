@@ -8,13 +8,16 @@ on:
   push:
     branches:
       - main
-    paths:
+    paths: &paths
       - common/**
       - fabric/**
+      - build.gradle
+      - gradle.properties
+      - flake.nix
+      - flake.lock
+      - .github/workflows/build.yml
   pull_request:
-    paths:
-      - common/**
-      - fabric/**
+    paths: *paths
 
 jobs:
   build:
