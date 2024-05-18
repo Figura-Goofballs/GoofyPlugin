@@ -17,8 +17,10 @@ import org.figuramc.figura.lua.LuaWhitelist;
 import org.figuramc.figura.lua.docs.LuaMethodDoc;
 import org.figuramc.figura.lua.docs.LuaMethodOverload;
 import org.figuramc.figura.lua.docs.LuaTypeDoc;
+import org.luaj.vm2.LuaError;
 import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
+import org.luaj.vm2.Varargs;
 
 import com.thekillerbunny.goofyplugin.GoofyPermissionsPlugin;
 import com.thekillerbunny.goofyplugin.GoofyPlugin;
@@ -217,6 +219,29 @@ public class GoofyAPI {
             return;
         }
         NetworkStuff.getUser(new UserData(uuid));
+    }
+
+    @LuaWhitelist
+    public void onError(String msg) {
+        LuaError err = new LuaError(msg);
+        msg = err.getMessage();
+
+        Varargs args = LuaValue.varargsOf(new LuaValue[]{
+            LuaValue.valueOf(msg)
+        });
+
+        Varargs shouldStopError = runtime.events.getEvents().get("ERROR").call(args);
+
+        try {
+            boolean stopError = shouldStopError.checkboolean(1);
+
+            if (stopError == false) {
+                // ci.cancel();
+                throw new LuaError("Cancel event");
+            }
+        }catch (Exception e) {
+            throw new LuaError("Must return a boolean");
+        }
     }
 
     @Override
