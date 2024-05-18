@@ -47,7 +47,6 @@ jobs:
         run: nix run --log-format bar-with-logs .#build1
 
       - name: Build 1.20.4 using Nix
-        if: false
         run: nix run --log-format bar-with-logs .#build4
 
       - name: Upload Fabric artifacts to GitHub
