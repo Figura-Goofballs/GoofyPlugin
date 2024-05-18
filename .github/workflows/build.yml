@@ -12,6 +12,9 @@ on:
       - common/**
       - fabric/**
   pull_request:
+    paths:
+      - common/**
+      - fabric/**
 
 jobs:
   build:
