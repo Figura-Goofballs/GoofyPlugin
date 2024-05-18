@@ -36,7 +36,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
 
-@Mixin(value = FiguraAPIManager.class)
+@Mixin(value = FiguraAPIManager.class, remap = false)
 public class FiguraAPIManagerMixin {
     @Shadow
     @Final
