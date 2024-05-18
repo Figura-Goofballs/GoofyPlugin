@@ -33,10 +33,10 @@ subprojects {
     }
 
     dependencies {
-        minecraft "com.mojang:minecraft:$minecraft_version"
+        minecraft "com.mojang:minecraft:$minecraft_version_out"
 
         mappings loom.layered {
-			mappings("org.quiltmc:quilt-mappings:$minecraft_version+build.$mappings:intermediary-v2")
+			mappings("org.quiltmc:quilt-mappings:$minecraft_version_out+build.$mappings:intermediary-v2")
 			officialMojangMappings()
 		}
     }
