@@ -29,7 +29,7 @@ dependencies {
     modApi "net.fabricmc.fabric-api:fabric-api:$fabric_api_version+$minecraft_version"
 
     // Figura fabric
-    modImplementation("org.figuramc:figura-fabric:$figura_version+$minecraft_version")
+    modImplementation("org.figuramc:figura-fabric:$figura_version+1.20.1")
 
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
