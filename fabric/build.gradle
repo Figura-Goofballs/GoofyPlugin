@@ -25,6 +25,9 @@ dependencies {
     compileOnly("com.github.FiguraMC.luaj:luaj-jse:$luaj-figura")
     compileOnly("com.neovisionaries:nv-websocket-client:$nv_websocket")
 
+    //  Mod menu
+    modImplementation("com.terraformersmc:modmenu:$modmenu_version")
+
     modImplementation "net.fabricmc:fabric-loader:$fabric_loader_version"
     modApi "net.fabricmc.fabric-api:fabric-api:$fabric_api_version+$minecraft_version"
 
@@ -46,7 +49,7 @@ Map<String, Object> properties = new HashMap<>()
     properties.put("fabric_api_version", fabric_api_version)
     properties.put("mod_id", plugin_id)
     properties.put("display_name", display_name)
-    properties.put("description", description)
+    properties.put("description", project.description)
     properties.put("authors", authors)
     properties.put("figura_version", figura_version)
 

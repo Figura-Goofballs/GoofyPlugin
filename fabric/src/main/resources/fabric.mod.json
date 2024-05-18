@@ -11,8 +11,8 @@
     "${authors}"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/Figura-Goofballs/GoofyPlugin"
+    "sources": "https://github.com/Figura-Goofballs/GoofyPlugin",
+    "issues": "https://github.com/Figura-Goofballs/GoofyPlugin/issues"
   },
   "license": "LGPL-2.1",
   "icon": "assets/goofyplugin/icon.png",
@@ -37,5 +37,13 @@
     "fabric": "*",
     "minecraft": "${minecraft_version_out}",
     "figura": ">=${figura_version}"
+  },
+  "custom": {
+    "modmenu": {
+      "links": {
+          "modmenu.discord": "https://discord.gg/7RQYvXDXDQ"
+      },
+      "update_checker": true
+    }
   }
 }
