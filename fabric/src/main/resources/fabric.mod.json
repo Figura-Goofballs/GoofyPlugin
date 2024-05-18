@@ -3,7 +3,7 @@
   "id": "${mod_id}",
   "version": "${version}",
   "name": "${display_name}",
-  "description": "The dumping ground of the Figura Goofballs!",
+  "description": "${description}",
   "mixins": [
     "goofyplugin-common.mixins.json"
   ],

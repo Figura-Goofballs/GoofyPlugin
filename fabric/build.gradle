@@ -49,7 +49,7 @@ Map<String, Object> properties = new HashMap<>()
     properties.put("fabric_api_version", fabric_api_version)
     properties.put("mod_id", plugin_id)
     properties.put("display_name", display_name)
-    properties.put("description", description)
+    properties.put("description", project.description)
     properties.put("authors", authors)
     properties.put("figura_version", figura_version)
 
