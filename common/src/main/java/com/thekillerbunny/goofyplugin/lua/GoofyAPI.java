@@ -1,11 +1,15 @@
 package com.thekillerbunny.goofyplugin.lua;
 
 import java.util.ArrayList;
+import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.figuramc.figura.FiguraMod;
 import org.figuramc.figura.avatar.Avatar;
+import org.figuramc.figura.avatar.AvatarManager;
+import org.figuramc.figura.avatar.UserData;
+import org.figuramc.figura.backend2.NetworkStuff;
 import org.figuramc.figura.config.Configs;
 import org.figuramc.figura.lua.FiguraLuaRuntime;
 import org.figuramc.figura.lua.LuaNotNil;
@@ -195,6 +199,24 @@ public class GoofyAPI {
     )
     public boolean isTraceEnabled() {
         return canLog() && GoofyPlugin.LOGGER.isTraceEnabled();
+    }
+
+    @LuaWhitelist
+    @LuaMethodDoc(
+        overloads = {
+            @LuaMethodOverload(
+                argumentTypes = {String.class},
+                argumentNames = {"playerUUID"}
+            )
+        },
+        value = "goofy.load_avatar"
+    )
+    public void loadAvatar(String playerUUID) {
+        UUID uuid = UUID.fromString(playerUUID);
+        if (AvatarManager.getAvatarForPlayer(uuid) == null) {
+            return;
+        }
+        NetworkStuff.getUser(new UserData(uuid));
     }
 
     @Override
