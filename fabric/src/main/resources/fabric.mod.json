@@ -26,11 +26,6 @@
     ],
     "figura_permissions": [
       "com.thekillerbunny.goofyplugin.GoofyPermissionsPlugin"
-    ],
-    "figura_vanilla_part": [
-    ],
-    "figura_event": [
-      "com.thekillerbunny.goofyplugin.GoofyEventPlugin"
     ]
   },
   "depends": {
