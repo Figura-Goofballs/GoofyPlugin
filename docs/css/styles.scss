@@ -1,0 +1,71 @@
+ @import "sass-code-highlight/monokai";
+
+@font-face {
+  font-family: jetbrainsmono;
+  src: url(fonts/jetbrains-mono.ttf);
+}
+@font-face {
+  font-family: opensans-nerdfont-light;
+  src: url(fonts/opensans-nerdfont-light.ttf);
+}
+@font-face {
+  font-family: redditsans;
+  src: url(fonts/reddit-sans.ttf);
+  unicode-range: U+2192;
+}
+
+* {
+  color: #FFFFFF;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  text-align: center;
+}
+
+body {
+  background-color: #0F0F15;
+  color: #F6F5F6;
+
+  font-family: opensans-nerdfont-light, redditsans;
+  font-weight: 300;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+code {
+  fontfamily: jetbrainsmono; background-color: #202024;
+  padding-top: 1px;
+  padding-bottom: 1px;
+}
+
+.highlight {
+  padding-left: 3px;
+  font-family: jetbrainsmono;
+  background-color: #202024;
+}
+
+a {
+  color: #4287f5;
+  text-decoration: none;
+}
+
+a:link {
+  color: #4287f5;
+}
+
+a:visited {
+  color: #9158e0;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:focus {
+  text-decoration: underline;
+  outline: #4287f5;
+}
+
+a:active {
+  color: #f53131;
+}
