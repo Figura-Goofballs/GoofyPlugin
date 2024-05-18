@@ -18,7 +18,7 @@ dependencies {
     compileOnly("com.neovisionaries:nv-websocket-client:$nv_websocket")
 
     // Figura common lib
-    modCompileOnly("org.figuramc:figura-common-intermediary:$figura_version+$minecraft_version")
+    modCompileOnly("org.figuramc:figura-common-intermediary:$figura_version+1.20.1")
 
     // We depend on fabric loader here to use the fabric @Environment annotations and get the mixin dependencies
     // Do NOT use other classes from fabric loader
