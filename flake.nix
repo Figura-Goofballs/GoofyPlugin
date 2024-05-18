@@ -35,17 +35,33 @@
       in rec {
         name = "goofy-plugin";
         apps = rec {
-          taskFor = vers: task: {
+          taskFor = { task, minecraft, fabric-api }: {
             type = "app";
-            program = "${pkgs.writeScript "${name}-build-${vers}" ''
+            program = "${pkgs.writeScript "${name}-build-${minecraft}-${fabric-api}" ''
               #!${pkgs.bash}/bin/bash
-              JAVA_HOME=${pkgs.jdk17} ${pkgs.gradle}/bin/gradle -Pminecraft_version=${vers} ${task} "$@"
+              JAVA_HOME=${pkgs.jdk17} ${pkgs.gradle}/bin/gradle -Pminecraft_version=${minecraft} -P fabric_api_version=${fabric-api} ${task} "$@"
             ''}";
           };
-          build1 = taskFor "1.20.1" "build";
-          build4 = taskFor "1.20.4" "build";
-          run1 = taskFor "1.20.1" "runClient";
-          run4 = taskFor "1.20.4" "runClient";
+          build1 = taskFor {
+            task = "build";
+            minecraft = "1.20.1";
+            fabric-api = "0.83.0";
+          };
+          build4 = taskFor {
+            task = "build";
+            minecraft = "1.20.4";
+            fabric-api = "0.97.0";
+          };
+          run1 = taskFor {
+            task = "runClient";
+            minecraft = "1.20.1";
+            fabric-api = "0.83.0";
+          };
+          run4 = taskFor {
+            task = "runClient";
+            minecraft = "1.20.4";
+            fabric-api = "0.97.0";
+          };
           default = run1;
 
           code.type = "app";
