@@ -3,8 +3,8 @@
   src: url(fonts/jetbrains-mono.ttf);
 }
 @font-face {
-  font-family: opensans;
-  src: url(fonts/open-sans.ttf);
+  font-family: opensans-nerdfont-light;
+  src: url(fonts/opensans-nerdfont-light.ttf);
 }
 @font-face {
   font-family: redditsans;
@@ -13,7 +13,7 @@
 }
 
 body {
-  font-family: redditsans, opensans;
+  font-family: opensans-nerdfont-light, redditsans;
   font-weight: 300;
 }
 code {
