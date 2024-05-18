@@ -1,17 +1,18 @@
-name: Update Wiki
-
+name: Publish wiki
 on:
   push:
+    branches: [main]
     paths:
-      - 'wiki/**'
-    branches:
-      - main
+      - wiki/**
+      - .github/workflows/update-wiki.yml
+concurrency:
+  group: publish-wiki
+  cancel-in-progress: true
+permissions:
+  contents: write
 jobs:
-  update-wiki:
+  publish-wiki:
     runs-on: ubuntu-latest
-    name: Update wiki
     steps:
-    - uses: Figura-Goofballs/Wiki-Action@v1
-      with:
-        path: 'wiki'
-        token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@v4
+      - uses: Andrew-Chen-Wang/github-wiki-action@v4
