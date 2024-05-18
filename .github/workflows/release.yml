@@ -34,6 +34,8 @@ jobs:
         
       - name: Upload Fabirc artifacts to release
         uses: svenstaro/upload-release-action@v2
+        permissions:
+          contents: write
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: fabric/build/libs/*
