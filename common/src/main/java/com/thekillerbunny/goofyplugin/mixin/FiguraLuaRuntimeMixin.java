@@ -32,14 +32,10 @@ public class FiguraLuaRuntimeMixin {
             try {
                 boolean stopError = shouldStopError.checkboolean(1);
                 
-                if (stopError == false) {
+                if (stopError == true) {
                     ci.cancel();
                 }
-            }catch (Exception e) {
-                if (shouldStopError.isnoneornil(1)) {
-                    ci.cancel();
-                }
-            }
+            }catch (Exception e) {}
         }
     }
 }
