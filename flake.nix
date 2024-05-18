@@ -52,7 +52,7 @@
             task = "build";
             minecraft = "1.20.4";
             fabric-api = "0.97.0";
-            loom = "1.5-SNAPSHOT";
+            loom = "1.2-SNAPSHOT";
           };
           run1 = taskFor {
             task = "runClient";
@@ -64,7 +64,7 @@
             task = "runClient";
             minecraft = "1.20.4";
             fabric-api = "0.97.0";
-            loom = "1.5-SNAPSHOT";
+            loom = "1.2-SNAPSHOT";
           };
           default = run1;
 
