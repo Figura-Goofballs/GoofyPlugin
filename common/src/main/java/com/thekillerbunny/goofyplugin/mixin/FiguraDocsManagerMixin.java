@@ -10,7 +10,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-@Mixin(value = FiguraDocsManager.class)
+@Mixin(value = FiguraDocsManager.class, remap = false)
 public class FiguraDocsManagerMixin {
     @Shadow
     @Final
