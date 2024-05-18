@@ -1,6 +1,6 @@
-`goofy:regexMatch(str, pattern)`: Returns all matches in `str` based on `pattern` (a Java flavor regex pattern)
+`goofy:regexMatch(str, pattern)`: Returns all matches in ` str` based on ` pattern` (a  Java flavor 󰑑 regex pattern)
 
-`goofy:regexSub(str, pattern, replacement)`: Returns a string with all matches of `pattern` (a Java flavor regex pattern) in `str` replaced with `replacement`
+`goofy:regexSub(str, pattern, replacement)`: Returns a string with all matches of ` pattern` (a  Java flavor 󰑑 regex pattern) in ` str` replaced with ` replacement`
 
 <hr>
 
