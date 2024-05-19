@@ -216,6 +216,9 @@ public class GoofyAPI {
         value = "goofy.get_bumpscocity"
     )
     public int getBumpscocity() {
+        if (owner.permissions.get(GoofyPermissionsPlugin.BUMPSCOCITY) > 1000) {
+            throw new LuaError("Dear god, this is way too much bumpscocity! (max 1000)");
+        }
         return owner.permissions.get(GoofyPermissionsPlugin.BUMPSCOCITY);
     }
 
