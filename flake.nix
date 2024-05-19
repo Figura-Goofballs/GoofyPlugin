@@ -101,6 +101,36 @@
             #!${bash}/bin/bash
             exec nix develop -c ${idea-community}/bin/idea-community build.gradle
           ''}";
+          install.type = "app";
+          install.program = with pkgs; "${writeScript "${name}-install" ''
+            #!${bash}/bin/bash
+            set -e
+            export PATH=${with pkgs; lib.makeSearchPath "bin" [bash jq gawk perl findutils coreutils]}
+            cd ~/.local/share/PrismLauncher/instances/"''${1?}"/ >/dev/null
+            if ! `jq -r .components\|any\(.cachedName=='"Fabric Loader"'\) mmc-pack.json`; then
+              echo "no Fabric :(" >&2
+              exit 1
+            fi
+            jq -r .components[]\|select\(.cachedName==\"Minecraft\"\).cachedVersion mmc-pack.json | xargs bash ${builtins.toFile "install-2-electric-boogaloo" ''
+              set -e
+              cd .minecraft/mods/ >/dev/null
+              test -f fabric-api-*.jar || echo "Remember to install Fabric API — proceeding anyway…"
+              rm -f goofyfiguraplugin-*.jar
+              pushd "$1"/fabric/build/libs/ >/dev/null
+              ls goofyfiguraplugin-*+$2.jar | sort -h | head -1 | xargs -i cp {} ~1
+            ''} ~-
+          ''}";
+          build-install.type = "app";
+          build-install.program = with pkgs; "${writeScript "${name}-build-install" ''
+            #!${bash}/bin/bash
+            set -e
+            cd $(mktemp -d)
+            trap "rm -rf $PWD" EXIT
+            cp -lrT --no-preserve=all ${./.} .
+            nix run .#build1
+            nix run .#build4
+            nix run .#install "$@"
+          ''}";
         };
         checks = {
           dev = pkgs.runCommand "check-dev" {inherit (devShells.default) buildInputs;} ''
