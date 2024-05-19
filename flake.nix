@@ -101,6 +101,20 @@
             #!${bash}/bin/bash
             exec nix develop -c ${idea-community}/bin/idea-community build.gradle
           ''}";
+          install.type = "app";
+          install.program = with pkgs; "${writeScript "${name}-install" ''
+            #!${bash}/bin/bash
+            set -e
+            export PATH=${with pkgs; lib.makeSearchPath "bin" [bash jq gawk perl findutils coreutils]}
+            cd ~/.local/share/PrismLauncher/instances/"''${1?}"/ >/dev/null
+            jq -r .components[]\|select\(.cachedName==\"Minecraft\"\).cachedVersion mmc-pack.json | xargs bash ${builtins.toFile "install-2-electric-boogaloo" ''
+              set -e
+              cd .minecraft/mods/ >/dev/null
+              rm -f goofyfiguraplugin-*.jar
+              pushd "$1"/fabric/build/libs/ >/dev/null
+              ls goofyfiguraplugin-*+$2.jar | sort -h | head -1 | xargs -i cp {} ~1
+            ''} ~-
+          ''}";
         };
         checks = {
           dev = pkgs.runCommand "check-dev" {inherit (devShells.default) buildInputs;} ''
