@@ -123,6 +123,7 @@
             trap "rm -rf $PWD" EXIT
             cp -lrT --no-preserve=all ${./.} .
             nix run .#build1
+            nix run .#build4
             nix run .#install "$@"
           ''}";
         };
