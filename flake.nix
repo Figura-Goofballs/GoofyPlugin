@@ -121,7 +121,7 @@
             set -e
             cd $(mktemp -d)
             trap "rm -rf $PWD" EXIT
-            cp -rT --no-preserve=all ${./.} .
+            cp -lrT --no-preserve=all ${./.} .
             nix run .#build1
             nix run .#install "$@"
           ''}";
