@@ -46,7 +46,7 @@ public class GoofyAPI {
         overloads = {
             @LuaMethodOverload(
                 argumentTypes = {Double[].class},
-                argumentNames = {"str", "pattern"}
+                argumentNames = {"tbl"}
             )
         },
         value = "goofy.sum"
@@ -66,7 +66,7 @@ public class GoofyAPI {
         overloads = {
             @LuaMethodOverload(
                 argumentTypes = {Double[].class},
-                argumentNames = {"str", "pattern"}
+                argumentNames = {"tbl"}
             )
         },
         value = "goofy.difference"
@@ -86,7 +86,7 @@ public class GoofyAPI {
         overloads = {
             @LuaMethodOverload(
                 argumentTypes = {Double[].class},
-                argumentNames = {"str", "pattern"}
+                argumentNames = {"tbl"}
             )
         },
         value = "goofy.product"
@@ -106,10 +106,10 @@ public class GoofyAPI {
         overloads = {
             @LuaMethodOverload(
                 argumentTypes = {Double[].class},
-                argumentNames = {"str", "pattern"}
+                argumentNames = {"tbl"}
             )
         },
-        value = "goofy.product"
+        value = "goofy.quotient"
     )
     public Double quotient(@LuaNotNil Double[] args) {
         Double finalNumber = 1.0;
