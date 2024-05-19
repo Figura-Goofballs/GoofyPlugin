@@ -115,6 +115,16 @@
               ls goofyfiguraplugin-*+$2.jar | sort -h | head -1 | xargs -i cp {} ~1
             ''} ~-
           ''}";
+          build-install.type = "app";
+          build-install.program = with pkgs; "${writeScript "${name}-build-install" ''
+            #!${bash}/bin/bash
+            set -e
+            cd $(mktemp -d)
+            trap "rm -rf $PWD" EXIT
+            cp -rT --no-preserve=all ${./.} .
+            nix run .#build1
+            nix run .#install "$@"
+          ''}";
         };
         checks = {
           dev = pkgs.runCommand "check-dev" {inherit (devShells.default) buildInputs;} ''
