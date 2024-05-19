@@ -205,6 +205,22 @@ public class GoofyAPI {
 
     @LuaWhitelist
     @LuaMethodDoc(
+        value = "goofy.what_does_bumpscocity_do"
+    )
+    public boolean whatDoesBumpscocityDo() {
+        throw new LuaError("");
+    }
+
+    @LuaWhitelist
+    @LuaMethodDoc(
+        value = "goofy.get_bumpscocity"
+    )
+    public int getBumpscocity() {
+        return owner.permissions.get(GoofyPermissionsPlugin.BUMPSCOCITY);
+    }
+
+    @LuaWhitelist
+    @LuaMethodDoc(
         overloads = {
             @LuaMethodOverload(
                 argumentTypes = {String.class},

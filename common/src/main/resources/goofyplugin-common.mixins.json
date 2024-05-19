@@ -10,7 +10,8 @@
     "FiguraDocsManagerMixin",
     "FiguraGlobalsDocsMixin",
     "EventsAPIMixin",
-    "FiguraLuaRuntimeMixin"
+    "FiguraLuaRuntimeMixin",
+    "ConfigTypeMixin"
   ],
   "injectors": {
     "defaultRequire": 1
