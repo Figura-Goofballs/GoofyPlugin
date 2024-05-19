@@ -32,6 +32,27 @@
             pkgs.vscode-extensions.vscjava.vscode-gradle
           ];
         };
+        idea-community = let
+          fetch-plugin = { name, version, url, hash ? "sha256:" + pkgs.lib.fakeSha256 }: pkgs.stdenvNoCC.mkDerivation {
+            inherit name version;
+            src = pkgs.fetchurl {
+              inherit url hash;
+            };
+            dontUnpack = true;
+            installPhase = ''
+              mkdir -p $out
+              cp $src $out
+            '';
+          };
+        in pkgs.jetbrains.plugins.addPlugins pkgs.jetbrains.idea-community [
+          "nixidea"
+          (fetch-plugin {
+            name = "minecraft-development";
+            version = "1.7.5";
+            url = https://downloads.marketplace.jetbrains.com/files/8327/527990/Minecraft_Development-2024.1-1.7.5.zip;
+            hash = sha256:9C34GX+bj5v2j7svF47boz7/uVIkWJuLyuXlAhV4TZI=;
+          })
+        ];
       in rec {
         name = "goofy-plugin";
         apps = rec {
@@ -74,6 +95,11 @@
           code.program = with pkgs; "${writeScript "${name}-code" ''
             #!${bash}/bin/bash
             exec nix develop -c ${codium}/bin/codium --verbose -w . "$@"
+          ''}";
+          idea.type = "app";
+          idea.program = with pkgs; "${writeScript "${name}-code" ''
+            #!${bash}/bin/bash
+            exec nix develop -c ${idea-community}/bin/idea-community build.gradle
           ''}";
         };
         checks = {
