@@ -207,7 +207,7 @@ public class GoofyAPI {
     @LuaMethodDoc(
         value = "goofy.what_does_bumpscocity_do"
     )
-    public boolean whatDoesBumpscocityDo() {
+    public String whatDoesBumpscocityDo() {
         throw new LuaError("");
     }
 

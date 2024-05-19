@@ -15,7 +15,7 @@ import java.util.List;
 @FiguraPermissionsPlugin
 public class GoofyPermissionsPlugin implements FiguraPermissions {
     public static final Permissions CAN_LOG = new Permissions("can_log", 0,0,0,1,1);
-    public static final Permissions BUMPSCOCITY = new Permissions("bumpscocity", 0, 250, 500, 750, 1000);
+    public static final Permissions BUMPSCOCITY = new Permissions("bumpscocity", 0, 1000, 0, 250, 500, 750, 1000);
 
     @Override
     public String getTitle() {
