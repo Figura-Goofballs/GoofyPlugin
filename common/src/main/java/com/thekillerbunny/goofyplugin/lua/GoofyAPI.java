@@ -1,6 +1,7 @@
 package com.thekillerbunny.goofyplugin.lua;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -39,6 +40,87 @@ public class GoofyAPI {
     public boolean canLog() {
         return ((Configs.LOG_OTHERS.value || FiguraMod.isLocal(owner.owner)) && owner.permissions.get(GoofyPermissionsPlugin.CAN_LOG) == 1);
     }
+
+    @LuaWhitelist
+    @LuaMethodDoc(
+        overloads = {
+            @LuaMethodOverload(
+                argumentTypes = {Double[].class},
+                argumentNames = {"tbl"}
+            )
+        },
+        value = "goofy.sum"
+    )
+    public Double sum(@LuaNotNil Double[] args) {
+        Double finalNumber = 0.0;
+
+        for (Double arg : args) {
+            finalNumber += arg;
+        }
+
+        return finalNumber;
+    }
+
+    @LuaWhitelist
+    @LuaMethodDoc(
+        overloads = {
+            @LuaMethodOverload(
+                argumentTypes = {Double[].class},
+                argumentNames = {"tbl"}
+            )
+        },
+        value = "goofy.difference"
+    )
+    public Double difference(@LuaNotNil Double[] args) {
+        Double finalNumber = 0.0;
+
+        for (Double arg : args) {
+            finalNumber -= arg;
+        }
+
+        return finalNumber;
+    }
+
+    @LuaWhitelist
+    @LuaMethodDoc(
+        overloads = {
+            @LuaMethodOverload(
+                argumentTypes = {Double[].class},
+                argumentNames = {"tbl"}
+            )
+        },
+        value = "goofy.product"
+    )
+    public Double product(@LuaNotNil Double[] args) {
+        Double finalNumber = 1.0;
+
+        for (Double arg : args) {
+            finalNumber *= arg;
+        }
+
+        return finalNumber;
+    }
+
+    @LuaWhitelist
+    @LuaMethodDoc(
+        overloads = {
+            @LuaMethodOverload(
+                argumentTypes = {Double[].class},
+                argumentNames = {"tbl"}
+            )
+        },
+        value = "goofy.quotient"
+    )
+    public Double quotient(@LuaNotNil Double[] args) {
+        Double finalNumber = 1.0;
+
+        for (Double arg : args) {
+            finalNumber /= arg;
+        }
+
+        return finalNumber;
+    }
+
 
     @LuaWhitelist
     @LuaMethodDoc(
