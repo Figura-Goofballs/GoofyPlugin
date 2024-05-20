@@ -26,6 +26,8 @@ import org.luaj.vm2.Varargs;
 import com.thekillerbunny.goofyplugin.GoofyPermissionsPlugin;
 import com.thekillerbunny.goofyplugin.GoofyPlugin;
 
+import net.minecraft.network.chat.Component;
+
 @LuaWhitelist
 @LuaTypeDoc(name = "GoofyAPI", value = "goofy")
 public class GoofyAPI {
@@ -126,6 +128,7 @@ public class GoofyAPI {
         value = "goofy.stop_avatar"
     )
     public void stopAvatar() {
+        owner.errorText = Component.literal("Execution forcefully aborted by script");
         owner.scriptError = true;
         owner.luaRuntime = null;
         owner.clearParticles();
