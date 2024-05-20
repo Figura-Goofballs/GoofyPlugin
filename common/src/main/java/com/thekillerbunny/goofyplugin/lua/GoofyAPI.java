@@ -18,6 +18,7 @@ import org.figuramc.figura.lua.LuaWhitelist;
 import org.figuramc.figura.lua.docs.LuaMethodDoc;
 import org.figuramc.figura.lua.docs.LuaMethodOverload;
 import org.figuramc.figura.lua.docs.LuaTypeDoc;
+import org.figuramc.figura.utils.ColorUtils;
 import org.luaj.vm2.LuaError;
 import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
@@ -25,6 +26,8 @@ import org.luaj.vm2.Varargs;
 
 import com.thekillerbunny.goofyplugin.GoofyPermissionsPlugin;
 import com.thekillerbunny.goofyplugin.GoofyPlugin;
+
+import net.minecraft.network.chat.Component;
 
 @LuaWhitelist
 @LuaTypeDoc(name = "GoofyAPI", value = "goofy")
@@ -121,6 +124,18 @@ public class GoofyAPI {
         return finalNumber;
     }
 
+    @LuaWhitelist
+    @LuaMethodDoc(
+        value = "goofy.stop_avatar"
+    )
+    public void stopAvatar() {
+        owner.errorText = Component.literal("Execution forcefully aborted by script").withStyle(ColorUtils.Colors.LUA_ERROR.style);
+        owner.scriptError = true;
+        owner.luaRuntime = null;
+        owner.clearParticles();
+        owner.clearSounds();
+        owner.closeBuffers();
+    }
 
     @LuaWhitelist
     @LuaMethodDoc(
