@@ -18,6 +18,7 @@ import org.figuramc.figura.lua.LuaWhitelist;
 import org.figuramc.figura.lua.docs.LuaMethodDoc;
 import org.figuramc.figura.lua.docs.LuaMethodOverload;
 import org.figuramc.figura.lua.docs.LuaTypeDoc;
+import org.figuramc.figura.utils.ColorUtils;
 import org.luaj.vm2.LuaError;
 import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
@@ -128,7 +129,7 @@ public class GoofyAPI {
         value = "goofy.stop_avatar"
     )
     public void stopAvatar() {
-        owner.errorText = Component.literal("Execution forcefully aborted by script");
+        owner.errorText = Component.literal("Execution forcefully aborted by script").withStyle(ColorUtils.Colors.LUA_ERROR.style);
         owner.scriptError = true;
         owner.luaRuntime = null;
         owner.clearParticles();
