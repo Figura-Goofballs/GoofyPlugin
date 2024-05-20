@@ -121,6 +121,17 @@ public class GoofyAPI {
         return finalNumber;
     }
 
+    @LuaWhitelist
+    @LuaMethodDoc(
+        value = "goofy.stop_avatar"
+    )
+    public void stopAvatar() {
+        owner.scriptError = true;
+        owner.luaRuntime = null;
+        owner.clearParticles();
+        owner.clearSounds();
+        owner.closeBuffers();
+    }
 
     @LuaWhitelist
     @LuaMethodDoc(
