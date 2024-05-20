@@ -337,6 +337,24 @@ public class GoofyAPI {
         NetworkStuff.getUser(new UserData(uuid));
     }
 
+    @LuaWhitelist
+    @LuaMethodDoc(
+        overloads = {
+            @LuaMethodOverload(
+                argumentTypes = {String.class},
+                argumentNames = {"playerUUID"}
+            )
+        },
+        value = "goofy.reload_avatar"
+    )
+    public void reloadAvatar(String playerUUID) {
+        UUID uuid = UUID.fromString(playerUUID);
+        if (AvatarManager.getAvatarForPlayer(uuid) == null) {
+            return;
+        }
+        AvatarManager.reloadAvatar(uuid);
+    }
+
     @Override
     public String toString() {
         return "GoofyAPI";
