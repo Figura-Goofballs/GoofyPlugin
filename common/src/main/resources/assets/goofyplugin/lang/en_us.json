@@ -25,7 +25,8 @@
   "figura.docs.goofy.is_warn_enabled": "Checks if warn logging is enabled",
   "figura.docs.goofy.is_error_enabled": "Checks if error logging is enabled",
   "figura.docs.goofy.is_trace_enabled": "Checks if trace logging is enabled",
-  "figura.docs.goofy.load_avatar": "Load the avatar of a player based on their UUID\nthe loadAvatar() function is fact checked by real asian animation and approved by the GN administration and contributers",
+  "figura.docs.goofy.load_avatar": "Load the avatar of a player based on their UUID\nGN approved",
+  "figura.docs.goofy.reload_avatar": "Reload the avatar of a player based on their UUID",
   "figura.docs.goofy.what_does_bumpscocity_do": "Tells you what bumpscocity does",
   "figura.docs.goofy.get_bumpscocity": "Gets the current bumpscocity"
 }
