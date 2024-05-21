@@ -129,9 +129,9 @@
             }
             rv() {
               if test -z "$1"; then
-                gh pr review -rb "$1"
-              else
                 gh pr review -a
+              else
+                gh pr review -rb "$1"
               fi
             }
           '';
