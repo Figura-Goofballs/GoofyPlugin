@@ -150,6 +150,21 @@
         formatter = pkgs.alejandra;
         devShells.default = pkgs.mkShell {
           buildInputs = with pkgs; [nix jdk17 gradle git gh nix bashInteractive];
+          shellHook = ''
+            alias pr="gh co"
+            alias mkpr="gh pr create"
+            br() {
+              git fetch origin main
+              git switch -c "''${1?}" origin/main
+            }
+            rv() {
+              if test -z "$1"; then
+                gh pr review -a
+              else
+                gh pr review -rb "$1"
+              fi
+            }
+          '';
         };
       }
     );
