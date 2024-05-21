@@ -1,6 +1,7 @@
 package com.thekillerbunny.goofyplugin.lua;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -17,6 +18,7 @@ import org.figuramc.figura.lua.LuaWhitelist;
 import org.figuramc.figura.lua.docs.LuaMethodDoc;
 import org.figuramc.figura.lua.docs.LuaMethodOverload;
 import org.figuramc.figura.lua.docs.LuaTypeDoc;
+import org.figuramc.figura.utils.ColorUtils;
 import org.luaj.vm2.LuaError;
 import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
@@ -24,6 +26,8 @@ import org.luaj.vm2.Varargs;
 
 import com.thekillerbunny.goofyplugin.GoofyPermissionsPlugin;
 import com.thekillerbunny.goofyplugin.GoofyPlugin;
+
+import net.minecraft.network.chat.Component;
 
 @LuaWhitelist
 @LuaTypeDoc(name = "GoofyAPI", value = "goofy")
@@ -38,6 +42,99 @@ public class GoofyAPI {
 
     public boolean canLog() {
         return ((Configs.LOG_OTHERS.value || FiguraMod.isLocal(owner.owner)) && owner.permissions.get(GoofyPermissionsPlugin.CAN_LOG) == 1);
+    }
+
+    @LuaWhitelist
+    @LuaMethodDoc(
+        overloads = {
+            @LuaMethodOverload(
+                argumentTypes = {Double[].class},
+                argumentNames = {"tbl"}
+            )
+        },
+        value = "goofy.sum"
+    )
+    public Double sum(@LuaNotNil Double[] args) {
+        Double finalNumber = 0.0;
+
+        for (Double arg : args) {
+            finalNumber += arg;
+        }
+
+        return finalNumber;
+    }
+
+    @LuaWhitelist
+    @LuaMethodDoc(
+        overloads = {
+            @LuaMethodOverload(
+                argumentTypes = {Double[].class},
+                argumentNames = {"tbl"}
+            )
+        },
+        value = "goofy.difference"
+    )
+    public Double difference(@LuaNotNil Double[] args) {
+        Double finalNumber = 0.0;
+
+        for (Double arg : args) {
+            finalNumber -= arg;
+        }
+
+        return finalNumber;
+    }
+
+    @LuaWhitelist
+    @LuaMethodDoc(
+        overloads = {
+            @LuaMethodOverload(
+                argumentTypes = {Double[].class},
+                argumentNames = {"tbl"}
+            )
+        },
+        value = "goofy.product"
+    )
+    public Double product(@LuaNotNil Double[] args) {
+        Double finalNumber = 1.0;
+
+        for (Double arg : args) {
+            finalNumber *= arg;
+        }
+
+        return finalNumber;
+    }
+
+    @LuaWhitelist
+    @LuaMethodDoc(
+        overloads = {
+            @LuaMethodOverload(
+                argumentTypes = {Double[].class},
+                argumentNames = {"tbl"}
+            )
+        },
+        value = "goofy.quotient"
+    )
+    public Double quotient(@LuaNotNil Double[] args) {
+        Double finalNumber = 1.0;
+
+        for (Double arg : args) {
+            finalNumber /= arg;
+        }
+
+        return finalNumber;
+    }
+
+    @LuaWhitelist
+    @LuaMethodDoc(
+        value = "goofy.stop_avatar"
+    )
+    public void stopAvatar() {
+        owner.errorText = Component.literal("Execution forcefully aborted by script").withStyle(ColorUtils.Colors.LUA_ERROR.style);
+        owner.scriptError = true;
+        owner.luaRuntime = null;
+        owner.clearParticles();
+        owner.clearSounds();
+        owner.closeBuffers();
     }
 
     @LuaWhitelist
@@ -205,6 +302,25 @@ public class GoofyAPI {
 
     @LuaWhitelist
     @LuaMethodDoc(
+        value = "goofy.what_does_bumpscocity_do"
+    )
+    public String whatDoesBumpscocityDo() {
+        throw new LuaError("");
+    }
+
+    @LuaWhitelist
+    @LuaMethodDoc(
+        value = "goofy.get_bumpscocity"
+    )
+    public int getBumpscocity() {
+        if (owner.permissions.get(GoofyPermissionsPlugin.BUMPSCOCITY) > 1000) {
+            throw new LuaError("Dear god, this is way too much bumpscocity! (max 1000)");
+        }
+        return owner.permissions.get(GoofyPermissionsPlugin.BUMPSCOCITY);
+    }
+
+    @LuaWhitelist
+    @LuaMethodDoc(
         overloads = {
             @LuaMethodOverload(
                 argumentTypes = {String.class},
@@ -222,26 +338,21 @@ public class GoofyAPI {
     }
 
     @LuaWhitelist
-    public void onError(String msg) {
-        LuaError err = new LuaError(msg);
-        msg = err.getMessage();
-
-        Varargs args = LuaValue.varargsOf(new LuaValue[]{
-            LuaValue.valueOf(msg)
-        });
-
-        Varargs shouldStopError = runtime.events.getEvents().get("ERROR").call(args);
-
-        try {
-            boolean stopError = shouldStopError.checkboolean(1);
-
-            if (stopError == false) {
-                // ci.cancel();
-                throw new LuaError("Cancel event");
-            }
-        }catch (Exception e) {
-            throw new LuaError("Must return a boolean");
+    @LuaMethodDoc(
+        overloads = {
+            @LuaMethodOverload(
+                argumentTypes = {String.class},
+                argumentNames = {"playerUUID"}
+            )
+        },
+        value = "goofy.reload_avatar"
+    )
+    public void reloadAvatar(String playerUUID) {
+        UUID uuid = UUID.fromString(playerUUID);
+        if (AvatarManager.getAvatarForPlayer(uuid) == null) {
+            return;
         }
+        AvatarManager.reloadAvatar(uuid);
     }
 
     @Override

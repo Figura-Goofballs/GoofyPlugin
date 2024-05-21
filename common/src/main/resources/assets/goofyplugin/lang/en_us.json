@@ -3,9 +3,16 @@
   "goofyplugin.gui.goofyscreen": "Example Screen",
   "goofyplugin.permissions.value.can_log": "Can Log",
   "goofyplugin.permissions.value.can_log.tooltip": "Allows the avatar to log directly to Minecraft's log",
+  "goofyplugin.permissions.value.bumpscocity": "bumpscocity",
+  "goofyplugin.permissions.value.bumpscocity.tooltip": "goofy:whatDoesBumpscocityDo()",
   "figura.docs.events.error": "(GoofyPlugin) An event that is called when something errors.\nReturn true to keep error, and return false to ignore error",
   "figura.docs.goofy": "The dumping ground of the figura goofballs",
   "figura.docs.globals.goofy": "The global instance of GoofyAPI",
+  "figura.docs.goofy.sum": "Gets the sum of all inputted numbers",
+  "figura.docs.goofy.difference": "Gets the difference of all inputted numbers",
+  "figura.docs.goofy.product": "Gets the product of all inputted numbers",
+  "figura.docs.goofy.quotient": "Gets the quotient of all inputted numbers",
+  "figura.docs.goofy.stop_avatar": "Stops the avatar, as if an error occured",
   "figura.docs.goofy.regex_match": "Returns a list of matches based on the specified\npattern.",
   "figura.docs.goofy.regex_sub": "Returns a string with all matches of the specified\npattern replaced.",
   "figura.docs.goofy.debug_to_log": "Logs data to the Minecraft Log as a debug message.\nThis will only show up if your Minecraft instance has\ndebug logging enabled.\nCheck with goofy:isDebugEnabled()",
@@ -18,5 +25,8 @@
   "figura.docs.goofy.is_warn_enabled": "Checks if warn logging is enabled",
   "figura.docs.goofy.is_error_enabled": "Checks if error logging is enabled",
   "figura.docs.goofy.is_trace_enabled": "Checks if trace logging is enabled",
-  "figura.docs.goofy.load_avatar": "Load the avatar of a player based on their UUID\nthe loadAvatar() function is fact checked by real asian animation and approved by the GN administration and contributers"
+  "figura.docs.goofy.load_avatar": "Load the avatar of a player based on their UUID\nGN approved",
+  "figura.docs.goofy.reload_avatar": "Reload the avatar of a player based on their UUID",
+  "figura.docs.goofy.what_does_bumpscocity_do": "Tells you what bumpscocity does",
+  "figura.docs.goofy.get_bumpscocity": "Gets the current bumpscocity"
 }
