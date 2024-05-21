@@ -5,8 +5,12 @@
   <img alt="quilt" height="56" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/supported/quilt_vector.svg">
 </p>
 
-<p align="center
+<p align="center">
 
 [<img src="https://img.shields.io/discord/1240038278212878436?logo=discord&label=Discord&labelColor=bc9af7&color=a368e6">](https://discord.com/invite/7RQYvXDXDQ) · [<img src="https://img.shields.io/github/actions/workflow/status/Figura-Goofballs/GoofyPlugin/build.yml">](https://github.com/Figura-Goofballs/GoofyPlugin/actions/workflows/build.yml) · [<img src="https://img.shields.io/modrinth/dt/figura-goofyplugin?logo=Modrinth&label=Modrinth&labelColor=aaffaa&color=55ff55">](https://modrinth.com/mod/figura-goofyplugin)
 
 </p>
+  
+  
+## Reporting a Security Vulnerability
+If you find a security vulnerability, please email me at [`bunny@thekillerbunny.com`](mailto:bunny@thekillerbunny.com?subject=Security%20Vulnerability%20in%20GoofyPlugin) or, if I don't respond within a week, DM me on discord at `thekillerbunny`.
