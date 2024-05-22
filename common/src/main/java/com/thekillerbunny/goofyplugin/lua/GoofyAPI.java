@@ -35,6 +35,18 @@ public class GoofyAPI {
     public GoofyAPI(FiguraLuaRuntime runtime) {
         this.runtime = runtime;
         this.owner = runtime.owner;
+
+        GoofyPlugin.disabledElements.put("HOTBAR", false);
+        GoofyPlugin.disabledElements.put("JUMP_METER", false);
+        GoofyPlugin.disabledElements.put("EXPERIENCE_BAR", false);
+        GoofyPlugin.disabledElements.put("SELECTED_ITEM_NAME", false);
+        GoofyPlugin.disabledElements.put("SCOREBOARD_SIDEBAR", false);
+        GoofyPlugin.disabledElements.put("PLAYER_HEALTH", false);
+        GoofyPlugin.disabledElements.put("VEHICLE_HEALTH", false);
+        GoofyPlugin.disabledElements.put("TEXTURE_OVERLAY", false);
+        GoofyPlugin.disabledElements.put("SPYGLASS_OVERLAY", false);
+        GoofyPlugin.disabledElements.put("VIGNETTE", false);
+        GoofyPlugin.disabledElements.put("PORTAL_OVERLAY", false);
     }
 
     public boolean canLog() {
@@ -363,6 +375,10 @@ public class GoofyAPI {
         value = "goofy.set_disable_gui_element"
     )
     public void setDisableGUIElement(@LuaNotNil String guiElement, @LuaNotNil Boolean disableRender) {
+        if (!FiguraMod.isLocal(owner.owner)) {
+            return;
+        }
+
         try {
             Enums.GuiElement element = Enums.GuiElement.valueOf(guiElement); // I did this to check if valid
             GoofyPlugin.LOGGER.info("Setting element " + element.toString() + " rendering to " + !disableRender);
