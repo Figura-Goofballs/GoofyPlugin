@@ -10,7 +10,9 @@ import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
+import java.util.HashMap;
+import java.util.Map;
+import static java.util.Map.entry;
 
 /**
  * Example API Plugin
@@ -25,6 +27,8 @@ public class GoofyPlugin implements FiguraAPI {
     public static final Logger LOGGER = LoggerFactory.getLogger("GoofyPlugin");
     private Avatar avatar;
 
+    public static HashMap<String, Boolean> disabledElements = new HashMap<String, Boolean>();
+
     public GoofyPlugin() {
     }
     public GoofyPlugin(Avatar avatar) {
@@ -34,7 +38,20 @@ public class GoofyPlugin implements FiguraAPI {
     /**
      * You can do common things on init here
      */
+    
     public static void init() {
+        disabledElements.put("HOTBAR", false);
+        disabledElements.put("JUMP_METER", false);
+        disabledElements.put("EXPERIENCE_BAR", false);
+        disabledElements.put("SELECTED_ITEM_NAME", false);
+        disabledElements.put("SCOREBOARD_SIDEBAR", false);
+        disabledElements.put("PLAYER_HEALTH", false);
+        disabledElements.put("VEHICLE_HEALTH", false);
+        disabledElements.put("TEXTURE_OVERLAY", false);
+        disabledElements.put("SPYGLASS_OVERLAY", false);
+        disabledElements.put("VIGNETTE", false);
+        disabledElements.put("PORTAL_OVERLAY", false);
+    
         LOGGER.info("Hello multi-loader world!");
     }
 

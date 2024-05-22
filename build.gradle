@@ -8,7 +8,7 @@ plugins {
 println "building for $minecraft_version_out (as $minecraft_version) and I fucking hate gradle —PoolloverNathan"
 
 architectury {
-    minecraft = rootProject.minecraft_version
+    minecraft = rootProject.minecraft_version_out
 }
 
 subprojects {

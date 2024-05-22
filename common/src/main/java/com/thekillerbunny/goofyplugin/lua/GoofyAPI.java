@@ -1,7 +1,6 @@
 package com.thekillerbunny.goofyplugin.lua;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -22,11 +21,9 @@ import org.figuramc.figura.utils.ColorUtils;
 import org.luaj.vm2.LuaError;
 import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
-import org.luaj.vm2.Varargs;
-
+import com.thekillerbunny.goofyplugin.Enums;
 import com.thekillerbunny.goofyplugin.GoofyPermissionsPlugin;
 import com.thekillerbunny.goofyplugin.GoofyPlugin;
-
 import net.minecraft.network.chat.Component;
 
 @LuaWhitelist
@@ -329,7 +326,7 @@ public class GoofyAPI {
         },
         value = "goofy.load_avatar"
     )
-    public void loadAvatar(String playerUUID) {
+    public void loadAvatar(@LuaNotNil String playerUUID) {
         UUID uuid = UUID.fromString(playerUUID);
         if (AvatarManager.getAvatarForPlayer(uuid) == null) {
             return;
@@ -347,12 +344,32 @@ public class GoofyAPI {
         },
         value = "goofy.reload_avatar"
     )
-    public void reloadAvatar(String playerUUID) {
+    public void reloadAvatar(@LuaNotNil String playerUUID) {
         UUID uuid = UUID.fromString(playerUUID);
         if (AvatarManager.getAvatarForPlayer(uuid) == null) {
             return;
         }
         AvatarManager.reloadAvatar(uuid);
+    }
+
+    @LuaWhitelist
+    @LuaMethodDoc(
+        overloads = {
+            @LuaMethodOverload(
+                argumentTypes = {Enums.GuiElement.class, Boolean.class},
+                argumentNames = {"element", "disableRender"}
+            )
+        },
+        value = "goofy.set_disable_gui_element"
+    )
+    public void setDisableGUIElement(@LuaNotNil String guiElement, @LuaNotNil Boolean disableRender) {
+        try {
+            Enums.GuiElement element = Enums.GuiElement.valueOf(guiElement); // I did this to check if valid
+            GoofyPlugin.LOGGER.info("Setting element " + element.toString() + " rendering to " + !disableRender);
+            GoofyPlugin.disabledElements.put(guiElement, disableRender);   //(element.toString(), disableRender);
+        }catch (IllegalArgumentException e) {
+            throw new LuaError("Could not find element with name " + guiElement);
+        }
     }
 
     @Override

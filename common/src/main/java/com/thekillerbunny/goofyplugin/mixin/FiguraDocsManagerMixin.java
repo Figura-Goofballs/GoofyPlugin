@@ -1,5 +1,6 @@
 package com.thekillerbunny.goofyplugin.mixin;
 
+import com.thekillerbunny.goofyplugin.Enums;
 import com.thekillerbunny.goofyplugin.lua.GoofyAPI;
 import org.figuramc.figura.lua.docs.FiguraDocsManager;
 import org.spongepowered.asm.mixin.Final;
@@ -16,10 +17,15 @@ public class FiguraDocsManagerMixin {
     @Final
     public static Map<String, Collection<Class<?>>> GLOBAL_CHILDREN;
 
+    @Shadow
+    @Final
+    private static Map<Class<?>, String> NAME_MAP;
 
     static {
         GLOBAL_CHILDREN.put("goofy", List.of(
             GoofyAPI.class
         ));
+
+        NAME_MAP.put(Enums.GuiElement.class, "GuiElement");
     }
 }
