@@ -18,3 +18,6 @@ to re-enable an element, run the same command with `false` instead of true
 * "SPYGLASS_OVERLAY"
 * "VIGNETTE"
 * "PORTAL_OVERLAY"
+* "CHAT"
+* "BOSSBAR"
+* "TAB_LIST"

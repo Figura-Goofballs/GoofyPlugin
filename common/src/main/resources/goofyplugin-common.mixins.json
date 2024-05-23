@@ -13,7 +13,10 @@
     "FiguraLuaRuntimeMixin",
     "GuiMixin",
     "AvatarManagerMixin",
-    "UserDataMixin"
+    "UserDataMixin",
+    "ChatComponentMixin",
+    "BossHealthOverlayMixin",
+    "PlayerTabOverlayMixin"
   ],
   "injectors": {
     "defaultRequire": 1

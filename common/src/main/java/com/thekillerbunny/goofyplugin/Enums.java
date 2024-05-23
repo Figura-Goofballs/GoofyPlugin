@@ -12,6 +12,9 @@ public class Enums {
         TEXTURE_OVERLAY,
         SPYGLASS_OVERLAY,
         VIGNETTE,
-        PORTAL_OVERLAY
+        PORTAL_OVERLAY,
+        CHAT,
+        BOSSBAR,
+        TAB_LIST
     }
 }
