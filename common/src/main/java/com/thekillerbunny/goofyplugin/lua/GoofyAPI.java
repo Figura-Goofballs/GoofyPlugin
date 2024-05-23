@@ -35,18 +35,6 @@ public class GoofyAPI {
     public GoofyAPI(FiguraLuaRuntime runtime) {
         this.runtime = runtime;
         this.owner = runtime.owner;
-
-        GoofyPlugin.disabledElements.put("HOTBAR", false);
-        GoofyPlugin.disabledElements.put("JUMP_METER", false);
-        GoofyPlugin.disabledElements.put("EXPERIENCE_BAR", false);
-        GoofyPlugin.disabledElements.put("SELECTED_ITEM_NAME", false);
-        GoofyPlugin.disabledElements.put("SCOREBOARD_SIDEBAR", false);
-        GoofyPlugin.disabledElements.put("PLAYER_HEALTH", false);
-        GoofyPlugin.disabledElements.put("VEHICLE_HEALTH", false);
-        GoofyPlugin.disabledElements.put("TEXTURE_OVERLAY", false);
-        GoofyPlugin.disabledElements.put("SPYGLASS_OVERLAY", false);
-        GoofyPlugin.disabledElements.put("VIGNETTE", false);
-        GoofyPlugin.disabledElements.put("PORTAL_OVERLAY", false);
     }
 
     public boolean canLog() {
