@@ -12,7 +12,8 @@
     "EventsAPIMixin",
     "FiguraLuaRuntimeMixin",
     "GuiMixin",
-    "AvatarManagerMixin"
+    "AvatarManagerMixin",
+    "UserDataMixin"
   ],
   "injectors": {
     "defaultRequire": 1
