@@ -7,10 +7,14 @@ import org.figuramc.figura.lua.LuaWhitelist;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.thekillerbunny.goofyplugin.Enums.GuiElement;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
+import java.util.HashMap;
+import java.util.Map;
+import static java.util.Map.entry;
 
 /**
  * Example API Plugin
@@ -25,6 +29,8 @@ public class GoofyPlugin implements FiguraAPI {
     public static final Logger LOGGER = LoggerFactory.getLogger("GoofyPlugin");
     private Avatar avatar;
 
+    public static HashMap<GuiElement, Boolean> disabledElements = new HashMap<GuiElement, Boolean>();
+
     public GoofyPlugin() {
     }
     public GoofyPlugin(Avatar avatar) {
@@ -34,7 +40,12 @@ public class GoofyPlugin implements FiguraAPI {
     /**
      * You can do common things on init here
      */
+    
     public static void init() {
+        for (GuiElement elem: GuiElement.values()) {
+            GoofyPlugin.disabledElements.put(elem, false);
+        }
+   
         LOGGER.info("Hello multi-loader world!");
     }
 

@@ -28,5 +28,6 @@
   "figura.docs.goofy.load_avatar": "Load the avatar of a player based on their UUID\nGN approved",
   "figura.docs.goofy.reload_avatar": "Reload the avatar of a player based on their UUID",
   "figura.docs.goofy.what_does_bumpscocity_do": "Tells you what bumpscocity does",
-  "figura.docs.goofy.get_bumpscocity": "Gets the current bumpscocity"
+  "figura.docs.goofy.get_bumpscocity": "Gets the current bumpscocity",
+  "figura.docs.goofy.set_disable_gui_element": "Sets whether to disable running the\nspecified GUI element"
 }
