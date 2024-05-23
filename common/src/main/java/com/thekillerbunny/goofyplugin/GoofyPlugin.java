@@ -7,6 +7,8 @@ import org.figuramc.figura.lua.LuaWhitelist;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.thekillerbunny.goofyplugin.Enums.GuiElement;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -27,7 +29,7 @@ public class GoofyPlugin implements FiguraAPI {
     public static final Logger LOGGER = LoggerFactory.getLogger("GoofyPlugin");
     private Avatar avatar;
 
-    public static HashMap<String, Boolean> disabledElements = new HashMap<String, Boolean>();
+    public static HashMap<GuiElement, Boolean> disabledElements = new HashMap<GuiElement, Boolean>();
 
     public GoofyPlugin() {
     }
@@ -40,18 +42,10 @@ public class GoofyPlugin implements FiguraAPI {
      */
     
     public static void init() {
-        disabledElements.put("HOTBAR", false);
-        disabledElements.put("JUMP_METER", false);
-        disabledElements.put("EXPERIENCE_BAR", false);
-        disabledElements.put("SELECTED_ITEM_NAME", false);
-        disabledElements.put("SCOREBOARD_SIDEBAR", false);
-        disabledElements.put("PLAYER_HEALTH", false);
-        disabledElements.put("VEHICLE_HEALTH", false);
-        disabledElements.put("TEXTURE_OVERLAY", false);
-        disabledElements.put("SPYGLASS_OVERLAY", false);
-        disabledElements.put("VIGNETTE", false);
-        disabledElements.put("PORTAL_OVERLAY", false);
-    
+        for (GuiElement elem: GuiElement.values()) {
+            GoofyPlugin.disabledElements.put(elem, false);
+        }
+   
         LOGGER.info("Hello multi-loader world!");
     }
 

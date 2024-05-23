@@ -368,9 +368,9 @@ public class GoofyAPI {
         }
 
         try {
-            Enums.GuiElement element = Enums.GuiElement.valueOf(guiElement); // I did this to check if valid
+            Enums.GuiElement element = Enums.GuiElement.valueOf(guiElement);
             GoofyPlugin.LOGGER.info("Setting element " + element.toString() + " rendering to " + !disableRender);
-            GoofyPlugin.disabledElements.put(guiElement, disableRender);   //(element.toString(), disableRender);
+            GoofyPlugin.disabledElements.put(element, disableRender);
         }catch (IllegalArgumentException e) {
             throw new LuaError("Could not find element with name " + guiElement);
         }
