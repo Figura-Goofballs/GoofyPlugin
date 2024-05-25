@@ -1,5 +1,6 @@
 package com.thekillerbunny.goofyplugin.lua;
 
+import org.apache.logging.log4j.Level;
 import org.figuramc.figura.avatar.Avatar;
 import org.figuramc.figura.lua.FiguraLuaRuntime;
 import org.figuramc.figura.lua.LuaNotNil;
@@ -35,7 +36,7 @@ public class CollectionAPI {
         },
         value = "collection.sum"
     )
-    public LuaValue sum(@LuaNotNil LuaTable tbl) {
+    public Object sum(@LuaNotNil LuaTable tbl) {
         if (tbl.length() == 0) {
             return LuaValue.NIL;
         }
@@ -47,25 +48,25 @@ public class CollectionAPI {
             for (double v : arr) {
                 sum += v;
             }
-            return LuaValue.valueOf(sum);
+            return sum;
         } else if (first.isuserdata(FiguraVec2.class)) {
             FiguraVec2 sum = FiguraVec2.of(0, 0);
             for (int i = 1; i <= tbl.length(); i++) {
                 sum.add((FiguraVec2) tbl.get(i).checkuserdata(FiguraVec2.class));
             }
-            return LuaValue.userdataOf(sum);
+            return sum;
         } else if (first.isuserdata(FiguraVec3.class)) {
             FiguraVec3 sum = FiguraVec3.of(0, 0, 0);
             for (int i = 1; i <= tbl.length(); i++) {
                 sum.add((FiguraVec3) tbl.get(i).checkuserdata(FiguraVec3.class));
             }
-            return LuaValue.userdataOf(sum);
+            return sum;
         } else if (first.isuserdata(FiguraVec4.class)) {
             FiguraVec4 sum = FiguraVec4.of(0, 0, 0, 0);
             for (int i = 1; i <= tbl.length(); i++) {
                 sum.add((FiguraVec4) tbl.get(i).checkuserdata(FiguraVec4.class));
             }
-            return LuaValue.userdataOf(sum);
+            return sum;
         } else {
             throw new LuaError("Unsupported array type");
         }
@@ -82,7 +83,7 @@ public class CollectionAPI {
             },
             value = "collection.sum"
     )
-    public LuaValue difference(@LuaNotNil LuaTable tbl) {
+    public Object difference(@LuaNotNil LuaTable tbl) {
         if (tbl.length() == 0) {
             return LuaValue.NIL;
         }
@@ -94,25 +95,25 @@ public class CollectionAPI {
             for (double v : arr) {
                 difference -= v;
             }
-            return LuaValue.valueOf(difference);
+            return difference;
         } else if (first.isuserdata(FiguraVec2.class)) {
-            FiguraVec2 sum = FiguraVec2.of(0, 0);
+            FiguraVec2 difference = FiguraVec2.of(0, 0);
             for (int i = 1; i <= tbl.length(); i++) {
-                sum.subtract((FiguraVec2) tbl.get(i).checkuserdata(FiguraVec2.class));
+                difference.subtract((FiguraVec2) tbl.get(i).checkuserdata(FiguraVec2.class));
             }
-            return LuaValue.userdataOf(sum);
+            return difference;
         } else if (first.isuserdata(FiguraVec3.class)) {
-            FiguraVec3 sum = FiguraVec3.of(0, 0, 0);
+            FiguraVec3 difference = FiguraVec3.of(0, 0, 0);
             for (int i = 1; i <= tbl.length(); i++) {
-                sum.subtract((FiguraVec3) tbl.get(i).checkuserdata(FiguraVec3.class));
+                difference.subtract((FiguraVec3) tbl.get(i).checkuserdata(FiguraVec3.class));
             }
-            return LuaValue.userdataOf(sum);
+            return difference;
         } else if (first.isuserdata(FiguraVec4.class)) {
-            FiguraVec4 sum = FiguraVec4.of(0, 0, 0, 0);
+            FiguraVec4 difference = FiguraVec4.of(0, 0, 0, 0);
             for (int i = 1; i <= tbl.length(); i++) {
-                sum.subtract((FiguraVec4) tbl.get(i).checkuserdata(FiguraVec4.class));
+                difference.subtract((FiguraVec4) tbl.get(i).checkuserdata(FiguraVec4.class));
             }
-            return LuaValue.userdataOf(sum);
+            return difference;
         } else {
             throw new LuaError("Unsupported array type");
         }
@@ -129,7 +130,7 @@ public class CollectionAPI {
             },
             value = "collection.sum"
     )
-    public LuaValue product(@LuaNotNil LuaTable tbl) {
+    public Object product(@LuaNotNil LuaTable tbl) {
         if (tbl.length() == 0) {
             return LuaValue.NIL;
         }
@@ -141,25 +142,25 @@ public class CollectionAPI {
             for (double v : arr) {
                 product *= v;
             }
-            return LuaValue.valueOf(product);
+            return product;
         } else if (first.isuserdata(FiguraVec2.class)) {
-            FiguraVec2 sum = FiguraVec2.of(0, 0);
+            FiguraVec2 product = FiguraVec2.of(0, 0);
             for (int i = 1; i <= tbl.length(); i++) {
-                sum.multiply((FiguraVec2) tbl.get(i).checkuserdata(FiguraVec2.class));
+                product.multiply((FiguraVec2) tbl.get(i).checkuserdata(FiguraVec2.class));
             }
-            return LuaValue.userdataOf(sum);
+            return product;
         } else if (first.isuserdata(FiguraVec3.class)) {
-            FiguraVec3 sum = FiguraVec3.of(0, 0, 0);
+            FiguraVec3 product = FiguraVec3.of(0, 0, 0);
             for (int i = 1; i <= tbl.length(); i++) {
-                sum.multiply((FiguraVec3) tbl.get(i).checkuserdata(FiguraVec3.class));
+                product.multiply((FiguraVec3) tbl.get(i).checkuserdata(FiguraVec3.class));
             }
-            return LuaValue.userdataOf(sum);
+            return product;
         } else if (first.isuserdata(FiguraVec4.class)) {
-            FiguraVec4 sum = FiguraVec4.of(0, 0, 0, 0);
+            FiguraVec4 product = FiguraVec4.of(0, 0, 0, 0);
             for (int i = 1; i <= tbl.length(); i++) {
-                sum.multiply((FiguraVec4) tbl.get(i).checkuserdata(FiguraVec4.class));
+                product.multiply((FiguraVec4) tbl.get(i).checkuserdata(FiguraVec4.class));
             }
-            return LuaValue.userdataOf(sum);
+            return product;
         } else {
             throw new LuaError("Unsupported array type");
         }
@@ -176,7 +177,7 @@ public class CollectionAPI {
             },
             value = "collection.sum"
     )
-    public LuaValue quotient(@LuaNotNil LuaTable tbl) {
+    public Object quotient(@LuaNotNil LuaTable tbl) {
         if (tbl.length() == 0) {
             return LuaValue.NIL;
         }
@@ -188,28 +189,108 @@ public class CollectionAPI {
             for (double v : arr) {
                 quotient /= v;
             }
-            return LuaValue.valueOf(quotient);
+            return quotient;
         } else if (first.isuserdata(FiguraVec2.class)) {
-            FiguraVec2 sum = FiguraVec2.of(0, 0);
+            FiguraVec2 quotient = FiguraVec2.of(0, 0);
             for (int i = 1; i <= tbl.length(); i++) {
-                sum.divide((FiguraVec2) tbl.get(i).checkuserdata(FiguraVec2.class));
+                quotient.divide((FiguraVec2) tbl.get(i).checkuserdata(FiguraVec2.class));
             }
-            return LuaValue.userdataOf(sum);
+            return quotient;
         } else if (first.isuserdata(FiguraVec3.class)) {
-            FiguraVec3 sum = FiguraVec3.of(0, 0, 0);
+            FiguraVec3 quotient = FiguraVec3.of(0, 0, 0);
             for (int i = 1; i <= tbl.length(); i++) {
-                sum.divide((FiguraVec3) tbl.get(i).checkuserdata(FiguraVec3.class));
+                quotient.divide((FiguraVec3) tbl.get(i).checkuserdata(FiguraVec3.class));
             }
-            return LuaValue.userdataOf(sum);
+            return quotient;
         } else if (first.isuserdata(FiguraVec4.class)) {
-            FiguraVec4 sum = FiguraVec4.of(0, 0, 0, 0);
+            FiguraVec4 quotient = FiguraVec4.of(0, 0, 0, 0);
             for (int i = 1; i <= tbl.length(); i++) {
-                sum.divide((FiguraVec4) tbl.get(i).checkuserdata(FiguraVec4.class));
+                quotient.divide((FiguraVec4) tbl.get(i).checkuserdata(FiguraVec4.class));
             }
-            return LuaValue.userdataOf(sum);
+            return quotient;
         } else {
             throw new LuaError("Unsupported array type");
         }
+    }
+
+    @LuaWhitelist
+    @LuaMethodDoc(
+            overloads = {
+                    @LuaMethodOverload(
+                            argumentTypes = {LuaTable.class, LuaFunction.class},
+                            argumentNames = {"tbl", "func"}
+                    ),
+
+            },
+            value = "collection.map"
+    )
+    public LuaTable map(@LuaNotNil LuaTable tbl, LuaFunction func) {
+        for (LuaValue key : tbl.keys()) {
+            tbl.set(key, func.call(tbl.get(key)));
+        }
+        return tbl;
+    }
+
+    @LuaWhitelist
+    @LuaMethodDoc(
+            overloads = {
+                    @LuaMethodOverload(
+                            argumentTypes = {LuaTable.class, LuaFunction.class},
+                            argumentNames = {"tbl", "func"}
+                    ),
+
+            },
+            value = "collection.each"
+    )
+    public LuaTable each(@LuaNotNil LuaTable tbl, LuaFunction func) {
+        for (LuaValue key : tbl.keys()) {
+            func.call(tbl.get(key));
+        }
+        return tbl;
+    }
+
+    @LuaWhitelist
+    @LuaMethodDoc(
+            overloads = {
+                    @LuaMethodOverload(
+                            argumentTypes = {LuaTable.class, LuaFunction.class},
+                            argumentNames = {"tbl", "func"}
+                    ),
+
+            },
+            value = "collection.flatMap"
+    )
+    public LuaTable flatMap(@LuaNotNil LuaTable tbl, LuaFunction func) {
+        LuaTable result = new LuaTable();
+        for (LuaValue key : tbl.keys()) {
+            LuaTable subTable = (LuaTable) func.call(tbl.get(key));
+            for (LuaValue subKey : subTable.keys()) {
+                result.set(result.length() + 1, subTable.get(subKey));
+            }
+        }
+        return result;
+    }
+
+    @LuaWhitelist
+    @LuaMethodDoc(
+            overloads = {
+                    @LuaMethodOverload(
+                            argumentTypes = {LuaTable.class, LuaFunction.class},
+                            argumentNames = {"tbl", "func"}
+                    ),
+
+            },
+            value = "collection.filter"
+    )
+    public LuaTable filter(@LuaNotNil LuaTable tbl, LuaFunction func) {
+        LuaTable result = new LuaTable();
+        for (LuaValue key : tbl.keys()) {
+            LuaValue value = tbl.get(key);
+            if (func.call(value).toboolean()) {
+                result.set(result.length() + 1, value);
+            }
+        }
+        return result;
     }
 
     @Override
