@@ -1,11 +1,12 @@
 # Table Math
 ## How to use
 
+these can also use vectors
 To use, you can do one of the following:
 ```lua
-goofy:sum({1, 3, 5, 4, 1}) --Returns 14
+collection:sum({1, 3, 5, 4, 1}) --Returns 14
 -- OR --
-goofy:sum(1, 3, 5, 4, 1) --Returns 14
+collection:sum(1, 3, 5, 4, 1) --Returns 14
 ```
 
 ## Supported operations
