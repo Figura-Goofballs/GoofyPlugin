@@ -31,5 +31,9 @@
   "figura.docs.collection.sum": "Gets the sum of all inputted numbers",
   "figura.docs.collection.difference": "Gets the difference of all inputted numbers",
   "figura.docs.collection.product": "Gets the product of all inputted numbers",
-  "figura.docs.collection.quotient": "Gets the quotient of all inputted numbers"
+  "figura.docs.collection.quotient": "Gets the quotient of all inputted numbers",
+  "figura.docs.collection.map": "Transforms each element of the array in-place",
+  "figura.docs.collection.each": "Runs a function on each element of the array",
+  "figura.docs.collection.flat_map": "Runs a function on each element and concatentates the resulting arrays",
+  "figura.docs.collection.filter": "Returns elements of the array matching a given predicate"
 }
