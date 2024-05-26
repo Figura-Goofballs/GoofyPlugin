@@ -1,5 +1,6 @@
 package com.thekillerbunny.goofyplugin.mixin;
 
+import com.thekillerbunny.goofyplugin.lua.CollectionAPI;
 import com.thekillerbunny.goofyplugin.lua.GoofyAPI;
 import org.figuramc.figura.lua.docs.FiguraGlobalsDocs;
 import org.figuramc.figura.lua.docs.LuaFieldDoc;
@@ -9,4 +10,7 @@ import org.spongepowered.asm.mixin.Mixin;
 public class FiguraGlobalsDocsMixin {
     @LuaFieldDoc("globals.goofy")
     public GoofyAPI goofy;
+    
+    @LuaFieldDoc("globals.collection")
+    public CollectionAPI collection;
 }
