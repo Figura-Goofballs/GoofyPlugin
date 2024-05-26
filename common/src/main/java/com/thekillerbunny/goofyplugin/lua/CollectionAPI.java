@@ -144,19 +144,19 @@ public class CollectionAPI {
             }
             return product;
         } else if (first.isuserdata(FiguraVec2.class)) {
-            FiguraVec2 product = FiguraVec2.of(0, 0);
+            FiguraVec2 product = FiguraVec2.of(1, 1);
             for (int i = 1; i <= tbl.length(); i++) {
                 product.multiply((FiguraVec2) tbl.get(i).checkuserdata(FiguraVec2.class));
             }
             return product;
         } else if (first.isuserdata(FiguraVec3.class)) {
-            FiguraVec3 product = FiguraVec3.of(0, 0, 0);
+            FiguraVec3 product = FiguraVec3.of(1, 1, 1);
             for (int i = 1; i <= tbl.length(); i++) {
                 product.multiply((FiguraVec3) tbl.get(i).checkuserdata(FiguraVec3.class));
             }
             return product;
         } else if (first.isuserdata(FiguraVec4.class)) {
-            FiguraVec4 product = FiguraVec4.of(0, 0, 0, 0);
+            FiguraVec4 product = FiguraVec4.of(1, 1, 1, 1);
             for (int i = 1; i <= tbl.length(); i++) {
                 product.multiply((FiguraVec4) tbl.get(i).checkuserdata(FiguraVec4.class));
             }
@@ -191,19 +191,19 @@ public class CollectionAPI {
             }
             return quotient;
         } else if (first.isuserdata(FiguraVec2.class)) {
-            FiguraVec2 quotient = FiguraVec2.of(0, 0);
+            FiguraVec2 quotient = FiguraVec2.of(1, 1);
             for (int i = 1; i <= tbl.length(); i++) {
                 quotient.divide((FiguraVec2) tbl.get(i).checkuserdata(FiguraVec2.class));
             }
             return quotient;
         } else if (first.isuserdata(FiguraVec3.class)) {
-            FiguraVec3 quotient = FiguraVec3.of(0, 0, 0);
+            FiguraVec3 quotient = FiguraVec3.of(1, 1, 1);
             for (int i = 1; i <= tbl.length(); i++) {
                 quotient.divide((FiguraVec3) tbl.get(i).checkuserdata(FiguraVec3.class));
             }
             return quotient;
         } else if (first.isuserdata(FiguraVec4.class)) {
-            FiguraVec4 quotient = FiguraVec4.of(0, 0, 0, 0);
+            FiguraVec4 quotient = FiguraVec4.of(1, 1, 1, 1);
             for (int i = 1; i <= tbl.length(); i++) {
                 quotient.divide((FiguraVec4) tbl.get(i).checkuserdata(FiguraVec4.class));
             }
