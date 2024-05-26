@@ -44,9 +44,25 @@ Each of these functions collect all values in the array, combining them into one
 
 * `collection:sum(vals: [a]) → a if a ∈ number | Vector2 | Vector3 | Vector4`
   Sum of all values. Vectors are summed pairwise.
+  ```lua
+  assert(collection:sum(1, 2, 3) == 6)
+  assert(collection:sum{vec(1, 2), vec(3, 4), vec(5, 6)} == vec(9, 12))
+  ```
 * `collection:difference(vals: [a]) → a if a ∈ number | Vector2 | Vector3 | Vector4`
   Difference of all values, equivalent to negative sum. Vectors are summed pairwise.
+  ```lua
+  assert(collection:sum(1, 2, 3) == -6)
+  assert(collection:sum{vec(1, 2), vec(3, 4), vec(5, 6)} == vec(-9, -12))
+  ```
 * `collection:product(vals: [a]) if a ∈ number | Vector2 | Vector3 | Vector4`
   Product of all values. Vectors are summed pairwise.
+  ```lua
+  assert(collection:sum(2, 3, 4) == 24)
+  assert(collection:sum{vec(1, 2), vec(3, 4), vec(5, 6)} == vec(15, 48))
+  ```
 * `collection:quotient(vals: [a]) → a if a ∈ number | Vector2 | Vector3 | Vector4`
-  Quotient of all values, equivalent to negative sum. Vectors are summed pairwise.
+  Quotient of all values, equivalent to negative product. Vectors are summed pairwise.
+  ```lua
+  assert(collection:sum(1, 2, 4) == 0.125)
+  assert(collection:sum{vec(2, 1), vec(4, 2), vec(1, 4)} == vec(0.125, 0.125))
+  ```
