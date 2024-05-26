@@ -20,7 +20,7 @@ For bulk operations on tables, the `collections` API is also provided. This offl
   assert(tbl == tbl2)
   assert(tbl[1] == 1 and tbl[2] == 2 and tbl[3] == 3)
   ```
-* `collection:mapEach(tbl: [a], fn: a → [b]) → [b]`
+* `collection:flatMap(tbl: [a], fn: a → [b]) → [b]`
   Like `collection:map`, but the return values of the function are treated as arrays. All such arrays are merged in a newly created array, which is returned. Similar to `>>=` operator in some languages.
   ```lua
   local tbl = {1, 2, 3}
