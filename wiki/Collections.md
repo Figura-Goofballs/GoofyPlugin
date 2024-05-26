@@ -26,8 +26,8 @@ For bulk operations on tables, the `collections` API is also provided. This offl
   local tbl = {1, 2, 3}
   local tbl2 = collection:flatMap(tbl, function(a) return {a, a+2} end)
   assert(tbl ~= tbl2) -- returns a newly allocated table
-  assert(tbl[1] == 1 and tbl[2] == 3 and tbl[3] == 2
-     and tbl[4] == 4 and tbl[5] == 3 and tbl[6] == 5)
+  assert(tbl2[1] == 1 and tbl2[2] == 3 and tbl2[3] == 2
+     and tbl2[4] == 4 and tbl2[5] == 3 and tbl2[6] == 5)
   ```
 * `collection:filter(tbl: [a], fn: a → boolean) → [a]`
   Returns a new table composed of only the elements for which the filter returns `true`. The original table is left unmodified.
@@ -35,7 +35,7 @@ For bulk operations on tables, the `collections` API is also provided. This offl
   local tbl = {1, 2, 3, 4, 5, 6}
   local tbl2 = collection:filter(tbl, function(a) return a % 2 == 0 end)
   assert(tbl ~= tbl2)
-  assert(tbl[1] == 2 and tbl[2] == 4 and tbl[3] == 6)
+  assert(tbl2[1] == 2 and tbl2[2] == 4 and tbl2[3] == 6)
   ```
 
 ## Reductive Operations
