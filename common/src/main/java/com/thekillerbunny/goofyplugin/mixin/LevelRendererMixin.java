@@ -38,7 +38,7 @@ public class LevelRendererMixin {
             try {
                 boolean stopRender = shouldNotRender.checkboolean(1);
 
-                if (stopRender == true) {
+                if (stopRender) {
                     ci.cancel();
                 }
             }catch (Exception e) {}
