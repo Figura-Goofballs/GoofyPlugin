@@ -5,7 +5,7 @@ For bulk operations on tables, the `collections` API is also provided. This offl
 ## Elementwise Operations
 
 * `collection:map(tbl: [a], fn: a → b) → [b]`
-  Runs a function on each element of the array, replacing each element with the return value in-place. Returns the table modified. Similar to `<$>` operator in somelanguages.
+  Runs a function on each element of the array, replacing each element with the return value in-place. Returns the table modified. Similar to `<$>` operator in some languages.
   ```lua
   local tbl = {1, 2, 3}
   local tbl2 = collections:map(tbl, function(a) return a + 1 end)
@@ -21,7 +21,7 @@ For bulk operations on tables, the `collections` API is also provided. This offl
   assert(tbl[1] == 1 and tbl[2] == 2 and tbl[3] == 3)
   ```
 * `collection:mapEach(tbl: [a], fn: a → [b]) → [b]`
-  Like `collection:map`, but the return values of the functiom are treated as arrays. All such arrays are merged in a newly created array, which is returned. Similar to `>>=` operator in some languages.
+  Like `collection:map`, but the return values of the function are treated as arrays. All such arrays are merged in a newly created array, which is returned. Similar to `>>=` operator in some languages.
   ```lua
   local tbl = {1, 2, 3}
   local tbl2 = collections:flatMap(tbl, function(a) return {a, a+2} end)
@@ -38,3 +38,15 @@ For bulk operations on tables, the `collections` API is also provided. This offl
   assert(tbl[1] == 2 and tbl[2] == 4 and tbl[3] == 6)
   ```
 
+## Reductive Operations
+
+Each of these functions collect all values in the array, combining them into one result. All of these implemented so far are arithmetic, and only work for homogenous arrays of numbers (4x speed increase) or vectors (3x speed increase). An empty array returns `nil`.
+
+* `collection:sum(vals: [a]) → a if a ∈ number | Vector2 | Vector3 | Vector4`
+  Sum of all values. Vectors are summed pairwise.
+* `collection:difference(vals: [a]) → a if a ∈ number | Vector2 | Vector3 | Vector4`
+  Difference of all values, equivalent to negative sum. Vectors are summed pairwise.
+* `collection:product(vals: [a]) if a ∈ number | Vector2 | Vector3 | Vector4`
+  Product of all values. Vectors are summed pairwise.
+* `collection:quotient(vals: [a]) → a if a ∈ number | Vector2 | Vector3 | Vector4`
+  Quotient of all values, equivalent to negative sum. Vectors are summed pairwise.
