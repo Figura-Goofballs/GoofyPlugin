@@ -8,7 +8,7 @@ For bulk operations on tables, the `collections` API is also provided. This offl
   Runs a function on each element of the array, replacing each element with the return value in-place. Returns the table modified. Similar to `<$>` operator in some languages.
   ```lua
   local tbl = {1, 2, 3}
-  local tbl2 = collections:map(tbl, function(a) return a + 1 end)
+  local tbl2 = collection:map(tbl, function(a) return a + 1 end)
   assert(tbl == tbl2) -- reference equality
   assert(tbl[1] == 2 and tbl[2] == 3 and tbl[3] == 4)
   ```
@@ -16,7 +16,7 @@ For bulk operations on tables, the `collections` API is also provided. This offl
   Like `collection:map`, but does not modify the table. The function's return value is discarded and the original table is returned.
   ```lua
   local tbl = {1, 2, 3}
-  local tbl2 = collections:each(tbl, function(a) print(a) end)
+  local tbl2 = collection:each(tbl, function(a) print(a) end)
   assert(tbl == tbl2)
   assert(tbl[1] == 1 and tbl[2] == 2 and tbl[3] == 3)
   ```
@@ -24,7 +24,7 @@ For bulk operations on tables, the `collections` API is also provided. This offl
   Like `collection:map`, but the return values of the function are treated as arrays. All such arrays are merged in a newly created array, which is returned. Similar to `>>=` operator in some languages.
   ```lua
   local tbl = {1, 2, 3}
-  local tbl2 = collections:flatMap(tbl, function(a) return {a, a+2} end)
+  local tbl2 = collection:flatMap(tbl, function(a) return {a, a+2} end)
   assert(tbl ~= tbl2) -- returns a newly allocated table
   assert(tbl[1] == 1 and tbl[2] == 3 and tbl[3] == 2
      and tbl[4] == 4 and tbl[5] == 3 and tbl[6] == 5)
@@ -33,7 +33,7 @@ For bulk operations on tables, the `collections` API is also provided. This offl
   Returns a new table composed of only the elements for which the filter returns `true`. The original table is left unmodified.
   ```lua
   local tbl = {1, 2, 3, 4, 5, 6}
-  local tbl2 = collections:filter(tbl, function(a) return a % 2 == 0 end)
+  local tbl2 = collection:filter(tbl, function(a) return a % 2 == 0 end)
   assert(tbl ~= tbl2)
   assert(tbl[1] == 2 and tbl[2] == 4 and tbl[3] == 6)
   ```
