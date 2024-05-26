@@ -27,14 +27,27 @@ public class EventsAPIMixin implements EventsAPIAccess {
     @LuaFieldDoc("events.error")
     public LuaEvent ERROR;
 
+    @Unique
+    @LuaWhitelist
+    @LuaFieldDoc("events.entity_render")
+    public LuaEvent ENTITY_RENDER;
+
     @Inject(method = "<init>", at = @At("RETURN"))
     void a(CallbackInfo ci) {
         ERROR = new LuaEvent();
+        ENTITY_RENDER = new LuaEvent();
+
         events.put("ERROR", ERROR);
+        events.put("ENTITY_RENDER", ENTITY_RENDER);
     }
 
     @Override
     public LuaEvent GoofyPlugin$getErrorEvent() {
         return ERROR;
+    }
+
+    @Override
+    public LuaEvent GoofyPlugin$getEntityRenderEvent() {
+        return ENTITY_RENDER;
     }
 }

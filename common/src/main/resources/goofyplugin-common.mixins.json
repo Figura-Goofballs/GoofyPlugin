@@ -16,7 +16,8 @@
     "UserDataMixin",
     "ChatComponentMixin",
     "BossHealthOverlayMixin",
-    "PlayerTabOverlayMixin"
+    "PlayerTabOverlayMixin",
+    "LevelRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

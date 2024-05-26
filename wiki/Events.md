@@ -10,3 +10,11 @@ function events.ERROR(msg)
     end
 end
 ```
+
+## `ENTITY_RENDER` event
+
+```lua
+function events.ENTITY_RENDER(entity)
+    return entity:getType() ~= "minecraft:zombie" -- Don't render zombies
+end
+```
