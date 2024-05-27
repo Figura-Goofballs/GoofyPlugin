@@ -33,7 +33,7 @@ public class LevelRendererMixin {
         LuaEvent event = ((EventsAPIAccess) localPlayer.luaRuntime.events).GoofyPlugin$getEntityRenderEvent();
 
         if (event.__len() > 0) {
-            Varargs shouldNotRender = localPlayer.run(event, localPlayer.render, EntityAPI.wrap(entity));
+            Varargs shouldNotRender = localPlayer.run(event, localPlayer.render, tickDelta, EntityAPI.wrap(entity));
             
             try {
                 boolean stopRender = shouldNotRender.checkboolean(1);
