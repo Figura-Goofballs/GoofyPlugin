@@ -14,7 +14,7 @@ end
 ## `ENTITY_RENDER` event
 
 ```lua
-function events.ENTITY_RENDER(entity)
+function events.ENTITY_RENDER(delta, entity) -- delta is the time between since the previous tikc, pass it into entity:getPos() or math.lerp for smoother stuff
     return entity:getType() ~= "minecraft:zombie" -- Don't render zombies
 end
 ```
