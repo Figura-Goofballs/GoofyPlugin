@@ -8,10 +8,14 @@ loom {
 
 
 repositories {
+    mavenCentral()
+
     maven { url 'https://jitpack.io' }
 }
 
 dependencies {
+    compileOnly("com.github.NepNep21:DiscordRPC4j16:$discordrpc4j_version")
+
     // Libraries
     compileOnly("com.github.FiguraMC.luaj:luaj-core:$luaj-figura")
     compileOnly("com.github.FiguraMC.luaj:luaj-jse:$luaj-figura")
