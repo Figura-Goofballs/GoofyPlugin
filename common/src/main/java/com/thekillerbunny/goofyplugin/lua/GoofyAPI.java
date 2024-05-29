@@ -24,6 +24,8 @@ import org.luaj.vm2.LuaValue;
 import com.thekillerbunny.goofyplugin.Enums;
 import com.thekillerbunny.goofyplugin.GoofyPermissionsPlugin;
 import com.thekillerbunny.goofyplugin.GoofyPlugin;
+
+import club.bottomservices.discordrpc.lib.RichPresence;
 import net.minecraft.network.chat.Component;
 
 @LuaWhitelist
@@ -52,6 +54,27 @@ public class GoofyAPI {
         owner.clearParticles();
         owner.clearSounds();
         owner.closeBuffers();
+    }
+
+    @LuaWhitelist
+    @LuaMethodDoc(
+        overloads = {
+            @LuaMethodOverload (
+                argumentTypes = {String.class, String.class, String.class, String.class},
+                argumentNames = {"details", "state", "largeImage", "largeText"}
+            )
+        },
+        value = "goofy.set_discord_presence"
+    )
+    public void setDiscordPresence(@LuaNotNil String details, @LuaNotNil String state, String largeImage, String largeText) {
+        if (GoofyPlugin.discordClient.isConnected && FiguraMod.isLocal(owner.owner)) {
+            RichPresence.Builder builder = new RichPresence.Builder()
+                .setTimestamps(System.currentTimeMillis() / 1000, null)
+                .setText(details, state)
+                .setAssets(largeImage, largeText, "logo", "Figura GoofyPlugin");
+
+            GoofyPlugin.discordClient.sendPresence(builder.build());
+        }
     }
 
     @LuaWhitelist
