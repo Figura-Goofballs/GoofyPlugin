@@ -14,4 +14,4 @@
   
 <h2 align="center">Reporting a Security Vulnerability</h2>
 
-If you find a security vulnerability, please email me at [`bunny@thekillerbunny.com`](mailto:bunny@thekillerbunny.com?subject=Security%20Vulnerability%20in%20GoofyPlugin) or, if I don't respond within a week, DM me on discord at `thekillerbunny`.
+If you find a security vulnerability, please email me at [`bunny@tkbunny.net`](mailto:bunny@tkbunny.net?subject=Security%20Vulnerability%20in%20GoofyPlugin) or, if I don't respond within a week, DM me on discord at `thekillerbunny`.
