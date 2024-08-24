@@ -22,4 +22,11 @@ public class AvatarManagerMixin {
             }
         }
     }
+
+    @Inject(method = "togglePanic", at = @At(value = "HEAD"))
+    private static void togglePanicHook(CallbackInfo ci) {
+      for (GuiElement elem: GuiElement.values()) {
+        GoofyPlugin.disabledElements.put(elem, false);
+      }
+    }
 }
