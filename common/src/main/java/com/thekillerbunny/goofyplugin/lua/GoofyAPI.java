@@ -336,7 +336,7 @@ public class GoofyAPI {
             throw new LuaError("Path cannot be empty");
         }
         
-        Path path = LocalAvatarFetcher.getLocalAvatarDirectory().resolve(avatarPath);;
+        Path path = LocalAvatarFetcher.getLocalAvatarDirectory().resolve(avatarPath);
         AvatarManager.loadLocalAvatar(path);
         AvatarList.selectedEntry = path;
     }
