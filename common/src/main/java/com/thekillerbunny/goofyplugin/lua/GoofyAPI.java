@@ -5,9 +5,13 @@ import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import java.nio.file.Path;
+
 import org.figuramc.figura.FiguraMod;
 import org.figuramc.figura.avatar.Avatar;
 import org.figuramc.figura.avatar.AvatarManager;
+import org.figuramc.figura.avatar.local.LocalAvatarFetcher;
+import org.figuramc.figura.avatar.local.LocalAvatarLoader;
 import org.figuramc.figura.avatar.UserData;
 import org.figuramc.figura.backend2.NetworkStuff;
 import org.figuramc.figura.config.Configs;
@@ -17,16 +21,20 @@ import org.figuramc.figura.lua.LuaWhitelist;
 import org.figuramc.figura.lua.docs.LuaMethodDoc;
 import org.figuramc.figura.lua.docs.LuaMethodOverload;
 import org.figuramc.figura.lua.docs.LuaTypeDoc;
+import org.figuramc.figura.gui.widgets.lists.AvatarList;
 import org.figuramc.figura.utils.ColorUtils;
+
 import org.luaj.vm2.LuaError;
 import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
+
 import com.thekillerbunny.goofyplugin.Enums;
 import com.thekillerbunny.goofyplugin.GoofyPermissionsPlugin;
 import com.thekillerbunny.goofyplugin.GoofyPlugin;
 
-import club.bottomservices.discordrpc.lib.RichPresence;
 import net.minecraft.network.chat.Component;
+
+import club.bottomservices.discordrpc.lib.RichPresence;
 
 @LuaWhitelist
 @LuaTypeDoc(name = "GoofyAPI", value = "goofy")
@@ -317,6 +325,43 @@ public class GoofyAPI {
         }catch (IllegalArgumentException e) {
             throw new LuaError("Could not find element with name " + guiElement);
         }
+    }
+
+    @LuaWhitelist
+    @LuaMethodDoc("goofy.upload_avatar")
+    public void uploadAvatar() {
+        if (!FiguraMod.isLocal(owner.owner)) {
+            return;
+        }
+
+        try {
+            LocalAvatarLoader.loadAvatar(null, null);
+        }catch (Exception ignored) {}
+        NetworkStuff.uploadAvatar(owner);
+        AvatarList.selectedEntry = null;
+    }
+
+    @LuaWhitelist
+    @LuaMethodDoc(
+        overloads = {
+            @LuaMethodOverload(
+                argumentTypes = {String.class},
+                argumentNames = {"path"}
+            )
+        },
+        value = "goofy.load_local_avatar"
+    )
+    public void loadLocalAvatar(@LuaNotNil String avatarPath) {
+        if (!FiguraMod.isLocal(owner.owner)) {
+            return;
+        }
+        if (avatarPath.isEmpty()) {
+            throw new LuaError("Path cannot be empty");
+        }
+        
+        Path path = LocalAvatarFetcher.getLocalAvatarDirectory().resolve(avatarPath);
+        AvatarManager.loadLocalAvatar(path);
+        AvatarList.selectedEntry = path;
     }
 
     @Override
