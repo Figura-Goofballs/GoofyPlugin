@@ -23,6 +23,7 @@ import org.figuramc.figura.lua.docs.LuaMethodOverload;
 import org.figuramc.figura.lua.docs.LuaTypeDoc;
 import org.figuramc.figura.gui.widgets.lists.AvatarList;
 import org.figuramc.figura.utils.ColorUtils;
+import org.figuramc.figura.math.vector.FiguraVec3;
 
 import org.luaj.vm2.LuaError;
 import org.luaj.vm2.LuaTable;
@@ -260,6 +261,28 @@ public class GoofyAPI {
             return;
         }
         NetworkStuff.getUser(new UserData(uuid));
+    }
+
+    @LuaWhitelist
+    @LuaMethodDoc(
+        overloads = {
+            @LuaMethodOverload(
+                argumentTypes = {String.class},
+                argumentNames = {"playerUUID"}
+            )
+        },
+        value = "goofy.get_player_color"
+    )
+    public String getPlayerColor(String playerUUID) {
+        UUID uuid = UUID.fromString(playerUUID);
+        if (AvatarManager.getAvatarForPlayer(uuid) == null) {
+            return "#000000";
+        }
+        Avatar avatar = AvatarManager.getLoadedAvatar(uuid);
+        if (avatar == null) {
+            return "#000000";
+        }
+        return avatar.color;
     }
 
     @LuaWhitelist
