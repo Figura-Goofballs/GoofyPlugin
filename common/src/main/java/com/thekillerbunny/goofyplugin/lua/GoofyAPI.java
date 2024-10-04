@@ -23,7 +23,6 @@ import org.figuramc.figura.lua.docs.LuaMethodOverload;
 import org.figuramc.figura.lua.docs.LuaTypeDoc;
 import org.figuramc.figura.gui.widgets.lists.AvatarList;
 import org.figuramc.figura.utils.ColorUtils;
-import org.figuramc.figura.math.vector.FiguraVec3;
 
 import org.luaj.vm2.LuaError;
 import org.luaj.vm2.LuaTable;
