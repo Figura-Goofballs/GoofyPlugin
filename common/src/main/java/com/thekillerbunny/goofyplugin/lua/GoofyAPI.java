@@ -279,7 +279,7 @@ public class GoofyAPI {
         }
         Avatar avatar = AvatarManager.getLoadedAvatar(uuid);
         if (avatar == null) {
-            return "#000000";
+            return null;
         }
         return avatar.color;
     }
