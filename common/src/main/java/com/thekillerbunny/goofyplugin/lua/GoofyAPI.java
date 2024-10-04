@@ -270,7 +270,7 @@ public class GoofyAPI {
                 argumentNames = { "playerUUID" }
             )
         },
-        value = "goofy.get_player_color"
+        value = "goofy.get_avatar_color"
     )
     public String getAvatarColor(String playerUUID) {
         UUID uuid = UUID.fromString(playerUUID);
