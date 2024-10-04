@@ -266,8 +266,8 @@ public class GoofyAPI {
     @LuaMethodDoc(
         overloads = {
             @LuaMethodOverload(
-                argumentTypes = {String.class},
-                argumentNames = {"playerUUID"}
+                argumentTypes = { String.class },
+                argumentNames = { "playerUUID" }
             )
         },
         value = "goofy.get_player_color"
