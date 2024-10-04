@@ -272,7 +272,7 @@ public class GoofyAPI {
         },
         value = "goofy.get_player_color"
     )
-    public String getPlayerColor(String playerUUID) {
+    public String getAvatarColor(String playerUUID) {
         UUID uuid = UUID.fromString(playerUUID);
         if (AvatarManager.getAvatarForPlayer(uuid) == null) {
             return "#000000";
