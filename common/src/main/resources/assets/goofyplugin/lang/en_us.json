@@ -23,7 +23,7 @@
   "figura.docs.goofy.is_error_enabled": "Checks if error logging is enabled",
   "figura.docs.goofy.is_trace_enabled": "Checks if trace logging is enabled",
   "figura.docs.goofy.load_avatar": "Load the avatar of a player based on their UUID\nGN approved",
-  "figura.docs.goofy.get_player_color": "Get the color of a player's avatar from UUID",
+  "figura.docs.goofy.get_player_color": "Get the color of a player's avatar from their UUID",
   "figura.docs.goofy.reload_avatar": "Reload the avatar of a player based on their UUID",
   "figura.docs.goofy.load_local_avatar": "Loads a local avatar",
   "figura.docs.goofy.upload_avatar": "Uploads the selected avatar",
