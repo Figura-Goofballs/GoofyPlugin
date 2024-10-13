@@ -255,7 +255,8 @@ public sealed interface Type<T> permits
     }
 
     public static @Nullable Type<?> parse(@NotNull Supplier<Character> seq) {
-        return switch (seq.get()) {
+		char c = seq.get();
+        return switch (c) {
             case 'y' -> BYTE;
             case 'b' -> BOOLEAN;
             case 'n' -> INT16;
@@ -270,7 +271,7 @@ public sealed interface Type<T> permits
 			case 'o' -> OBJECT_PATH;
 			case 'g' -> SIGNATURE;
 
-            case Character c -> throw new IllegalArgumentException("Bad type specifier " + c);
+            default -> throw new IllegalArgumentException("Bad type specifier " + c);
         };
     }
 
