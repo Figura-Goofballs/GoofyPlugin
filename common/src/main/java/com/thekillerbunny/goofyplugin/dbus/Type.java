@@ -4,6 +4,7 @@ import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.NotNull;
 import org.apache.commons.lang3.mutable.Mutable;
 
+import java.util.List;
 import java.util.function.Supplier;
 
 public sealed interface Type<T> permits
@@ -180,6 +181,55 @@ public sealed interface Type<T> permits
         }
     }
 
+    final class StringType implements Type<String> {
+        @Override
+        public String read(Message message) {
+            return "";
+        }
+
+        @Override
+        public void write(String value, Message message) {
+
+        }
+
+        @Override
+        public void writeTypeCode(StringBuilder out) {
+			out.append('s');
+        }
+    }
+    final class ObjectPathType implements Type<Path> {
+        @Override
+        public Path read(Message message) {
+            return "";
+        }
+
+        @Override
+        public void write(Path value, Message message) {
+
+        }
+
+        @Override
+        public void writeTypeCode(StringBuilder out) {
+			out.append('o');
+        }
+    }
+    final class SignatureType implements Type<List<Type>> {
+        @Override
+        public List<Type> read(Message message) {
+            return List.of();
+        }
+
+        @Override
+        public void write(List<Type> value, Message message) {
+
+        }
+
+        @Override
+        public void writeTypeCode(StringBuilder out) {
+			out.append('g');
+        }
+    }
+
     Type<Byte> BYTE = new ByteType();
     Type<Boolean> BOOLEAN = new BooleanType();
     Type<Short> INT16 = new Int16Type();
@@ -189,6 +239,10 @@ public sealed interface Type<T> permits
     Type<Long> INT64 = new Int64Type();
     Type<Long> UINT64 = new UInt64Type();
     Type<Double> DOUBLE = new DoubleType();
+
+	Tyoe<String> STRING = new StringType();
+	Type<Path> OBJECT_PATH = new ObjectPathType();
+	Type<List<Type>> SIGNATURE = new SignatureType();
 
     public abstract T read(Message message);
     public abstract void write(T value, Message message);
@@ -211,6 +265,11 @@ public sealed interface Type<T> permits
             case 'x' -> INT64;
             case 't' -> UINT64;
             case 'd' -> DOUBLE;
+
+			case 's' -> STRING;
+			case 'o' -> OBJECT_PATH;
+			case 'g' -> SIGNATURE;
+
             case Character c -> throw new IllegalArgumentException("Bad type specifier " + c);
         };
     }
