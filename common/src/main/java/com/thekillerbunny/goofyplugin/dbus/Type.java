@@ -256,6 +256,33 @@ public sealed interface Type<T> permits
         }
 	}
 
+	// FIXME(PoolloverNathan): structs should be variants for type-safety once variants are implemented
+	// NOTE: structs cannot be list-safe or richly-typed due to Java's generics restrictions
+	// TODO(PoolloverNathan): find a way to make structs safe anyway — maybe recursive generics?
+	final class StructType implements Type<List<?>> {
+		List<Type<?>> inner;
+		StructType(List<Type<T>> inner) {
+			this.inner = inner;
+		}
+
+        @Override
+        public List<?> read(Message message) {
+            return List.of();
+        }
+
+        @Override
+        public void write(List<?> value, Message message) {
+			
+        }
+
+        @Override
+        public void writeTypeCode(StringBuilder out) {
+			out.append('(');
+			for (Type<?> t: inner) t.writeTypeCode(out);
+			out.append(')');
+        }
+	}
+
     Type<Byte> BYTE = new ByteType();
     Type<Boolean> BOOLEAN = new BooleanType();
     Type<Short> INT16 = new Int16Type();
@@ -307,5 +334,9 @@ public sealed interface Type<T> permits
 
 	public static <T> Type<List<T>> array(Type<T> inner) {
 		return new ArrayType(Objects.requireNonNull(inner));
+	}
+
+	public static Type<?> struct(List<Type<?>> inner) {
+		return new StructType(Objects.requireNonNull(inner));
 	}
 }
