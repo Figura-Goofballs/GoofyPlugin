@@ -5,6 +5,7 @@ import org.jetbrains.annotations.NotNull;
 import org.apache.commons.lang3.mutable.Mutable;
 
 import java.util.List;
+import java.util.ArrayList;
 import java.util.function.Supplier;
 
 import java.nio.file.Path;
@@ -232,6 +233,29 @@ public sealed interface Type<T> permits
         }
     }
 
+	final class ArrayType<T> implements Type<T> {
+		Type<T> inner;
+		ArrayType(Type<T> inner) {
+			this.inner = inner;
+		}
+
+        @Override
+        public List<T> read(Message message) {
+            return List.of();
+        }
+
+        @Override
+        public void write(List<T> value, Message message) {
+			
+        }
+
+        @Override
+        public void writeTypeCode(StringBuilder out) {
+			out.append('a');
+			inner.writeTypeCode(out);
+        }
+	}
+
     Type<Byte> BYTE = new ByteType();
     Type<Boolean> BOOLEAN = new BooleanType();
     Type<Short> INT16 = new Int16Type();
@@ -249,6 +273,10 @@ public sealed interface Type<T> permits
     public abstract T read(Message message);
     public abstract void write(T value, Message message);
     public abstract void writeTypeCode(StringBuilder out);
+
+	public default int depth() {
+		return 0;
+	}
 
     public default String typeCode() {
         StringBuilder b = new StringBuilder();
@@ -277,4 +305,7 @@ public sealed interface Type<T> permits
         };
     }
 
+	public static <T> Type<List<T>> array(Type<T> inner) {
+		return new ArrayType(Objects.requireNonNull(inner));
+	}
 }
