@@ -257,7 +257,7 @@ public sealed interface Type<T> permits
 	}
 
 	// FIXME(PoolloverNathan): structs should be variants for type-safety once variants are implemented
-	// NOTE: structs cannot be list-safe or richly-typed due to Java's generics restrictions
+	// FIX(James Gosling): structs cannot be compile-time typesafe without type parameter lists
 	// TODO(PoolloverNathan): find a way to make structs safe anyway — maybe recursive generics?
 	final class StructType implements Type<List<?>> {
 		List<Type<?>> inner;
