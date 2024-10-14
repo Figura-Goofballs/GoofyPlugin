@@ -390,9 +390,6 @@ public sealed interface Type<T> permits
         };
     }
 
-    public static <T> Type<List<T>> array(Type<T> inner) {
-        return new ArrayType<>(Objects.requireNonNull(inner));
-    }
     enum ParseContext {
         DIRECT,
         STRUCT,
