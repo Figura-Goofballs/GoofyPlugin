@@ -1,25 +1,31 @@
 package com.thekillerbunny.goofyplugin.dbus;
 
+import org.apache.commons.lang3.NotImplementedException;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.NotNull;
-import org.apache.commons.lang3.mutable.Mutable;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import java.util.function.Supplier;
 
 import java.nio.file.Path;
 
 public sealed interface Type<T> permits
-		Type.ByteType,
-        Type.BooleanType,
-        Type.DoubleType,
-        Type.Int16Type,
-        Type.Int32Type,
-        Type.Int64Type,
-        Type.UInt16Type,
-        Type.UInt32Type,
-        Type.UInt64Type
+	Type.ArrayType,
+	Type.BooleanType,
+	Type.ByteType,
+	Type.DoubleType,
+	Type.Int16Type,
+	Type.Int32Type,
+	Type.Int64Type,
+	Type.ObjectPathType,
+	Type.SignatureType,
+	Type.StringType,
+	Type.StructType,
+	Type.UInt16Type,
+	Type.UInt32Type,
+	Type.UInt64Type
 {
     final class ByteType implements Type<Byte> {
         ByteType() {}
@@ -203,7 +209,7 @@ public sealed interface Type<T> permits
     final class ObjectPathType implements Type<Path> {
         @Override
         public Path read(Message message) {
-            return "";
+            return null;
         }
 
         @Override
@@ -216,14 +222,14 @@ public sealed interface Type<T> permits
 			out.append('o');
         }
     }
-    final class SignatureType implements Type<List<Type>> {
+    final class SignatureType implements Type<List<Type<?>>> {
         @Override
-        public List<Type> read(Message message) {
+        public List<Type<?>> read(Message message) {
             return List.of();
         }
 
         @Override
-        public void write(List<Type> value, Message message) {
+        public void write(List<Type<?>> value, Message message) {
 
         }
 
@@ -233,7 +239,7 @@ public sealed interface Type<T> permits
         }
     }
 
-	final class ArrayType<T> implements Type<T> {
+	final class ArrayType<T> implements Type<List<T>> {
 		Type<T> inner;
 		ArrayType(Type<T> inner) {
 			this.inner = inner;
@@ -261,7 +267,7 @@ public sealed interface Type<T> permits
 	// TODO(PoolloverNathan): find a way to make structs safe anyway — maybe recursive generics?
 	final class StructType implements Type<List<?>> {
 		List<Type<?>> inner;
-		StructType(List<Type<T>> inner) {
+		StructType(List<Type<?>> inner) {
 			this.inner = inner;
 		}
 
@@ -293,9 +299,9 @@ public sealed interface Type<T> permits
     Type<Long> UINT64 = new UInt64Type();
     Type<Double> DOUBLE = new DoubleType();
 
-	Tyoe<String> STRING = new StringType();
+	Type<String> STRING = new StringType();
 	Type<Path> OBJECT_PATH = new ObjectPathType();
-	Type<List<Type>> SIGNATURE = new SignatureType();
+	Type<List<Type<?>>> SIGNATURE = new SignatureType();
 
     public abstract T read(Message message);
     public abstract void write(T value, Message message);
@@ -333,7 +339,7 @@ public sealed interface Type<T> permits
     }
 
 	public static <T> Type<List<T>> array(Type<T> inner) {
-		return new ArrayType(Objects.requireNonNull(inner));
+		return new ArrayType<>(Objects.requireNonNull(inner));
 	}
 
 	public static Type<?> struct(List<Type<?>> inner) {
