@@ -156,7 +156,6 @@
             gradle
             jdk17
             nix
-            nix
           ];
           shellHook = ''
             alias pr="gh co"
