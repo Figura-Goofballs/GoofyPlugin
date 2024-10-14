@@ -12,20 +12,20 @@ import java.util.function.Supplier;
 import java.nio.file.Path;
 
 public sealed interface Type<T> permits
-	Type.ArrayType,
-	Type.BooleanType,
-	Type.ByteType,
-	Type.DoubleType,
-	Type.Int16Type,
-	Type.Int32Type,
-	Type.Int64Type,
-	Type.ObjectPathType,
-	Type.SignatureType,
-	Type.StringType,
-	Type.StructType,
-	Type.UInt16Type,
-	Type.UInt32Type,
-	Type.UInt64Type
+    Type.ArrayType,
+    Type.BooleanType,
+    Type.ByteType,
+    Type.DoubleType,
+    Type.Int16Type,
+    Type.Int32Type,
+    Type.Int64Type,
+    Type.ObjectPathType,
+    Type.SignatureType,
+    Type.StringType,
+    Type.StructType,
+    Type.UInt16Type,
+    Type.UInt32Type,
+    Type.UInt64Type
 {
     final class ByteType implements Type<Byte> {
         ByteType() {}
@@ -42,7 +42,7 @@ public sealed interface Type<T> permits
 
         @Override
         public void writeTypeCode(StringBuilder out) {
-			out.append('y');
+            out.append('y');
         }
     }
     final class BooleanType implements Type<Boolean> {
@@ -203,7 +203,7 @@ public sealed interface Type<T> permits
 
         @Override
         public void writeTypeCode(StringBuilder out) {
-			out.append('s');
+            out.append('s');
         }
     }
     final class ObjectPathType implements Type<Path> {
@@ -219,7 +219,7 @@ public sealed interface Type<T> permits
 
         @Override
         public void writeTypeCode(StringBuilder out) {
-			out.append('o');
+            out.append('o');
         }
     }
     final class SignatureType implements Type<List<Type<?>>> {
@@ -235,15 +235,15 @@ public sealed interface Type<T> permits
 
         @Override
         public void writeTypeCode(StringBuilder out) {
-			out.append('g');
+            out.append('g');
         }
     }
 
-	final class ArrayType<T> implements Type<List<T>> {
-		Type<T> inner;
-		ArrayType(Type<T> inner) {
-			this.inner = inner;
-		}
+    final class ArrayType<T> implements Type<List<T>> {
+        Type<T> inner;
+        ArrayType(Type<T> inner) {
+            this.inner = inner;
+        }
 
         @Override
         public List<T> read(Message message) {
@@ -252,24 +252,24 @@ public sealed interface Type<T> permits
 
         @Override
         public void write(List<T> value, Message message) {
-			
+            
         }
 
         @Override
         public void writeTypeCode(StringBuilder out) {
-			out.append('a');
-			inner.writeTypeCode(out);
+            out.append('a');
+            inner.writeTypeCode(out);
         }
-	}
+    }
 
-	// FIXME(PoolloverNathan): structs should be variants for type-safety once variants are implemented
-	// FIX(James Gosling): structs cannot be compile-time typesafe without type parameter lists
-	// TODO(PoolloverNathan): find a way to make structs safe anyway — maybe recursive generics?
-	final class StructType implements Type<List<?>> {
-		List<Type<?>> inner;
-		StructType(List<Type<?>> inner) {
-			this.inner = inner;
-		}
+    // FIXME(PoolloverNathan): structs should be variants for type-safety once variants are implemented
+    // FIX(James Gosling): structs cannot be compile-time typesafe without type parameter lists
+    // TODO(PoolloverNathan): find a way to make structs safe anyway — maybe recursive generics?
+    final class StructType implements Type<List<?>> {
+        List<Type<?>> inner;
+        StructType(List<Type<?>> inner) {
+            this.inner = inner;
+        }
 
         @Override
         public List<?> read(Message message) {
@@ -278,16 +278,16 @@ public sealed interface Type<T> permits
 
         @Override
         public void write(List<?> value, Message message) {
-			
+            
         }
 
         @Override
         public void writeTypeCode(StringBuilder out) {
-			out.append('(');
-			for (Type<?> t: inner) t.writeTypeCode(out);
-			out.append(')');
+            out.append('(');
+            for (Type<?> t: inner) t.writeTypeCode(out);
+            out.append(')');
         }
-	}
+    }
 
     Type<Byte> BYTE = new ByteType();
     Type<Boolean> BOOLEAN = new BooleanType();
@@ -299,17 +299,17 @@ public sealed interface Type<T> permits
     Type<Long> UINT64 = new UInt64Type();
     Type<Double> DOUBLE = new DoubleType();
 
-	Type<String> STRING = new StringType();
-	Type<Path> OBJECT_PATH = new ObjectPathType();
-	Type<List<Type<?>>> SIGNATURE = new SignatureType();
+    Type<String> STRING = new StringType();
+    Type<Path> OBJECT_PATH = new ObjectPathType();
+    Type<List<Type<?>>> SIGNATURE = new SignatureType();
 
     public abstract T read(Message message);
     public abstract void write(T value, Message message);
     public abstract void writeTypeCode(StringBuilder out);
 
-	public default int depth() {
-		return 0;
-	}
+    public default int depth() {
+        return 0;
+    }
 
     public default String typeCode() {
         StringBuilder b = new StringBuilder();
@@ -318,7 +318,7 @@ public sealed interface Type<T> permits
     }
 
     public static @Nullable Type<?> parse(@NotNull Supplier<Character> seq) {
-		char c = seq.get();
+        char c = seq.get();
         return switch (c) {
             case 'y' -> BYTE;
             case 'b' -> BOOLEAN;
@@ -330,19 +330,19 @@ public sealed interface Type<T> permits
             case 't' -> UINT64;
             case 'd' -> DOUBLE;
 
-			case 's' -> STRING;
-			case 'o' -> OBJECT_PATH;
-			case 'g' -> SIGNATURE;
+            case 's' -> STRING;
+            case 'o' -> OBJECT_PATH;
+            case 'g' -> SIGNATURE;
 
             default -> throw new IllegalArgumentException("Bad type specifier " + c);
         };
     }
 
-	public static <T> Type<List<T>> array(Type<T> inner) {
-		return new ArrayType<>(Objects.requireNonNull(inner));
-	}
+    public static <T> Type<List<T>> array(Type<T> inner) {
+        return new ArrayType<>(Objects.requireNonNull(inner));
+    }
 
-	public static Type<?> struct(List<Type<?>> inner) {
-		return new StructType(Objects.requireNonNull(inner));
-	}
+    public static Type<?> struct(List<Type<?>> inner) {
+        return new StructType(Objects.requireNonNull(inner));
+    }
 }
