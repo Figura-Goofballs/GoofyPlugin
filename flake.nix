@@ -156,6 +156,7 @@
             gradle
             jdk17
             nix
+            stgit
           ];
           shellHook = ''
             alias pr="gh co"
