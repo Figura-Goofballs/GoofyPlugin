@@ -334,8 +334,70 @@ public sealed interface Type<T> permits
             case 'o' -> OBJECT_PATH;
             case 'g' -> SIGNATURE;
 
-            default -> throw new IllegalArgumentException("Bad type specifier " + c);
+            case 'a' -> array(parse(seq));
+            case '(' -> {
+                List<Type<?>> types = new ArrayList<>();
+                for (;;) {
+                    Type<?> current = parse(seq, ParseContext.STRUCT);
+                    if (current == null) yield struct(types);
+                    types.add(current);
+                }
+            }
+            case ')' -> {
+                if (ctx == ParseContext.STRUCT) {
+                    yield null;
+                } else {
+                    throw new IllegalArgumentException("unexpected end of struct");
+                }
+            }
+            case '{' -> {
+                if (ctx == ParseContext.ARRAY) {
+                    throw new NotImplementedException("TODO: return a dictionary entry");
+                } else {
+                    throw new IllegalArgumentException("dictionary entries may only be in arrays")
+                }
+            }
+            case '}' -> throw new IllegalArgumentException(switch (ctx) {
+                case DIRECT -> "unexpected end of dictionary";
+                case STRUCT -> "smoothen the bracket and try again";
+                case ARRAY -> "right-to-left dictionaries are not supported";
+                case KEY -> "how would that even work";
+                case VALUE -> "set in disguise detected";
+            });
+
+            case 0 -> {
+                if (ctx == ParseContext.DIRECT) {
+                    yield null;
+                } else {
+                    throw new IllegalArgumentException(switch (ctx) {
+                        case DIRECT -> throw new AssertionError("ctx became DIRECT after checking? impossible");
+                        case STRUCT -> "unterminated struct";
+                        case ARRAY -> "unterminated array";
+                        case KEY -> "unterminated dict; expected key";
+                        case VALUE -> "unterminated dict; expected value";
+                    });
+                }
+            }
+
+            default -> {
+                throw new IllegalArgumentException("Bad type specifier " + c);
+            }
         };
+    }
+
+    public static <T> Type<List<T>> array(Type<T> inner) {
+        return new ArrayType<>(Objects.requireNonNull(inner));
+    }
+    enum ParseContext {
+        DIRECT,
+        STRUCT,
+        ARRAY,
+        KEY,
+        VALUE;
+    }
+
+    public static @Nullable Type<?> parse(@NotNull Supplier<Character> seq) {
+        return parse(seq, ParseContext.DIRECT);
     }
 
     public static <T> Type<List<T>> array(Type<T> inner) {
