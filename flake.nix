@@ -149,7 +149,15 @@
         };
         formatter = pkgs.alejandra;
         devShells.default = pkgs.mkShell {
-          buildInputs = with pkgs; [nix jdk17 gradle git gh nix bashInteractive];
+          buildInputs = with pkgs; [
+            bashInteractive
+            gh
+            git
+            gradle
+            jdk17
+            nix
+            nix
+          ];
           shellHook = ''
             alias pr="gh co"
             alias mkpr="gh pr create"
