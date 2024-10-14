@@ -260,6 +260,11 @@ public sealed interface Type<T> permits
             out.append('a');
             inner.writeTypeCode(out);
         }
+
+        @Override
+        public int depth() {
+            return inner.depth() + 1;
+        }
     }
 
     // FIXME(PoolloverNathan): structs should be variants for type-safety once variants are implemented
@@ -354,7 +359,7 @@ public sealed interface Type<T> permits
                 if (ctx == ParseContext.ARRAY) {
                     throw new NotImplementedException("TODO: return a dictionary entry");
                 } else {
-                    throw new IllegalArgumentException("dictionary entries may only be in arrays")
+                    throw new IllegalArgumentException("dictionary entries may only be in arrays");
                 }
             }
             case '}' -> throw new IllegalArgumentException(switch (ctx) {
