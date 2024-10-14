@@ -322,7 +322,7 @@ public sealed interface Type<T> permits
         return b.toString();
     }
 
-    public static @Nullable Type<?> parse(@NotNull Supplier<Character> seq) {
+    public static @Nullable Type<?> parse(@NotNull Supplier<Character> seq, ParseContext ctx) {
         char c = seq.get();
         return switch (c) {
             case 'y' -> BYTE;
