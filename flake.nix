@@ -163,7 +163,7 @@
             alias mkpr="gh pr create"
             br() {
               git fetch origin main
-              git switch -c "''${1?}" origin/main
+              git switch -c "''${1?}" --no-track origin/main
             }
             rv() {
               if test -z "$1"; then
