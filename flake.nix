@@ -149,13 +149,21 @@
         };
         formatter = pkgs.alejandra;
         devShells.default = pkgs.mkShell {
-          buildInputs = with pkgs; [nix jdk17 gradle git gh nix bashInteractive];
+          buildInputs = with pkgs; [
+            bashInteractive
+            gh
+            git
+            gradle
+            jdk17
+            nix
+            stgit
+          ];
           shellHook = ''
             alias pr="gh co"
             alias mkpr="gh pr create"
             br() {
               git fetch origin main
-              git switch -c "''${1?}" origin/main
+              git switch -c "''${1?}" --no-track origin/main
             }
             rv() {
               if test -z "$1"; then
