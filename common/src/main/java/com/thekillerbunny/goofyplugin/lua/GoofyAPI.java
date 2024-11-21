@@ -274,6 +274,28 @@ public class GoofyAPI {
     @LuaMethodDoc(
         overloads = {
             @LuaMethodOverload(
+                argumentTypes = { String.class },
+                argumentNames = { "playerUUID" }
+            )
+        },
+        value = "goofy.get_avatar_color"
+    )
+    public String getAvatarColor(String playerUUID) {
+        UUID uuid = UUID.fromString(playerUUID);
+        if (AvatarManager.getAvatarForPlayer(uuid) == null) {
+            return null;
+        }
+        Avatar avatar = AvatarManager.getLoadedAvatar(uuid);
+        if (avatar == null) {
+            return null;
+        }
+        return avatar.color;
+    }
+
+    @LuaWhitelist
+    @LuaMethodDoc(
+        overloads = {
+            @LuaMethodOverload(
                 argumentTypes = {String.class},
                 argumentNames = {"playerUUID"}
             )
