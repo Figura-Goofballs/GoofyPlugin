@@ -7,6 +7,9 @@ import java.util.regex.Pattern;
 
 import java.nio.file.Path;
 
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.client.Minecraft;
+
 import org.figuramc.figura.FiguraMod;
 import org.figuramc.figura.avatar.Avatar;
 import org.figuramc.figura.avatar.AvatarManager;
@@ -21,8 +24,11 @@ import org.figuramc.figura.lua.LuaWhitelist;
 import org.figuramc.figura.lua.docs.LuaMethodDoc;
 import org.figuramc.figura.lua.docs.LuaMethodOverload;
 import org.figuramc.figura.lua.docs.LuaTypeDoc;
+import org.figuramc.figura.math.vector.FiguraVec2;
+import org.figuramc.figura.math.vector.FiguraVec3;
 import org.figuramc.figura.gui.widgets.lists.AvatarList;
 import org.figuramc.figura.utils.ColorUtils;
+import org.figuramc.figura.utils.LuaUtils;
 
 import org.luaj.vm2.LuaError;
 import org.luaj.vm2.LuaTable;
@@ -39,10 +45,12 @@ import net.minecraft.network.chat.Component;
 public class GoofyAPI {
     private final FiguraLuaRuntime runtime;
     private final Avatar owner;
+    private final Minecraft mc;
 
     public GoofyAPI(FiguraLuaRuntime runtime) {
         this.runtime = runtime;
         this.owner = runtime.owner;
+        this.mc = Minecraft.getInstance();
     }
 
     public boolean canLog() {
@@ -319,7 +327,6 @@ public class GoofyAPI {
 
         try {
             Enums.GuiElement element = Enums.GuiElement.valueOf(guiElement);
-            GoofyPlugin.LOGGER.info("Setting element " + element.toString() + " rendering to " + !disableRender);
             GoofyPlugin.disabledElements.put(element, disableRender);
         }catch (IllegalArgumentException e) {
             throw new LuaError("Could not find element with name " + guiElement);
@@ -361,6 +368,128 @@ public class GoofyAPI {
         Path path = LocalAvatarFetcher.getLocalAvatarDirectory().resolve(avatarPath);
         AvatarManager.loadLocalAvatar(path);
         AvatarList.selectedEntry = path;
+    }
+
+    @LuaWhitelist
+    @LuaMethodDoc(
+      overloads = {
+        @LuaMethodOverload(
+          argumentTypes = {FiguraVec3.class},
+          argumentNames = {"velocity"}
+        ),
+        @LuaMethodOverload(
+          argumentTypes = {Double.class, Double.class, Double.class},
+          argumentNames = {"x", "y", "z"}
+        )
+      },
+      value = "goofy.set_velocity"
+    )
+    public void setVelocity(@LuaNotNil Object x, Double y, Double z) {
+      if (!FiguraMod.isLocal(owner.owner)) {
+          return;
+      }
+      
+      LocalPlayer player = this.mc.player;
+
+      if (player == null) {
+        return;
+      }
+      
+      if (player.hasPermissions(2) || this.mc.isLocalServer()) {
+        FiguraVec3 velocity = LuaUtils.parseVec3("setVelocity", x, y, z);
+        player.setDeltaMovement(velocity.asVec3());
+      }
+    }
+
+    @LuaWhitelist
+    @LuaMethodDoc(
+      overloads = {
+        @LuaMethodOverload(
+          argumentTypes = {FiguraVec3.class},
+          argumentNames = {"position"}
+        ),
+        @LuaMethodOverload(
+          argumentTypes = {Double.class, Double.class, Double.class},
+          argumentNames = {"x", "y", "z"}
+        )
+      },
+      value = "goofy.set_pos"
+    )
+    public void setPos(@LuaNotNil Object x, Double y, Double z) {
+      if (!FiguraMod.isLocal(owner.owner)) {
+          return;
+      }
+      
+      LocalPlayer player = this.mc.player;
+
+      if (player == null) {
+        return;
+      }
+      
+      if (player.hasPermissions(2) || this.mc.isLocalServer()) {
+        FiguraVec3 pos = LuaUtils.parseVec3("setPos", x, y, z);
+        player.setPos(pos.asVec3());
+      }
+    }
+    
+    @LuaWhitelist
+    @LuaMethodDoc(
+      overloads = {
+        @LuaMethodOverload(
+          argumentTypes = {FiguraVec2.class},
+          argumentNames = {"rotation"}
+        ),
+        @LuaMethodOverload(
+          argumentTypes = {Double.class, Double.class},
+          argumentNames = {"x", "y"}
+        )
+      },
+      value = "goofy.set_rot"
+    )
+
+    public void setRot(@LuaNotNil Object x, Double y) {
+      if (!FiguraMod.isLocal(owner.owner)) {
+          return;
+      }
+      
+      LocalPlayer player = this.mc.player;
+
+      if (player == null) {
+        return;
+      }
+      
+      if (player.hasPermissions(2) || this.mc.isLocalServer()) {
+        FiguraVec2 rot = LuaUtils.parseVec2("setRot", x, y);
+        player.setXRot((float) rot.x);
+        player.setYRot((float) rot.y);
+      }
+    }
+
+    @LuaWhitelist
+    @LuaMethodDoc(
+      overloads = {
+        @LuaMethodOverload(
+          argumentTypes = {Double.class},
+          argumentNames = {"angle"}
+        )
+      },
+      value = "goofy.set_body_rot"
+    )
+
+    public void setBodyRot(@LuaNotNil double rot) {
+      if (!FiguraMod.isLocal(owner.owner)) {
+          return;
+      }
+      
+      LocalPlayer player = this.mc.player;
+
+      if (player == null) {
+        return;
+      }
+      
+      if (player.hasPermissions(2) || this.mc.isLocalServer()) {
+        player.setYBodyRot((float) rot);
+      }
     }
 
     @Override
