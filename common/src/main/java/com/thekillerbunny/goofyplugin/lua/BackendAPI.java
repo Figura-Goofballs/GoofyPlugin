@@ -38,7 +38,7 @@ public class BackendAPI {
     public void disconnect(String message) {
         NetworkStuff.disconnect(message);
     }
-    @LuaMethodDoc("goofy.backend.disconnect")
+    @LuaMethodDoc("goofy.backend.get_token")
     @LuaWhitelist
     public String getToken() {
         try {
