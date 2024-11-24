@@ -11,6 +11,7 @@ import org.figuramc.figura.lua.api.data.FiguraBuffer;
 import org.figuramc.figura.lua.docs.LuaMethodDoc;
 
 import java.lang.reflect.Field;
+import java.util.Objects;
 
 import net.minecraft.network.chat.Component;
 
@@ -56,8 +57,8 @@ public class BackendAPI {
     }
     @LuaMethodDoc("goofy.backend.connect_with_token")
     @LuaWhitelist
-    public void connectWithToken(String token) {
-        NetworkStuff.connect(token);
+    public void connect(String token) {
+        NetworkStuff.connect(Objects.requireNonNullElse(token, getToken()));
     }
     @LuaMethodDoc("goofy.backend.motd")
     @LuaWhitelist
