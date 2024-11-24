@@ -1,6 +1,7 @@
 package com.thekillerbunny.goofyplugin.lua;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -71,8 +72,8 @@ public class GoofyAPI {
     @LuaMethodDoc(
         value = "goofy.stop_avatar"
     )
-    public void stopAvatar() {
-        owner.errorText = Component.literal("Execution forcefully aborted by script").withStyle(ColorUtils.Colors.LUA_ERROR.style);
+    public void stopAvatar(String message) {
+        owner.errorText = Component.literal(Objects.requireNonNullElse(message, "Execution aborted by script")).withStyle(ColorUtils.Colors.LUA_ERROR.style);
         owner.scriptError = true;
         owner.luaRuntime = null;
         owner.clearParticles();
