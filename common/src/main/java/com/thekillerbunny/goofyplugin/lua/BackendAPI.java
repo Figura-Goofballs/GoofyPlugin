@@ -12,6 +12,8 @@ import org.figuramc.figura.lua.docs.LuaMethodDoc;
 
 import java.lang.reflect.Field;
 
+import net.minecraft.network.chat.Component;
+
 public class BackendAPI {
     @LuaMethodDoc("goofy.backend.connected")
     @LuaWhitelist
@@ -60,13 +62,7 @@ public class BackendAPI {
     @LuaMethodDoc("goofy.backend.motd")
     @LuaWhitelist
     public String motd() {
-        try {
-            Field gsonField = NetworkStuff.class.getDeclaredField("GSON");
-            gsonField.setAccessible(true);
-            return ((Gson) gsonField.get(null)).toJson(ExtraCodecs.COMPONENT.encodeStart(JsonOps.INSTANCE, NetworkStuff.motd).getOrThrow(true, str -> {}));
-        } catch (NoSuchFieldException | IllegalAccessException e) {
-            return null;
-        }
+		return Component.Serializer.toJson(NetworkStuff.motd);
     }
     @LuaMethodDoc("goofy.backend.write")
     @LuaWhitelist
