@@ -245,6 +245,9 @@ public class GoofyAPI {
     }
 
     @LuaWhitelist
+    public final BackendAPI backend = new BackendAPI();
+
+    @LuaWhitelist
     @LuaMethodDoc(
         value = "goofy.what_does_bumpscocity_do"
     )
