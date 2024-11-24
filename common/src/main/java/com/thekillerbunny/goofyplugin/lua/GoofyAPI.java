@@ -21,6 +21,7 @@ import org.figuramc.figura.config.Configs;
 import org.figuramc.figura.lua.FiguraLuaRuntime;
 import org.figuramc.figura.lua.LuaNotNil;
 import org.figuramc.figura.lua.LuaWhitelist;
+import org.figuramc.figura.lua.api.nameplate.NameplateAPI;
 import org.figuramc.figura.lua.docs.LuaMethodDoc;
 import org.figuramc.figura.lua.docs.LuaMethodOverload;
 import org.figuramc.figura.lua.docs.LuaTypeDoc;
@@ -29,6 +30,8 @@ import org.figuramc.figura.math.vector.FiguraVec3;
 import org.figuramc.figura.gui.widgets.lists.AvatarList;
 import org.figuramc.figura.utils.ColorUtils;
 import org.figuramc.figura.utils.LuaUtils;
+
+import org.apache.commons.lang3.ObjectUtils;
 
 import org.luaj.vm2.LuaError;
 import org.luaj.vm2.LuaTable;
@@ -268,6 +271,34 @@ public class GoofyAPI {
             return;
         }
         NetworkStuff.getUser(new UserData(uuid));
+    }
+
+    @LuaWhitelist
+    @LuaMethodDoc(
+      overloads = {
+        @LuaMethodOverload(
+          argumentTypes = { String.class },
+          argumentNames = { "avatarUUID" }
+        )
+      },
+      value = "goofy.get_avatar_nameplate"
+    )
+    public String[] getAvatarNameplate(@LuaNotNil String avatarUUID) {
+      UUID uuid = UUID.fromString(avatarUUID);
+      Avatar avatar = AvatarManager.getLoadedAvatar(uuid);
+
+      if (avatar == null) {
+        return new String[]{avatarUUID, avatarUUID, avatarUUID};
+      }
+
+      NameplateAPI plate = avatar.luaRuntime.nameplate;
+
+      String name = avatar.entityName;
+      String chat = ObjectUtils.firstNonNull(plate.CHAT.getText(), name, avatarUUID);
+      String entity = ObjectUtils.firstNonNull(plate.ENTITY.getText(), name, avatarUUID);
+      String list = ObjectUtils.firstNonNull(plate.LIST.getText(), name, avatarUUID);
+
+      return new String[]{chat, entity, list};
     }
 
     @LuaWhitelist
