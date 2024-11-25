@@ -42,12 +42,15 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.luaj.vm2.LuaError;
 import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
+import org.luaj.vm2.lib.ZeroArgFunction;
 
 import com.thekillerbunny.goofyplugin.Enums;
 import com.thekillerbunny.goofyplugin.GoofyPermissionsPlugin;
 import com.thekillerbunny.goofyplugin.GoofyPlugin;
+import com.thekillerbunny.goofyplugin.ducks.FiguraLuaRuntimeAccess;
 
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 
 @LuaWhitelist
 @LuaTypeDoc(name = "GoofyAPI", value = "goofy")
@@ -73,9 +76,25 @@ public class GoofyAPI {
         value = "goofy.stop_avatar"
     )
     public void stopAvatar(String message) {
-        owner.errorText = Component.literal(Objects.requireNonNullElse(message, "Execution aborted by script")).withStyle(ColorUtils.Colors.LUA_ERROR.style);
+        if (message != null) {
+          Component userComponent = TextUtils.tryParseJson(message);
+          MutableComponent errorComponent = Component.empty().withStyle(ColorUtils.Colors.LUA_ERROR.style);
+          errorComponent.append(userComponent);
+
+          owner.errorText = errorComponent;
+        }else {
+          owner.errorText = Component.literal("Execution aborted by script").withStyle(ColorUtils.Colors.LUA_ERROR.style);
+        }
+
         owner.scriptError = true;
-        owner.luaRuntime = null;
+
+        ((FiguraLuaRuntimeAccess) runtime).getSetHookFunction().invoke(LuaValue.varargsOf(new ZeroArgFunction() {
+          @Override
+          public LuaValue call() {
+            return LuaValue.valueOf(0);
+          }
+        }, LuaValue.EMPTYSTRING, LuaValue.valueOf(1)));
+
         owner.clearParticles();
         owner.clearSounds();
         owner.closeBuffers();
