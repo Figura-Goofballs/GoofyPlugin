@@ -15,6 +15,7 @@ import java.util.Objects;
 
 import net.minecraft.network.chat.Component;
 
+@LuaWhitelist
 public class BackendAPI {
     @LuaMethodDoc("goofy.backend.connected")
     @LuaWhitelist
