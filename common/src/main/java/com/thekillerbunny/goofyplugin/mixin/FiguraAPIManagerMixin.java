@@ -1,7 +1,6 @@
 package com.thekillerbunny.goofyplugin.mixin;
 
-import com.thekillerbunny.goofyplugin.lua.CollectionAPI;
-import com.thekillerbunny.goofyplugin.lua.GoofyAPI;
+import com.thekillerbunny.goofyplugin.lua.*;
 import org.figuramc.figura.lua.FiguraAPIManager;
 import org.figuramc.figura.lua.FiguraLuaRuntime;
 import org.spongepowered.asm.mixin.Final;
@@ -25,6 +24,7 @@ public class FiguraAPIManagerMixin {
     static {
         WHITELISTED_CLASSES.add(GoofyAPI.class);
         WHITELISTED_CLASSES.add(CollectionAPI.class);
+        WHITELISTED_CLASSES.add(BackendAPI.class);
 
         API_GETTERS.put("goofy", r -> new GoofyAPI(r));
         API_GETTERS.put("collection", r -> new CollectionAPI(r));
