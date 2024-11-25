@@ -28,5 +28,6 @@ public class FiguraAPIManagerMixin {
 
         API_GETTERS.put("goofy", r -> new GoofyAPI(r));
         API_GETTERS.put("collection", r -> new CollectionAPI(r));
+        API_GETTERS.put("backend", r -> new BackendAPI());
     }
 }

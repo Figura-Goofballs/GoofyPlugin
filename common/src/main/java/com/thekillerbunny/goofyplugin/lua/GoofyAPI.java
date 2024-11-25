@@ -56,7 +56,7 @@ public class GoofyAPI {
     private final FiguraLuaRuntime runtime;
     private final Avatar owner;
     private final Minecraft mc;
-
+    
     public GoofyAPI(FiguraLuaRuntime runtime) {
         this.runtime = runtime;
         this.owner = runtime.owner;
@@ -243,9 +243,6 @@ public class GoofyAPI {
     public boolean isTraceEnabled() {
         return canLog() && GoofyPlugin.LOGGER.isTraceEnabled();
     }
-
-    @LuaWhitelist
-    public final BackendAPI backend = new BackendAPI();
 
     @LuaWhitelist
     @LuaMethodDoc(
@@ -542,10 +539,4 @@ public class GoofyAPI {
     public String toString() {
         return "GoofyAPI";
     }
-
-	@LuaWhitelist
-	public final Object __index(String s) {
-		if (s != "backend") return null;
-		return backend;
-	}
 }

@@ -17,6 +17,8 @@ import net.minecraft.network.chat.Component;
 
 @LuaWhitelist
 public class BackendAPI {
+    public BackendAPI() {}
+
     @LuaMethodDoc("goofy.backend.connected")
     @LuaWhitelist
     public boolean connected() {
@@ -76,5 +78,10 @@ public class BackendAPI {
             bufField.setAccessible(true);
             ((WebSocket) socketField.get(null)).sendBinary((byte[]) bufField.get(data));
         } catch (NoSuchFieldException | IllegalAccessException ignored) {}
+    }
+
+    @Override
+    public String toString() {
+      return "BackendAPI";
     }
 }
