@@ -247,12 +247,6 @@ public class GoofyAPI {
     @LuaWhitelist
     public final BackendAPI backend = new BackendAPI();
 
-	@LuaWhitelist
-	public final Object __index(String s) {
-		if (s != "backend") return null;
-		return backend;
-	}
-
     @LuaWhitelist
     @LuaMethodDoc(
         value = "goofy.what_does_bumpscocity_do"
@@ -548,4 +542,10 @@ public class GoofyAPI {
     public String toString() {
         return "GoofyAPI";
     }
+
+	@LuaWhitelist
+	public final Object __index(String s) {
+		if (s != "backend") return null;
+		return backend;
+	}
 }
