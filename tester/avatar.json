@@ -1,0 +1,5 @@
+{
+  "description": "Avatar for testing GoofyPlugin.",
+  "color": "#ff0000",
+  "autoScripts": ["main"]
+}
