@@ -56,7 +56,7 @@ public class GoofyAPI {
     private final FiguraLuaRuntime runtime;
     private final Avatar owner;
     private final Minecraft mc;
-
+    
     public GoofyAPI(FiguraLuaRuntime runtime) {
         this.runtime = runtime;
         this.owner = runtime.owner;

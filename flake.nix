@@ -117,7 +117,7 @@
               test -f fabric-api-*.jar || echo "Remember to install Fabric API — proceeding anyway…"
               rm -f goofyfiguraplugin-*.jar
               pushd "$1"/fabric/build/libs/ >/dev/null
-              ls goofyfiguraplugin-*+$2.jar | sort -h | head -1 | xargs -i cp {} ~1
+              ls goofyfiguraplugin-*+$2.jar | sort -rh | head -1 | xargs -i cp -v {} ~1
             ''} ~-
           ''}";
           build-install.type = "app";
@@ -126,7 +126,7 @@
             set -e
             cd $(mktemp -d)
             trap "rm -rf $PWD" EXIT
-            cp -lrT --no-preserve=all ${./.} .
+            cp -rT --no-preserve=all ${./.} .
             nix run .#build1
             nix run .#build4
             nix run .#install "$@"
