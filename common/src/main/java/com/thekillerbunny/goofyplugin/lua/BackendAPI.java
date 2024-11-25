@@ -15,7 +15,10 @@ import java.util.Objects;
 
 import net.minecraft.network.chat.Component;
 
+@LuaWhitelist
 public class BackendAPI {
+    public BackendAPI() {}
+
     @LuaMethodDoc("goofy.backend.connected")
     @LuaWhitelist
     public boolean connected() {
@@ -41,9 +44,8 @@ public class BackendAPI {
     public void disconnect(String message) {
         NetworkStuff.disconnect(message);
     }
-    @LuaMethodDoc("goofy.backend.get_token")
-    @LuaWhitelist
-    public String getToken() {
+
+    private String getToken() {
         try {
             Field apiField = NetworkStuff.class.getDeclaredField("api");
             apiField.setAccessible(true);
@@ -55,10 +57,11 @@ public class BackendAPI {
             throw new AssertionError("Not possible", e);
         }
     }
+
     @LuaMethodDoc("goofy.backend.connect_with_token")
     @LuaWhitelist
-    public void connect(String token) {
-        NetworkStuff.connect(Objects.requireNonNullElse(token, getToken()));
+    public void connect() {
+        NetworkStuff.connect(getToken());
     }
     @LuaMethodDoc("goofy.backend.motd")
     @LuaWhitelist
@@ -75,5 +78,10 @@ public class BackendAPI {
             bufField.setAccessible(true);
             ((WebSocket) socketField.get(null)).sendBinary((byte[]) bufField.get(data));
         } catch (NoSuchFieldException | IllegalAccessException ignored) {}
+    }
+
+    @Override
+    public String toString() {
+      return "BackendAPI";
     }
 }
