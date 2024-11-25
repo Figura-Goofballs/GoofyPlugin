@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import com.thekillerbunny.goofyplugin.ducks.EventsAPIAccess;
+import com.thekillerbunny.goofyplugin.nomixducks.EventsAPIAccess;
 
 import java.util.Map;
 
