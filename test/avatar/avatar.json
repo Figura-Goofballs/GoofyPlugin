@@ -1,0 +1,9 @@
+{
+  "name": "Test avatar",
+  "description": "GoofyPlugin test avatar",
+  "authors": [
+    "TheKillerBunny"
+  ],
+  "color": "#5865f2",
+  "autoScripts": ["init"]
+}
