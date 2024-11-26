@@ -128,6 +128,12 @@
               hmc.offline.username=GithubActions
               hmc.offline=true
             ''} "$_"
+            mkdir -p HeadlessMC/run/saves/test
+            ln -s ${pkgs.fetchurl {
+              url = https://files.catbox.moe/bvc20j.dat;
+              hash = sha256:PSY3Y2WFPVjIGS0gIzN7mBGmIpNbzYfM5NrbDpHjSAs=;
+            }} "$_/latest.dat"
+            readlink "$_" >> HeadlessMC/run/allowed_symlinks.txt
             java -jar ${pkgs.fetchurl {
               url = "https://github.com/3arthqu4ke/headlessmc/releases/download/2.4.1/headlessmc-launcher-wrapper-2.4.1.jar";
               hash = "sha256:mWJd/ygFzSsTkVekm/bT0u21d6tDIXHlEoYa2eMfmOw=";
