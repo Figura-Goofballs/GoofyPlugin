@@ -98,13 +98,23 @@
           };
           default = run1;
 
-          headless = writeApp [pkgs.jdk21] /*bash*/ ''
-            set -x
-            work="$(mktemp -d)"
-            trap 'rm -rf "$work"' EXIT
-            cd build
-            mkdir -p HeadlessMC
-            cp ${pkgs.writeText "config.properties" /*conf*/''
+          headlessInit = writeApp [pkgs.jdk21] /*bash*/ ''
+            set -ex
+            rm -rf HeadlessMC
+            mkdir -p HeadlessMC/run/mods
+            ln -vfs "$(realpath fabric/build/libs/goofyfiguraplugin-*+1.20.1.jar)" "$_/"
+            ln -vfs ${pkgs.fetchurl {
+              url = https://github.com/3arthqu4ke/hmc-specifics/releases/download/v1.20.1-1.2.2/hmc-specifics-fabric-1.20.1-1.2.2.jar;
+              hash = sha256:Q43VsYkZWu8F0f+B28RIQRjabKP8RQpJgBlxXSM9Dl0=;
+            }} ${pkgs.fetchurl {
+              url = https://cdn.modrinth.com/data/P7dR8mSH/versions/P7uGFii0/fabric-api-0.92.2%2B1.20.1.jar;
+              hash = sha256:RQD4RMRVc9A51o05Y8mIWqnedxJnAhbgrT5d8WxncPw=;
+            }} ${pkgs.fetchurl {
+              url = https://cdn.modrinth.com/data/s9gIPDom/versions/DhHrk371/figura-0.1.4%2B1.20.1-fabric-mc.jar;
+              hash = sha256:7YvlqzciJXeBx919VHY/Cq04TSHoGwMoHpCgQ7BfAaI=;
+            }} -t "$_"
+            rm -vf HeadlessMC/config.properties
+            ln -vfs ${pkgs.writeText "config.properties" /*conf*/''
               hmc.assets.dummy=true
               hmc.exit.on.failed.command=true
               hmc.gamedir=HeadlessMC/run
@@ -113,14 +123,23 @@
               hmc.mcdir=HeadlessMC
               hmc.offline.username=GithubActions
               hmc.offline=true
-            ''} HeadlessMC/config.properties
+            ''} "$_"
             java -jar ${pkgs.fetchurl {
               url = https://github.com/3arthqu4ke/headlessmc/releases/download/2.4.1/headlessmc-launcher-wrapper-2.4.1.jar;
               hash = sha256:mWJd/ygFzSsTkVekm/bT0u21d6tDIXHlEoYa2eMfmOw=;
             }} <<EOF
-            download 1.20.1
-            fabric 1.20.1
-            launch 1.20.1
+              download 1.20.1
+              fabric 1.20.1
+            EOF
+          '';
+          headless = writeApp [pkgs.jdk21] /*bash*/''
+            java -jar ${pkgs.fetchurl {
+              url = https://github.com/3arthqu4ke/headlessmc/releases/download/2.4.1/headlessmc-launcher-wrapper-2.4.1.jar;
+              hash = sha256:mWJd/ygFzSsTkVekm/bT0u21d6tDIXHlEoYa2eMfmOw=;
+            }} <<EOF
+              help
+              launch 1 -id
+              help
             EOF
           '';
 
