@@ -1,6 +1,7 @@
 package com.thekillerbunny.goofyplugin.lua;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -12,6 +13,7 @@ import net.minecraft.client.Minecraft;
 
 import org.figuramc.figura.FiguraMod;
 import org.figuramc.figura.avatar.Avatar;
+import org.figuramc.figura.avatar.Badges;
 import org.figuramc.figura.avatar.AvatarManager;
 import org.figuramc.figura.avatar.local.LocalAvatarFetcher;
 import org.figuramc.figura.avatar.local.LocalAvatarLoader;
@@ -30,30 +32,39 @@ import org.figuramc.figura.math.vector.FiguraVec3;
 import org.figuramc.figura.gui.widgets.lists.AvatarList;
 import org.figuramc.figura.utils.ColorUtils;
 import org.figuramc.figura.utils.LuaUtils;
+import org.figuramc.figura.utils.TextUtils;
+import org.figuramc.figura.font.Emojis;
+
+import com.google.gson.Gson;
 
 import org.apache.commons.lang3.ObjectUtils;
 
 import org.luaj.vm2.LuaError;
 import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
+import org.luaj.vm2.lib.ZeroArgFunction;
 
 import com.thekillerbunny.goofyplugin.Enums;
 import com.thekillerbunny.goofyplugin.GoofyPermissionsPlugin;
 import com.thekillerbunny.goofyplugin.GoofyPlugin;
+import com.thekillerbunny.goofyplugin.ducks.FiguraLuaRuntimeAccess;
 
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 
 @LuaWhitelist
 @LuaTypeDoc(name = "GoofyAPI", value = "goofy")
 public class GoofyAPI {
+    private final Gson gson;
     private final FiguraLuaRuntime runtime;
     private final Avatar owner;
     private final Minecraft mc;
-
+    
     public GoofyAPI(FiguraLuaRuntime runtime) {
         this.runtime = runtime;
         this.owner = runtime.owner;
         this.mc = Minecraft.getInstance();
+        this.gson = new Gson();
     }
 
     public boolean canLog() {
@@ -64,10 +75,26 @@ public class GoofyAPI {
     @LuaMethodDoc(
         value = "goofy.stop_avatar"
     )
-    public void stopAvatar() {
-        owner.errorText = Component.literal("Execution forcefully aborted by script").withStyle(ColorUtils.Colors.LUA_ERROR.style);
+    public void stopAvatar(String message) {
+        if (message != null) {
+          Component userComponent = TextUtils.tryParseJson(message);
+          MutableComponent errorComponent = Component.empty().withStyle(ColorUtils.Colors.LUA_ERROR.style);
+          errorComponent.append(userComponent);
+
+          owner.errorText = errorComponent;
+        }else {
+          owner.errorText = Component.literal("Execution aborted by script").withStyle(ColorUtils.Colors.LUA_ERROR.style);
+        }
+
         owner.scriptError = true;
-        owner.luaRuntime = null;
+
+        ((FiguraLuaRuntimeAccess) runtime).getSetHookFunction().invoke(LuaValue.varargsOf(new ZeroArgFunction() {
+          @Override
+          public LuaValue call() {
+            return LuaValue.valueOf(0);
+          }
+        }, LuaValue.EMPTYSTRING, LuaValue.valueOf(1)));
+
         owner.clearParticles();
         owner.clearSounds();
         owner.closeBuffers();
@@ -298,7 +325,11 @@ public class GoofyAPI {
       String entity = ObjectUtils.firstNonNull(plate.ENTITY.getText(), name, avatarUUID);
       String list = ObjectUtils.firstNonNull(plate.LIST.getText(), name, avatarUUID);
 
-      return new String[]{chat, entity, list};
+      Component cChat = Emojis.removeBlacklistedEmojis(Emojis.applyEmojis(Badges.noBadges4U(Badges.appendBadges(TextUtils.tryParseJson(chat), uuid, true))));
+      Component cEntity = Emojis.removeBlacklistedEmojis(Emojis.applyEmojis(Badges.noBadges4U(Badges.appendBadges(TextUtils.tryParseJson(entity), uuid, true))));
+      Component cList = Emojis.removeBlacklistedEmojis(Emojis.applyEmojis(Badges.noBadges4U(Badges.appendBadges(TextUtils.tryParseJson(list), uuid, true))));
+
+      return new String[]{Component.Serializer.toJson(cChat), Component.Serializer.toJson(cEntity), Component.Serializer.toJson(cList)};
     }
 
     @LuaWhitelist
