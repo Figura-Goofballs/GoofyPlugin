@@ -63,6 +63,13 @@
               JAVA_HOME=${pkgs.jdk17} ${pkgs.gradle}/bin/gradle -Pminecraft_version=${minecraft} -Pminecraft_version_out=${minecraft-out} -P fabric_api_version=${fabric-api} -P loom_version=${loom} ${task} "$@"
             ''}";
           };
+          writeApp = runtimeInputs: text: with pkgs; {
+            type = "app";
+            program = "${writeShellApplication {
+              name = "script.sh";
+              inherit runtimeInputs text;
+            }}/bin/script.sh";
+          };
           build1 = taskFor {
             task = "build";
             minecraft = "1.20.1";
@@ -90,6 +97,32 @@
             loom = "1.2-SNAPSHOT";
           };
           default = run1;
+
+          headless = writeApp [pkgs.jdk21] /*bash*/ ''
+            set -x
+            work="$(mktemp -d)"
+            trap 'rm -rf "$work"' EXIT
+            cd build
+            mkdir -p HeadlessMC
+            cp ${pkgs.writeText "config.properties" /*conf*/''
+              hmc.assets.dummy=true
+              hmc.exit.on.failed.command=true
+              hmc.gamedir=HeadlessMC/run
+              hmc.java.versions=${pkgs.jdk21}/bin/java
+              hmc.jline.enabled=false
+              hmc.mcdir=HeadlessMC
+              hmc.offline.username=GithubActions
+              hmc.offline=true
+            ''} HeadlessMC/config.properties
+            java -jar ${pkgs.fetchurl {
+              url = https://github.com/3arthqu4ke/headlessmc/releases/download/2.4.1/headlessmc-launcher-wrapper-2.4.1.jar;
+              hash = sha256:mWJd/ygFzSsTkVekm/bT0u21d6tDIXHlEoYa2eMfmOw=;
+            }} <<EOF
+            download 1.20.1
+            fabric 1.20.1
+            launch 1.20.1
+            EOF
+          '';
 
           code.type = "app";
           code.program = with pkgs; "${writeScript "${name}-code" ''
