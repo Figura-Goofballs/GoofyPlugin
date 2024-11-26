@@ -18,10 +18,11 @@ local assertionError = "$$UNIT_TEST_FAILED$$ goofy:%s expected value %s, but got
 
 for funcAndArgs, expectedValue in pairs(assertions) do
   local func = funcAndArgs[1]
-  table.remove(funcAndArgs, 1)
 
-  local gotValue = goofy[func](goofy, table.unpack(funcAndArgs))
+  local gotValue = goofy[func](goofy, table.unpack(funcAndArgs, 2))
 
-  assert(gotValue == expectedValue, assertionError:format(func, tostring(expectedValue), tostring(gotValue)))
+  if gotValue ~= expectedValue then
+    goofy:errorToLog(assertionError:format(func, tostring(expectedValue), tostring(gotValue))))
+  end
 end
 
