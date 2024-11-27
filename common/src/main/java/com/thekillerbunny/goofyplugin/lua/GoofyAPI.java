@@ -301,35 +301,8 @@ public class GoofyAPI {
     }
 
     @LuaWhitelist
-    @LuaMethodDoc(
-      overloads = {
-        @LuaMethodOverload(
-          argumentTypes = { String.class },
-          argumentNames = { "avatarUUID" }
-        )
-      },
-      value = "goofy.get_avatar_nameplate"
-    )
     public String[] getAvatarNameplate(@LuaNotNil String avatarUUID) {
-      UUID uuid = UUID.fromString(avatarUUID);
-      Avatar avatar = AvatarManager.getLoadedAvatar(uuid);
-
-      if (avatar == null) {
-        return new String[]{avatarUUID, avatarUUID, avatarUUID};
-      }
-
-      NameplateAPI plate = avatar.luaRuntime.nameplate;
-
-      String name = avatar.entityName;
-      String chat = ObjectUtils.firstNonNull(plate.CHAT.getText(), name, avatarUUID);
-      String entity = ObjectUtils.firstNonNull(plate.ENTITY.getText(), name, avatarUUID);
-      String list = ObjectUtils.firstNonNull(plate.LIST.getText(), name, avatarUUID);
-
-      Component cChat = Emojis.removeBlacklistedEmojis(Emojis.applyEmojis(Badges.noBadges4U(Badges.appendBadges(TextUtils.tryParseJson(chat), uuid, true))));
-      Component cEntity = Emojis.removeBlacklistedEmojis(Emojis.applyEmojis(Badges.noBadges4U(Badges.appendBadges(TextUtils.tryParseJson(entity), uuid, true))));
-      Component cList = Emojis.removeBlacklistedEmojis(Emojis.applyEmojis(Badges.noBadges4U(Badges.appendBadges(TextUtils.tryParseJson(list), uuid, true))));
-
-      return new String[]{Component.Serializer.toJson(cChat), Component.Serializer.toJson(cEntity), Component.Serializer.toJson(cList)};
+      throw new LuaError("getAvatarNameplate is unavailable on 1.21");
     }
 
     @LuaWhitelist

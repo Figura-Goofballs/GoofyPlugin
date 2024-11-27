@@ -9,6 +9,7 @@ import org.figuramc.figura.backend2.NetworkStuff;
 import org.figuramc.figura.lua.LuaWhitelist;
 import org.figuramc.figura.lua.api.data.FiguraBuffer;
 import org.figuramc.figura.lua.docs.LuaMethodDoc;
+import org.luaj.vm2.LuaError;
 
 import java.lang.reflect.Field;
 import java.util.Objects;
@@ -63,10 +64,9 @@ public class BackendAPI {
     public void connect() {
         NetworkStuff.connect(getToken());
     }
-    @LuaMethodDoc("goofy.backend.motd")
     @LuaWhitelist
     public String motd() {
-		return Component.Serializer.toJson(NetworkStuff.motd);
+        throw new LuaError("backend:motd() is unavailable on 1.21");
     }
     @LuaMethodDoc("goofy.backend.write")
     @LuaWhitelist
