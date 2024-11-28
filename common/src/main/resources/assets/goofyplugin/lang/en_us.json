@@ -1,6 +1,7 @@
 {
   "goofyplugin.gui.goofyscreen.ok.tooltip": "Press this to return to the previous screen",
   "goofyplugin.gui.goofyscreen": "Example Screen",
+  "goofyplugin.gui.panels.title.history": "History",
   "goofyplugin.permissions.value.can_log": "Can Log",
   "goofyplugin.permissions.value.can_log.tooltip": "Allows the avatar to log directly to Minecraft's log",
   "goofyplugin.permissions.value.bumpscocity": "bumpscocity",
