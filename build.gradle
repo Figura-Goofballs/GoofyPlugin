@@ -39,6 +39,8 @@ subprojects {
 			mappings("org.quiltmc:quilt-mappings:$minecraft_version_out+build.$mappings:intermediary-v2")
 			officialMojangMappings()
 		}
+
+        implementation 'com.github.eclipse-jgit:jgit:v7.1.0.202411261347-r'
     }
 }
 
