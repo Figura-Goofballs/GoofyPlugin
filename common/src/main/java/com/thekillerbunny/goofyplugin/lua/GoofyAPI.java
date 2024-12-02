@@ -1,17 +1,16 @@
 package com.thekillerbunny.goofyplugin.lua;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import java.nio.file.Path;
 
+import com.thekillerbunny.goofyplugin.Feature;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.Minecraft;
 
+import org.apache.commons.lang3.Range;
 import org.figuramc.figura.FiguraMod;
 import org.figuramc.figura.avatar.Avatar;
 import org.figuramc.figura.avatar.Badges;
@@ -43,13 +42,17 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.luaj.vm2.LuaError;
 import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
+import org.luaj.vm2.Varargs;
+import org.luaj.vm2.lib.ZeroArgFunction;
 
 import com.thekillerbunny.goofyplugin.Enums;
 import com.thekillerbunny.goofyplugin.GoofyPermissionsPlugin;
 import com.thekillerbunny.goofyplugin.GoofyPlugin;
+import com.thekillerbunny.goofyplugin.ducks.FiguraLuaRuntimeAccess;
 
 import net.minecraft.network.chat.Component;
 import sun.misc.Unsafe;
+import net.minecraft.network.chat.MutableComponent;
 
 @LuaWhitelist
 @LuaTypeDoc(name = "GoofyAPI", value = "goofy")
@@ -75,9 +78,25 @@ public class GoofyAPI {
         value = "goofy.stop_avatar"
     )
     public void stopAvatar(String message) {
-        owner.errorText = Component.literal(Objects.requireNonNullElse(message, "Execution aborted by script")).withStyle(ColorUtils.Colors.LUA_ERROR.style);
+        if (message != null) {
+          Component userComponent = TextUtils.tryParseJson(message);
+          MutableComponent errorComponent = Component.empty().withStyle(ColorUtils.Colors.LUA_ERROR.style);
+          errorComponent.append(userComponent);
+
+          owner.errorText = errorComponent;
+        }else {
+          owner.errorText = Component.literal("Execution aborted by script").withStyle(ColorUtils.Colors.LUA_ERROR.style);
+        }
+
         owner.scriptError = true;
-        owner.luaRuntime = null;
+
+        ((FiguraLuaRuntimeAccess) runtime).getSetHookFunction().invoke(LuaValue.varargsOf(new ZeroArgFunction() {
+          @Override
+          public LuaValue call() {
+            return LuaValue.valueOf(0);
+          }
+        }, LuaValue.EMPTYSTRING, LuaValue.valueOf(1)));
+
         owner.clearParticles();
         owner.clearSounds();
         owner.closeBuffers();
@@ -348,6 +367,28 @@ public class GoofyAPI {
             return null;
         }
         return avatar.color;
+    }
+
+    @LuaWhitelist
+    @LuaMethodDoc("goofy.check_features")
+    public void checkFeatures(LuaTable features) {
+        Varargs v = LuaValue.NIL;
+        while (!(v = features.next(v.arg1())).isnil(1)) {
+            String n = v.checkjstring(1);
+            int l = v.checkint(2);
+            Feature f;
+            try {
+                f = Feature.valueOf(n.toUpperCase());
+            } catch (Throwable t) {
+                throw new LuaError("GoofyPlugin feature '%s' not supported".formatted(n));
+            }
+            if (f.current() < l) {
+                throw new LuaError("This avatar uses version %d of GoofyPlugin feature %s, which is more recent than your currently-installed version %d".formatted(l, n, f.current()));
+            }
+            if (f.compatible() > l) {
+                throw new LuaError("This avatar uses version %d of GoofyPlugin feature %s, which is incompatible with your currently-installed version %d (must be at most %d)".formatted(l, n, f.current(), f.compatible()));
+            }
+        }
     }
 
     @LuaWhitelist

@@ -5,7 +5,8 @@
   "name": "${display_name}",
   "description": "${description}",
   "mixins": [
-    "goofyplugin-common.mixins.json"
+    "goofyplugin-common.mixins.json",
+    "goofyplugin-common-accessors.mixins.json"
   ],
   "authors": [
     "${authors}"

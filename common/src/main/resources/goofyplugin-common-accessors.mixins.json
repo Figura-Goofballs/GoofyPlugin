@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "com.thekillerbunny.goofyplugin.ducks",
+  "compatibilityLevel": "JAVA_17",
+  "minVersion": "0.8",
+  "client": [
+  ],
+  "mixins": [
+    "FiguraLuaRuntimeAccess"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
