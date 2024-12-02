@@ -49,8 +49,8 @@
           (fetch-plugin {
             name = "minecraft-development";
             version = "1.7.5";
-            url = https://downloads.marketplace.jetbrains.com/files/8327/527990/Minecraft_Development-2024.1-1.7.5.zip;
-            hash = sha256:9C34GX+bj5v2j7svF47boz7/uVIkWJuLyuXlAhV4TZI=;
+            url = "https://downloads.marketplace.jetbrains.com/files/8327/527990/Minecraft_Development-2024.1-1.7.5.zip";
+            hash = "sha256:9C34GX+bj5v2j7svF47boz7/uVIkWJuLyuXlAhV4TZI=";
           })
         ];
       in rec {
@@ -62,6 +62,13 @@
               #!${pkgs.bash}/bin/bash
               JAVA_HOME=${pkgs.jdk17} ${pkgs.gradle}/bin/gradle -Pminecraft_version=${minecraft} -Pminecraft_version_out=${minecraft-out} -P fabric_api_version=${fabric-api} -P loom_version=${loom} ${task} "$@"
             ''}";
+          };
+          writeApp = runtimeInputs: text: with pkgs; {
+            type = "app";
+            program = "${writeShellApplication {
+              name = "script.sh";
+              inherit runtimeInputs text;
+            }}/bin/script.sh";
           };
           build1 = taskFor {
             task = "build";
@@ -90,6 +97,55 @@
             loom = "1.2-SNAPSHOT";
           };
           default = run1;
+
+          headlessInit = writeApp [pkgs.jdk21 pkgs.coreutils pkgs.unzip] /*bash*/ ''
+            set -ex
+            rm -rf HeadlessMC
+
+            mkdir -p HeadlessMC/run/saves/testWorld
+            unzip ${./test/testWorld.zip} -d HeadlessMC/run/saves/testWorld
+
+            mkdir -p HeadlessMC/run/mods
+            ln -vfs "$(realpath fabric/build/libs/goofyfiguraplugin-*+1.20.1.jar)" "$_/"
+            ln -vfs ${pkgs.fetchurl {
+              url = "https://github.com/3arthqu4ke/hmc-specifics/releases/download/v1.20.1-1.2.2/hmc-specifics-fabric-1.20.1-1.2.2.jar";
+              hash = "sha256:Q43VsYkZWu8F0f+B28RIQRjabKP8RQpJgBlxXSM9Dl0=";
+            }} ${pkgs.fetchurl {
+              url = "https://cdn.modrinth.com/data/P7dR8mSH/versions/P7uGFii0/fabric-api-0.92.2%2B1.20.1.jar";
+              hash = "sha256:RQD4RMRVc9A51o05Y8mIWqnedxJnAhbgrT5d8WxncPw=";
+            }} ${pkgs.fetchurl {
+              url = "https://cdn.modrinth.com/data/s9gIPDom/versions/DhHrk371/figura-0.1.4%2B1.20.1-fabric-mc.jar";
+              hash = "sha256:7YvlqzciJXeBx919VHY/Cq04TSHoGwMoHpCgQ7BfAaI=";
+            }} -t "$_"
+            rm -vf HeadlessMC/config.properties
+            ln -vfs ${pkgs.writeText "config.properties" /*conf*/''
+              hmc.assets.dummy=true
+              hmc.exit.on.failed.command=true
+              hmc.gamedir=HeadlessMC/run
+              hmc.java.versions=${pkgs.jdk21}/bin/java
+              hmc.jline.enabled=false
+              hmc.mcdir=HeadlessMC
+              hmc.offline.username=GithubActions
+              hmc.offline=true
+            ''} "$_"
+            java -jar ${pkgs.fetchurl {
+              url = "https://github.com/3arthqu4ke/headlessmc/releases/download/2.4.1/headlessmc-launcher-wrapper-2.4.1.jar";
+              hash = "sha256:mWJd/ygFzSsTkVekm/bT0u21d6tDIXHlEoYa2eMfmOw=";
+            }} <<EOF
+              download 1.20.1
+              fabric 1.20.1
+            EOF
+          '';
+          headless = writeApp [pkgs.jdk21] /*bash*/''
+            java -jar ${pkgs.fetchurl {
+              url = "https://github.com/3arthqu4ke/headlessmc/releases/download/2.4.1/headlessmc-launcher-wrapper-2.4.1.jar";
+              hash = "sha256:mWJd/ygFzSsTkVekm/bT0u21d6tDIXHlEoYa2eMfmOw=";
+            }} <<EOF
+              help
+              launch 1 -id --quickPlaySingleplayer testWorld
+              help
+            EOF
+          '';
 
           code.type = "app";
           code.program = with pkgs; "${writeScript "${name}-code" ''
