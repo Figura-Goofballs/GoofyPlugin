@@ -6,18 +6,19 @@
   "client": [
   ],
   "mixins": [
+    "AvatarManagerMixin",
+    "BossHealthOverlayMixin",
+    "ChatComponentMixin",
+    "EntityAPIMixin",
+    "EventsAPIMixin",
     "FiguraAPIManagerMixin",
     "FiguraDocsManagerMixin",
     "FiguraGlobalsDocsMixin",
-    "EventsAPIMixin",
     "FiguraLuaRuntimeMixin",
     "GuiMixin",
-    "AvatarManagerMixin",
-    "UserDataMixin",
-    "ChatComponentMixin",
-    "BossHealthOverlayMixin",
+    "LevelRendererMixin",
     "PlayerTabOverlayMixin",
-    "LevelRendererMixin"
+    "UserDataMixin"
   ],
   "injectors": {
     "defaultRequire": 1
