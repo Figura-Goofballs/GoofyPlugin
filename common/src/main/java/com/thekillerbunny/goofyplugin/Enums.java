@@ -3,6 +3,7 @@ package com.thekillerbunny.goofyplugin;
 public class Enums {
     public enum GuiElement {
         HOTBAR,
+        SCREEN,
         JUMP_METER,
         EXPERIENCE_BAR,
         SELECTED_ITEM_NAME,
