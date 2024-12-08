@@ -4,9 +4,6 @@
   "compatibilityLevel": "JAVA_17",
   "minVersion": "0.8",
   "client": [
-    "ScreenMixin"
-  ],
-  "mixins": [
     "AvatarManagerMixin",
     "BossHealthOverlayMixin",
     "ChatComponentMixin",
@@ -18,6 +15,7 @@
     "GuiMixin",
     "LevelRendererMixin",
     "PlayerTabOverlayMixin",
+    "ScreenMixin",
     "UserDataMixin"
   ],
   "injectors": {
