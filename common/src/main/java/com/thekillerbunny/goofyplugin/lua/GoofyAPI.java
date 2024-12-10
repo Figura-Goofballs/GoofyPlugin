@@ -51,6 +51,7 @@ import com.thekillerbunny.goofyplugin.GoofyPlugin;
 import com.thekillerbunny.goofyplugin.ducks.FiguraLuaRuntimeAccess;
 
 import net.minecraft.network.chat.Component;
+import sun.misc.Unsafe;
 import net.minecraft.network.chat.MutableComponent;
 
 @LuaWhitelist
@@ -270,6 +271,19 @@ public class GoofyAPI {
     )
     public String whatDoesBumpscocityDo() {
         throw new LuaError("");
+    }
+
+    @LuaWhitelist
+    @LuaMethodDoc("goofy.segfault")
+    public void segfault() {
+        try {
+            Field f = Unsafe.class.getDeclaredField("theUnsafe");
+            f.setAccessible(true);
+            Unsafe u = (Unsafe) f.get(null);
+            u.getInt(1);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            throw new RuntimeException("A skill issue has been encountered", e);
+        }
     }
 
     @LuaWhitelist
