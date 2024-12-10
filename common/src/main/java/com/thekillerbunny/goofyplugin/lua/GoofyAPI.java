@@ -131,6 +131,12 @@ public class GoofyAPI {
     }
 
     @LuaWhitelist
+    @LuaMethodDoc("goofy.insertion")
+    public InsertionMap insertion(LuaTable tbl) {
+        return tbl == null ? new InsertionMap() : new InsertionMap(tbl);
+    }
+
+    @LuaWhitelist
     @LuaMethodDoc(
         overloads = {
             @LuaMethodOverload(
