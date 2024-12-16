@@ -4,20 +4,19 @@
   "compatibilityLevel": "JAVA_17",
   "minVersion": "0.8",
   "client": [
-  ],
-  "mixins": [
+    "AvatarManagerMixin",
+    "BossHealthOverlayMixin",
+    "ChatComponentMixin",
+    "EventsAPIMixin",
     "FiguraAPIManagerMixin",
     "FiguraDocsManagerMixin",
     "FiguraGlobalsDocsMixin",
-    "EventsAPIMixin",
     "FiguraLuaRuntimeMixin",
     "GuiMixin",
-    "AvatarManagerMixin",
-    "UserDataMixin",
-    "ChatComponentMixin",
-    "BossHealthOverlayMixin",
+    "LevelRendererMixin",
     "PlayerTabOverlayMixin",
-    "LevelRendererMixin"
+    "ScreenMixin",
+    "UserDataMixin"
   ],
   "injectors": {
     "defaultRequire": 1
