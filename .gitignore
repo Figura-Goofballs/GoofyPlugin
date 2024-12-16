@@ -24,7 +24,6 @@ runV2/
 
 .settings/
 .vscode/
-bin/
 .classpath
 .project
 

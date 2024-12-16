@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+set -e
+flag="$1"
+set --
+git branch --format=%\(refname\) --merged | while read; do
+	branch="${REPLY##refs/heads/}"
+	if [ "$branch" != "`git branch --show-current`" ]; then
+		set -- "$@" "$branch"
+	fi
+done
+case "$flag" in
+	-d)	git branch -d "$@";;
+	-0)	printf "%s\0" "$@";;
+	"")	printf "%s\n" "$@";;
+	*)	exit 1;;
+esac
