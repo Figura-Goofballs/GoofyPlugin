@@ -96,12 +96,8 @@ public class BackendAPI {
     }
     @LuaMethodDoc("goofy.backend.motd")
     @LuaWhitelist
-    public String motd() {
-        if (!FiguraMod.isLocal(this.owner.owner)) {
-            return "";
-        }
-
-        return Component.Serializer.toJson(NetworkStuff.motd);
+    public Component motd() {
+        return NetworkStuff.motd;
     }
     @LuaMethodDoc("goofy.backend.write")
     @LuaWhitelist
