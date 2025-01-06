@@ -1,5 +1,8 @@
 package com.thekillerbunny.goofyplugin;
 
+import net.minecraft.core.RegistryAccess;
+import net.minecraft.network.chat.Component;
+
 import com.thekillerbunny.goofyplugin.lua.BackendAPI;
 import org.figuramc.figura.avatar.Avatar;
 import org.figuramc.figura.entries.FiguraAPI;
@@ -42,6 +45,10 @@ public class GoofyPlugin implements FiguraAPI {
      * You can do common things on init here
      */
     
+    public static String componentToJson(Component component) {
+        return Component.Serializer.toJson(component, RegistryAccess.EMPTY);
+    }
+
     public static void init() {
         for (GuiElement elem: GuiElement.values()) {
             GoofyPlugin.disabledElements.put(elem, false);

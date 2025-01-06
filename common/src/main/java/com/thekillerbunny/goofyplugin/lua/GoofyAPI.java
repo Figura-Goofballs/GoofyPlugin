@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 
 import java.nio.file.Path;
 
+import com.thekillerbunny.goofyplugin.GoofyPlugin;
 import com.thekillerbunny.goofyplugin.Feature;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.Minecraft;
@@ -330,7 +331,7 @@ public class GoofyAPI {
       Component cEntity = Emojis.removeBlacklistedEmojis(Emojis.applyEmojis(Badges.noBadges4U(Badges.appendBadges(TextUtils.tryParseJson(entity), uuid, true))));
       Component cList = Emojis.removeBlacklistedEmojis(Emojis.applyEmojis(Badges.noBadges4U(Badges.appendBadges(TextUtils.tryParseJson(list), uuid, true))));
 
-      return new String[]{Component.Serializer.toJson(cChat), Component.Serializer.toJson(cEntity), Component.Serializer.toJson(cList)};
+      return new String[]{GoofyPlugin.componentToJson(cChat), GoofyPlugin.componentToJson(cEntity), GoofyPlugin.componentToJson(cList)};
     }
 
     @LuaWhitelist
