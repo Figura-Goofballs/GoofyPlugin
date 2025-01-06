@@ -1,5 +1,7 @@
 package com.thekillerbunny.goofyplugin.lua;
 
+import com.thekillerbunny.goofyplugin.GoofyPlugin;
+
 import com.google.gson.Gson;
 import com.mojang.serialization.JsonOps;
 import com.neovisionaries.ws.client.WebSocket;
@@ -66,7 +68,7 @@ public class BackendAPI {
     @LuaMethodDoc("goofy.backend.motd")
     @LuaWhitelist
     public String motd() {
-		return Component.Serializer.toJson(NetworkStuff.motd);
+		return GoofyPlugin.componentToJson(NetworkStuff.motd);
     }
     @LuaMethodDoc("goofy.backend.write")
     @LuaWhitelist

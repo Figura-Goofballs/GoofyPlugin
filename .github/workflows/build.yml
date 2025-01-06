@@ -32,6 +32,9 @@ jobs:
       - name: Build 1.21.1 using Nix
         run: nix run --log-format bar-with-logs .#build21-1
 
+      - name: Build 1.21.4 using Nix
+        run: nix run --log-format bar-with-logs .#build21-4
+
       - name: Upload Fabric artifacts to GitHub
         uses: actions/upload-artifact@v4
         with:
