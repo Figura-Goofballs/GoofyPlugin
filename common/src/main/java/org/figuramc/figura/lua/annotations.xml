@@ -1,0 +1,5 @@
+<root>
+    <item name='org.figuramc.figura.lua.FiguraLuaRuntime org.luaj.vm2.Varargs run(java.lang.Object, org.figuramc.figura.avatar.Avatar.Instructions, java.lang.Object...)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+</root>

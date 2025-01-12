@@ -12,6 +12,7 @@
     "FiguraDocsManagerMixin",
     "FiguraGlobalsDocsMixin",
     "FiguraLuaRuntimeMixin",
+    "GameRendererMixin",
     "GuiMixin",
     "LevelRendererMixin",
     "PlayerTabOverlayMixin",
