@@ -173,6 +173,7 @@
             jdk17
             nix
             stgit
+            ./dev
           ];
           shellHook = ''
             alias pr="gh co"
