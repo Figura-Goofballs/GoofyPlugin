@@ -1,6 +1,5 @@
 package com.thekillerbunny.goofyplugin.lua;
 
-import com.mojang.brigadier.Message;
 import com.mojang.brigadier.builder.ArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
@@ -25,7 +24,6 @@ import org.jetbrains.annotations.Nullable;
 import org.luaj.vm2.*;
 import org.luaj.vm2.lib.TwoArgFunction;
 
-import java.util.Objects;
 import java.util.function.BiFunction;
 
 @LuaWhitelist
@@ -34,15 +32,19 @@ public sealed interface Brigadier<T extends Brigadier<T>> {
     @LuaMethodDoc("goofy.brigadier")
     T addChild(Brigadier<?> node);
 
+    CommandNode<FiguraClientCommandSource> toBuilt();
+
     @LuaTypeDoc(name = "BrigadierNode", value = "goofy")
     record Node (CommandNode<FiguraClientCommandSource> node) implements Brigadier<Node> {
         @Override
         public Node addChild(Brigadier<?> child) {
-            node.addChild(switch (child) {
-                case Node(var n) -> n;
-                case Builder(_, var b) -> b.build();
-            });
+            node.addChild(child.toBuilt());
             return this;
+        }
+
+        @Override
+        public CommandNode<FiguraClientCommandSource> toBuilt() {
+            return node;
         }
     }
 
@@ -52,11 +54,13 @@ public sealed interface Brigadier<T extends Brigadier<T>> {
         @LuaWhitelist
         @Override
         public Builder<T> addChild(Brigadier<?> node) {
-            switch (node) {
-                case Node(var n) -> builder.then(n);
-                case Builder(_, var b) -> builder.then(b);
-            }
+            builder.then(node.toBuilt());
             return this;
+        }
+
+        @Override
+        public CommandNode<FiguraClientCommandSource> toBuilt() {
+            return builder.build();
         }
 
         @Contract(mutates = "this")
@@ -90,30 +94,24 @@ public sealed interface Brigadier<T extends Brigadier<T>> {
         public Builder<T> executes(LuaFunction contents) {
             executesJava((a, s) -> {
                 try {
-                    return switch (avatar.luaRuntime.typeManager.luaToJava(contents.call(a))) {
-                        case String m -> {
-                            s.figura$sendFeedback(TextUtils.tryParseJson(m));
-                            yield 0;
-                        }
-                        case Integer i -> i;
-                        case Boolean b -> b ? 1 : 0;
-                        case LuaTable t -> {
-                            s.figura$sendFeedback(ExtraCodecs.COMPONENT.decode(JsonOps.INSTANCE, LuaUtils.asJsonValue(t)).getOrThrow(true, e -> { throw new LuaError("Invalid component in command handler: " + t); }).getFirst());
-                            yield 0;
-                        }
-                        case null -> 0;
-                        case Object r -> r.hashCode();
-                    };
+                    var value = avatar.luaRuntime.typeManager.luaToJava(contents.call(a));
+                    if (value instanceof String m) {
+                        s.figura$sendFeedback(TextUtils.tryParseJson(m));
+                        return 0;
+                    } else if (value instanceof Integer i) {
+                        return i;
+                    } else if (value == Boolean.TRUE) {
+                        return 1;
+                    } else if (value == null || value == Boolean.FALSE) {
+                        return 0;
+                    } else if (value instanceof LuaTable t) {
+                        s.figura$sendFeedback(ExtraCodecs.COMPONENT.decode(JsonOps.INSTANCE, LuaUtils.asJsonValue(t)).getOrThrow(true, e -> { throw new LuaError("Invalid component in command handler: " + t); }).getFirst());
+                        return 0;
+                    } else {
+                        return 0;
+                    }
                 } catch (Exception err) {
-                    throw new CommandRuntimeException(err instanceof LuaError luaError ? switch (avatar.luaRuntime.typeManager.luaToJava(luaError.getMessageObject())) {
-                        case String m -> Component.literal(m);
-                        case LuaTable t -> ExtraCodecs.COMPONENT.decode(JsonOps.INSTANCE, LuaUtils.asJsonValue(t)).get().map(Pair::getFirst, e -> Component.translatable("goofyplugin.error.while_parsing_error", Component.literal(e.message())));
-                        // idk if this is needed
-                        case EntityAPI<?> e -> e.getEntity().getName();
-                        // other types
-                        case LuaNil _ -> Component.translatable("goofyplugin.error.unknown");
-                        case Object o -> Component.literal(o.toString());
-                    } : Component.nullToEmpty(err.getMessage()));
+                    throw new CommandRuntimeException(Component.nullToEmpty(err.getMessage()));
                 }
             });
             return this;
