@@ -1,36 +1,24 @@
 package com.thekillerbunny.goofyplugin.lua;
 
 import com.mojang.brigadier.builder.ArgumentBuilder;
-import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.tree.CommandNode;
 import com.mojang.datafixers.util.Pair;
-import com.mojang.serialization.Codec;
 import com.mojang.serialization.JsonOps;
 import net.minecraft.commands.CommandRuntimeException;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.ExtraCodecs;
-import net.minecraft.world.entity.player.Player;
 import org.figuramc.figura.avatar.Avatar;
-import org.figuramc.figura.lua.LuaNotNil;
-import org.figuramc.figura.lua.LuaTypeManager;
 import org.figuramc.figura.lua.LuaWhitelist;
 import org.figuramc.figura.lua.api.entity.EntityAPI;
-import org.figuramc.figura.lua.api.entity.PlayerAPI;
 import org.figuramc.figura.lua.docs.LuaMethodDoc;
 import org.figuramc.figura.lua.docs.LuaTypeDoc;
 import org.figuramc.figura.utils.FiguraClientCommandSource;
-import org.figuramc.figura.utils.JsonUtils;
 import org.figuramc.figura.utils.LuaUtils;
 import org.figuramc.figura.utils.TextUtils;
-import org.jetbrains.annotations.NotNull;
 import org.luaj.vm2.*;
-import org.luaj.vm2.ast.Str;
 import org.luaj.vm2.lib.TwoArgFunction;
 
-import java.awt.*;
-import java.util.Objects;
 import java.util.function.BiFunction;
-import java.util.function.Function;
 
 @LuaWhitelist
 public sealed interface Brigadier<T extends Brigadier<T>> {
@@ -63,7 +51,7 @@ public sealed interface Brigadier<T extends Brigadier<T>> {
             return this;
         }
 
-        public Builder<T> executesJava(BiFunction<LuaValue, FiguraClientCommandSource, Integer> callback) {
+        public void executesJava(BiFunction<LuaValue, FiguraClientCommandSource, Integer> callback) {
             builder.executes(c -> callback.apply(new LuaUserdata(c, new LuaTable() {{
                 set("__index", new TwoArgFunction() {
                     @Override
@@ -81,7 +69,6 @@ public sealed interface Brigadier<T extends Brigadier<T>> {
                     }
                 });
             }}), c.getSource()));
-            return this;
         }
 
         @LuaWhitelist
