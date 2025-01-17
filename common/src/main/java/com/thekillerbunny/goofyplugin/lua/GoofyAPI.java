@@ -6,7 +6,9 @@ import java.util.regex.Pattern;
 
 import java.nio.file.Path;
 
-import com.thekillerbunny.goofyplugin.Feature;
+import com.mojang.brigadier.builder.LiteralArgumentBuilder;
+import com.mojang.brigadier.builder.RequiredArgumentBuilder;
+import com.thekillerbunny.goofyplugin.*;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.Minecraft;
 
@@ -39,15 +41,9 @@ import com.google.gson.Gson;
 
 import org.apache.commons.lang3.ObjectUtils;
 
-import org.luaj.vm2.LuaError;
-import org.luaj.vm2.LuaTable;
-import org.luaj.vm2.LuaValue;
-import org.luaj.vm2.Varargs;
+import org.luaj.vm2.*;
 import org.luaj.vm2.lib.ZeroArgFunction;
 
-import com.thekillerbunny.goofyplugin.Enums;
-import com.thekillerbunny.goofyplugin.GoofyPermissionsPlugin;
-import com.thekillerbunny.goofyplugin.GoofyPlugin;
 import com.thekillerbunny.goofyplugin.ducks.FiguraLuaRuntimeAccess;
 
 import net.minecraft.network.chat.Component;
@@ -430,6 +426,24 @@ public class GoofyAPI {
         }catch (Exception ignored) {}
         NetworkStuff.uploadAvatar(owner);
         AvatarList.selectedEntry = null;
+    }
+
+    @LuaWhitelist
+    @LuaMethodDoc("goofy.new_node")
+    public Brigadier<?> newNode(@LuaNotNil String name, String type, LuaFunction complete) {
+        if (type == null) {
+            return new Brigadier.Builder<>(owner, LiteralArgumentBuilder.literal(name));
+        } else {
+            var argumentType = CommandArgumentType.valueOf(type.toUpperCase()).argumentType;
+            var builder = new Brigadier.Builder<>(owner, RequiredArgumentBuilder.argument(name, argumentType));
+            if (complete != null) {
+                builder.builder().suggests((ctx, sug) -> {
+                    complete.call(owner.luaRuntime.typeManager.javaToLua(new Brigadier.Suggestions(sug)).arg1(), builder.wrapArgs(ctx));
+                    return sug.buildFuture();
+                });
+            }
+            return builder;
+        }
     }
 
     @LuaWhitelist
