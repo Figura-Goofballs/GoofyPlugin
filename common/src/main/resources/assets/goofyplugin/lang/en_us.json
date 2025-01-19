@@ -1,4 +1,6 @@
 {
+  "goofyplugin.error.unknown": "Something bad happened",
+  "goofyplugin.error.while_parsing_error": "Error while parsing error: %s",
   "goofyplugin.gui.goofyscreen.ok.tooltip": "Press this to return to the previous screen",
   "goofyplugin.gui.goofyscreen": "Example Screen",
   "goofyplugin.permissions.value.can_log": "Can Log",
