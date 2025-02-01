@@ -63,33 +63,49 @@
               JAVA_HOME=${pkgs.jdk17} ${pkgs.gradle}/bin/gradle -Pminecraft_version=${minecraft} -Pminecraft_version_out=${minecraft-out} -P fabric_api_version=${fabric-api} -P loom_version=${loom} ${task} "$@"
             ''}";
           };
-          build1 = taskFor {
+          build21 = taskFor {
             task = "build";
-            minecraft = "1.20.1";
-            fabric-api = "0.83.0";
-            loom = "1.2-SNAPSHOT";
+            minecraft = "1.21";
+            minecraft-out = "1.21";
+            fabric-api = "0.100.0";
+            loom = "1.6-SNAPSHOT";
           };
-          build4 = taskFor {
+          build21-1 = taskFor {
             task = "build";
-            minecraft = "1.20.1";
-            minecraft-out = "1.20.4";
-            fabric-api = "0.83.0";
-            loom = "1.2-SNAPSHOT";
+            minecraft = "1.21";
+            minecraft-out = "1.21.1";
+            fabric-api = "0.100.0";
+            loom = "1.6-SNAPSHOT";
           };
-          run1 = taskFor {
+          build21-4 = taskFor {
+            task = "build";
+            minecraft = "1.21";
+            minecraft-out = "1.21.4";
+            fabric-api = "0.100.0";
+            loom = "1.6-SNAPSHOT";
+          };
+          run21 = taskFor {
             task = "runClient";
-            minecraft = "1.20.1";
-            fabric-api = "0.83.0";
-            loom = "1.2-SNAPSHOT";
+            minecraft = "1.21";
+            minecraft-out = "1.21";
+            fabric-api = "0.100.0";
+            loom = "1.6-SNAPSHOT";
           };
-          run4 = taskFor {
+          run21-1 = taskFor {
             task = "runClient";
-            minecraft = "1.20.1";
-            minecraft-out = "1.20.4";
-            fabric-api = "0.83.0";
-            loom = "1.2-SNAPSHOT";
+            minecraft = "1.21";
+            minecraft-out = "1.21.1";
+            fabric-api = "0.100.0";
+            loom = "1.6-SNAPSHOT";
           };
-          default = run1;
+          run21-4 = taskFor {
+            task = "runClient";
+            minecraft = "1.21";
+            minecraft-out = "1.21.4";
+            fabric-api = "0.100.0";
+            loom = "1.6-SNAPSHOT";
+          };
+          default = run21-1;
 
           code.type = "app";
           code.program = with pkgs; "${writeScript "${name}-code" ''

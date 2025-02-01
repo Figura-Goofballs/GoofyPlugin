@@ -1,5 +1,7 @@
 package com.thekillerbunny.goofyplugin.lua;
 
+import com.thekillerbunny.goofyplugin.GoofyPlugin;
+
 import com.google.gson.Gson;
 import com.mojang.serialization.JsonOps;
 import com.neovisionaries.ws.client.WebSocket;

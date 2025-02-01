@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 
 import java.nio.file.Path;
 
+import com.thekillerbunny.goofyplugin.GoofyPlugin;
 import com.thekillerbunny.goofyplugin.Feature;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.Minecraft;
