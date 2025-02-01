@@ -12,7 +12,7 @@ import net.minecraft.client.gui.Gui;
 
 @Mixin(Gui.class)
 public class GuiMixin {
-    @Inject(method = "renderItemHotbar", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "renderHotbar", at = @At("HEAD"), cancellable = true)
     public void renderHotbar(CallbackInfo ci) {
         if (GoofyPlugin.disabledElements.get(GuiElement.HOTBAR)) {
             ci.cancel();

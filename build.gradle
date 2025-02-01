@@ -13,7 +13,7 @@ architectury {
 
 subprojects {
     apply plugin: "dev.architectury.loom"
-	  //apply plugin: "io.github.juuxel.loom-vineflower"
+	apply plugin: "io.github.juuxel.loom-vineflower"
 
     loom {
         silentMojangMappingsLicense()

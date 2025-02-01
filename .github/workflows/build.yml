@@ -7,7 +7,7 @@ name: Build GoofyPlugin with Gradle
 on:
   push:
     branches:
-      - 1-21
+      - main
   pull_request:
 
 jobs:
@@ -26,14 +26,11 @@ jobs:
       - name: Run checks
         run: nix flake check --log-format bar-with-logs
 
-      - name: Build 1.21 using Nix
-        run: nix run --log-format bar-with-logs .#build21
+      - name: Build 1.20.1 using Nix
+        run: nix run --log-format bar-with-logs .#build1
 
-      - name: Build 1.21.1 using Nix
-        run: nix run --log-format bar-with-logs .#build21-1
-
-      - name: Build 1.21.4 using Nix
-        run: nix run --log-format bar-with-logs .#build21-4
+      - name: Build 1.20.4 using Nix
+        run: nix run --log-format bar-with-logs .#build4
 
       - name: Upload Fabric artifacts to GitHub
         uses: actions/upload-artifact@v4
