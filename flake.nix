@@ -129,6 +129,7 @@
             fi
             jq -r .components[]\|select\(.cachedName==\"Minecraft\"\).cachedVersion mmc-pack.json | xargs bash ${builtins.toFile "install-2-electric-boogaloo" ''
               set -e
+              shopt -s dotglob
               cd *minecraft/mods/ >/dev/null
               test -f fabric-api-*.jar || echo "Remember to install Fabric API — proceeding anyway…"
               rm -f goofyfiguraplugin-*.jar
