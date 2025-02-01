@@ -15,6 +15,7 @@
     "GameRendererMixin",
     "GuiMixin",
     "LevelRendererMixin",
+    "PlayerStatusWidgetMixin",
     "PlayerTabOverlayMixin",
     "ScreenMixin",
     "UserDataMixin"
