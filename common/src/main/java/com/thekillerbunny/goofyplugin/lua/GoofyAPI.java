@@ -1,6 +1,8 @@
 package com.thekillerbunny.goofyplugin.lua;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.function.Consumer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -11,7 +13,6 @@ import com.thekillerbunny.goofyplugin.Feature;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.Minecraft;
 
-import org.apache.commons.lang3.Range;
 import org.figuramc.figura.FiguraMod;
 import org.figuramc.figura.avatar.Avatar;
 import org.figuramc.figura.avatar.Badges;
@@ -487,6 +488,30 @@ public class GoofyAPI {
 
     @LuaWhitelist
     @LuaMethodDoc(
+            overloads = {
+                    @LuaMethodOverload(
+                            argumentTypes = {FiguraVec3.class},
+                            argumentNames = {"velocity"}
+                    ),
+                    @LuaMethodOverload(
+                            argumentTypes = {Double.class, Double.class, Double.class},
+                            argumentNames = {"x", "y", "z"}
+                    )
+            },
+            value = "goofy.movement_enabled"
+    )
+    public boolean movementEnabled() {
+        AtomicBoolean enabled = new AtomicBoolean(false);
+        runIfMovementEnabled(player -> enabled.set(true));
+        return enabled.get();
+    }
+
+    public void runIfMovementEnabled(Consumer<LocalPlayer> callback) {
+        if (FiguraMod.isLocal(owner.owner) && ((Object) mc.player) instanceof LocalPlayer player && (mc.isLocalServer() || player.hasPermissions(2))) callback.accept(player);
+    }
+
+    @LuaWhitelist
+    @LuaMethodDoc(
       overloads = {
         @LuaMethodOverload(
           argumentTypes = {FiguraVec3.class},
@@ -500,20 +525,10 @@ public class GoofyAPI {
       value = "goofy.set_velocity"
     )
     public void setVelocity(@LuaNotNil Object x, Double y, Double z) {
-      if (!FiguraMod.isLocal(owner.owner)) {
-          return;
-      }
-      
-      LocalPlayer player = this.mc.player;
-
-      if (player == null) {
-        return;
-      }
-      
-      if (player.hasPermissions(2) || this.mc.isLocalServer()) {
+      runIfMovementEnabled(player -> {
         FiguraVec3 velocity = LuaUtils.parseVec3("setVelocity", x, y, z);
         player.setDeltaMovement(velocity.asVec3());
-      }
+      });
     }
 
     @LuaWhitelist
@@ -531,20 +546,10 @@ public class GoofyAPI {
       value = "goofy.set_pos"
     )
     public void setPos(@LuaNotNil Object x, Double y, Double z) {
-      if (!FiguraMod.isLocal(owner.owner)) {
-          return;
-      }
-      
-      LocalPlayer player = this.mc.player;
-
-      if (player == null) {
-        return;
-      }
-      
-      if (player.hasPermissions(2) || this.mc.isLocalServer()) {
+        runIfMovementEnabled(player -> {
         FiguraVec3 pos = LuaUtils.parseVec3("setPos", x, y, z);
         player.setPos(pos.asVec3());
-      }
+      });
     }
     
     @LuaWhitelist
@@ -563,21 +568,11 @@ public class GoofyAPI {
     )
 
     public void setRot(@LuaNotNil Object x, Double y) {
-      if (!FiguraMod.isLocal(owner.owner)) {
-          return;
-      }
-      
-      LocalPlayer player = this.mc.player;
-
-      if (player == null) {
-        return;
-      }
-      
-      if (player.hasPermissions(2) || this.mc.isLocalServer()) {
+        runIfMovementEnabled(player -> {
         FiguraVec2 rot = LuaUtils.parseVec2("setRot", x, y);
         player.setXRot((float) rot.x);
         player.setYRot((float) rot.y);
-      }
+      });
     }
 
     @LuaWhitelist
@@ -592,19 +587,9 @@ public class GoofyAPI {
     )
 
     public void setBodyRot(@LuaNotNil double rot) {
-      if (!FiguraMod.isLocal(owner.owner)) {
-          return;
-      }
-      
-      LocalPlayer player = this.mc.player;
-
-      if (player == null) {
-        return;
-      }
-      
-      if (player.hasPermissions(2) || this.mc.isLocalServer()) {
+        runIfMovementEnabled(player -> {
         player.setYBodyRot((float) rot);
-      }
+      });
     }
 
     @Override
