@@ -10,6 +10,7 @@
     "EventsAPIMixin",
     "FiguraAPIManagerMixin",
     "FiguraDocsManagerMixin",
+    "FiguraFutureMixin",
     "FiguraGlobalsDocsMixin",
     "FiguraLuaRuntimeMixin",
     "GameRendererMixin",

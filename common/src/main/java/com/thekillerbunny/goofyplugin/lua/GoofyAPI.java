@@ -1,15 +1,20 @@
 package com.thekillerbunny.goofyplugin.lua;
 
 import java.util.*;
+import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import java.nio.file.Path;
 
+import com.mojang.datafixers.util.Either;
 import com.thekillerbunny.goofyplugin.GoofyPlugin;
 import com.thekillerbunny.goofyplugin.Feature;
+import com.thekillerbunny.goofyplugin.ducks.AvatarAccessor;
+import com.thekillerbunny.goofyplugin.nomixinducks.FiguraFutureMixinAccess;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.Minecraft;
 
@@ -25,6 +30,7 @@ import org.figuramc.figura.config.Configs;
 import org.figuramc.figura.lua.FiguraLuaRuntime;
 import org.figuramc.figura.lua.LuaNotNil;
 import org.figuramc.figura.lua.LuaWhitelist;
+import org.figuramc.figura.lua.api.data.FiguraFuture;
 import org.figuramc.figura.lua.api.event.LuaEvent;
 import org.figuramc.figura.lua.api.nameplate.NameplateAPI;
 import org.figuramc.figura.lua.docs.LuaMethodDoc;
@@ -42,10 +48,10 @@ import com.google.gson.Gson;
 
 import org.apache.commons.lang3.ObjectUtils;
 
-import org.luaj.vm2.LuaError;
-import org.luaj.vm2.LuaTable;
-import org.luaj.vm2.LuaValue;
-import org.luaj.vm2.Varargs;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.luaj.vm2.*;
 import org.luaj.vm2.lib.ZeroArgFunction;
 
 import com.thekillerbunny.goofyplugin.Enums;
@@ -563,6 +569,54 @@ public class GoofyAPI {
         player.setXRot((float) rot.x);
         player.setYRot((float) rot.y);
       });
+    }
+
+    @Contract(mutates = "param1")
+    <T> void addFutureCallback(@NotNull FiguraFuture<T> fut, @NotNull Consumer<Either<Throwable, T>> fn) {
+        //noinspection unchecked
+        ((FiguraFutureMixinAccess<T>) fut).goofyplugin$handlers().add(fn);
+    }
+
+    @Contract(value = "_, !null, _ -> _; _, null, !null -> _; _, null, null -> fail", mutates = "param1")
+    <T> void addFutureCallback(@NotNull FiguraFuture<T> fut, @Nullable Consumer<T> resolved, @Nullable Consumer<Throwable> rejected) {
+        addFutureCallback(fut, e -> {
+            if (resolved != null) e.ifRight(resolved);
+            if (rejected != null) e.ifLeft(rejected);
+        });
+    }
+
+    void enqueue(Runnable r) {
+        ((AvatarAccessor) owner).getEvents().add(r);
+    }
+
+    <T> void resolveFutureWith(FiguraFuture<T> result, Supplier<T> fn) {
+        enqueue(() -> {
+            try {
+                result.complete(fn.get());
+            } catch (Throwable e) {
+                result.error(e);
+            }
+        });
+    }
+
+    @LuaWhitelist
+    @LuaMethodDoc("goofy.when_resolved")
+    void mapFuture(FiguraFuture<?> fut, LuaFunction resolved, LuaFunction rejected) {
+        FiguraFuture<Varargs> result = new FiguraFuture<>();
+        if (fut.isDone()) {
+            if (fut.hasError()) {
+                Throwable e = ((FiguraFutureMixinAccess<?>) fut).goofyplugin$errorObject();
+                resolveFutureWith(result, () -> rejected.invoke(e instanceof LuaError l ? l.getMessageObject() : LuaValue.valueOf(e.getMessage())));
+            } else {
+                resolveFutureWith(result, () -> resolved.invoke(owner.luaRuntime.typeManager.javaToLua(fut.getValue())));
+            }
+        } else {
+            addFutureCallback(
+                fut,
+                resolved == null ? null : x -> resolveFutureWith(result, () -> resolved.invoke(owner.luaRuntime.typeManager.javaToLua(x))),
+                rejected == null ? null : e -> resolveFutureWith(result, () -> rejected.invoke(e instanceof LuaError l ? l.getMessageObject() : LuaValue.valueOf(e.getMessage())))
+            );
+        }
     }
 
     @LuaWhitelist
