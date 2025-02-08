@@ -6,6 +6,7 @@
   "client": [
   ],
   "mixins": [
+    "AvatarAccessor",
     "FiguraLuaRuntimeAccess"
   ],
   "injectors": {
