@@ -55,6 +55,7 @@ import com.thekillerbunny.goofyplugin.ducks.FiguraLuaRuntimeAccess;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.world.entity.player.Abilities;
 
 @LuaWhitelist
 @LuaTypeDoc(name = "GoofyAPI", value = "goofy")
@@ -102,6 +103,23 @@ public class GoofyAPI {
         owner.clearParticles();
         owner.clearSounds();
         owner.closeBuffers();
+    }
+
+    @LuaWhitelist
+    @LuaMethodDoc(
+        overloads = {
+            @LuaMethodOverload(
+                argumentTypes = { Boolean.class },
+                argumentNames = {"canFly"}
+            )
+        },
+        value = "goofy.set_can_fly"
+    )
+    public void setCanFly(@LuaNotNil Boolean canFly) {
+        runIfMovementEnabled(player -> {
+            Abilities abilities = player.getAbilities();
+            abilities.mayfly = canFly;
+        });
     }
 
     @LuaWhitelist
