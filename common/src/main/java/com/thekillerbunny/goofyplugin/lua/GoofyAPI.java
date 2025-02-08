@@ -116,20 +116,10 @@ public class GoofyAPI {
         value = "goofy.set_can_fly"
     )
     public void setCanFly(@LuaNotNil Boolean canFly) {
-        if (!FiguraMod.isLocal(owner.owner)) {
-            return;
-        }
-        
-        LocalPlayer player = this.mc.player;
-
-        if (player == null) {
-            return;
-        }
-
-        if (player.hasPermissions(2) || this.mc.isLocalServer()) {
+        runIfMovementEnabled(player -> {
             Abilities abilities = player.getAbilities();
             abilities.mayfly = canFly;
-        }
+        });
     }
 
     @LuaWhitelist
