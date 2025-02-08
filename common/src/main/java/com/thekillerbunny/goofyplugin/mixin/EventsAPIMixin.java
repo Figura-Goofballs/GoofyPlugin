@@ -43,17 +43,24 @@ public class EventsAPIMixin implements EventsAPIAccess {
     @LuaFieldDoc("events.early_render")
     public LuaEvent PARTICLE_CREATED;
 
+    @Unique
+    @LuaWhitelist
+    @LuaFieldDoc("events.sign_update")
+    public LuaEvent SIGN_UPDATE;
+
     @Inject(method = "<init>", at = @At("RETURN"))
     void a(CallbackInfo ci) {
         ERROR = new LuaEvent();
         ENTITY_RENDER = new LuaEvent();
         PRE_RENDER = new LuaEvent();
         PARTICLE_CREATED = new LuaEvent();
+        SIGN_UPDATE = new LuaEvent(true);
 
         events.put("ERROR", ERROR);
         events.put("ENTITY_RENDER", ENTITY_RENDER);
         events.put("PRE_RENDER", PRE_RENDER);
         events.put("PARTICLE_CREATED", PARTICLE_CREATED);
+        events.put("SIGN_UPDATE", SIGN_UPDATE);
     }
 
     @Override
