@@ -10,6 +10,7 @@
   "figura.docs.goofy": "The dumping ground of the figura goofballs",
   "figura.docs.globals.goofy": "The global instance of GoofyAPI",
   "figura.docs.goofy.stop_avatar": "Stops the avatar, as if an error occured",
+  "figura.docs.goofy.set_can_fly": "Sets the mayFly ability on the player.",
   "figura.docs.goofy.regex_match": "Returns a list of matches based on the specified\npattern.",
   "figura.docs.goofy.regex_sub": "Returns a string with all matches of the specified\npattern replaced.",
   "figura.docs.goofy.debug_to_log": "Logs data to the Minecraft Log as a debug message.\nThis will only show up if your Minecraft instance has\ndebug logging enabled.\nCheck with goofy:isDebugEnabled()",

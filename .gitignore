@@ -58,3 +58,7 @@ libs/
 # Nathan backups
 *~
 */.factorypath
+
+# Not sure what to categorize this at
+fabric/bin
+common/bin
