@@ -27,6 +27,7 @@ import org.figuramc.figura.lua.LuaNotNil;
 import org.figuramc.figura.lua.LuaWhitelist;
 import org.figuramc.figura.lua.api.event.LuaEvent;
 import org.figuramc.figura.lua.api.nameplate.NameplateAPI;
+import org.figuramc.figura.lua.api.world.ItemStackAPI;
 import org.figuramc.figura.lua.docs.LuaMethodDoc;
 import org.figuramc.figura.lua.docs.LuaMethodOverload;
 import org.figuramc.figura.lua.docs.LuaTypeDoc;
@@ -180,6 +181,15 @@ public class GoofyAPI {
             GoofyPlugin.LOGGER.debug("[" + owner.entityName + "] - " + data);
         }
     }
+
+	/**
+	 * @see https://github.com/FiguraMC/Figura/pull/309
+	*/
+	@LuaMethodDoc("goofy.get_cursor_item")
+	@LuaWhitelist
+	public ItemStackAPI getCursorItem() {
+		return ItemStackAPI.verify(mc.player.containerMenu.getCarried());
+	}
 
     @LuaWhitelist
     @LuaMethodDoc(
