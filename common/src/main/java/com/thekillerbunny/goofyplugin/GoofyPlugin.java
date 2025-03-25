@@ -4,6 +4,7 @@ import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
 
 import com.thekillerbunny.goofyplugin.lua.BackendAPI;
+import com.thekillerbunny.goofyplugin.lua.InsertionMap;
 import org.figuramc.figura.avatar.Avatar;
 import org.figuramc.figura.entries.FiguraAPI;
 import org.figuramc.figura.entries.annotations.FiguraAPIPlugin;
@@ -92,6 +93,7 @@ public class GoofyPlugin implements FiguraAPI {
     public static final Class<?>[] GOOFY_PLUGIN_CLASSES = new Class[] {
             GoofyPlugin.class,
             BackendAPI.class,
+            InsertionMap.class,
     };
 
 }
