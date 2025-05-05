@@ -28,9 +28,6 @@ public class FiguraDocsManagerMixin {
         GLOBAL_CHILDREN.put("collection", List.of(
             CollectionAPI.class
         ));
-        GLOBAL_CHILDREN.put("backend", List.of(
-            BackendAPI.class
-        ));
 
         NAME_MAP.put(Enums.GuiElement.class, "GuiElement");
     }
