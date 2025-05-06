@@ -4,6 +4,7 @@ import org.figuramc.figura.lua.LuaWhitelist;
 import org.figuramc.figura.lua.api.event.EventsAPI;
 import org.figuramc.figura.lua.api.event.LuaEvent;
 import org.figuramc.figura.lua.docs.LuaFieldDoc;
+import org.luaj.vm2.Lua;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -37,15 +38,22 @@ public class EventsAPIMixin implements EventsAPIAccess {
     @LuaFieldDoc("events.early_render")
     public LuaEvent PRE_RENDER;
 
+    @Unique
+    @LuaWhitelist
+    @LuaFieldDoc("events.early_render")
+    public LuaEvent PARTICLE_CREATED;
+
     @Inject(method = "<init>", at = @At("RETURN"))
     void a(CallbackInfo ci) {
         ERROR = new LuaEvent();
         ENTITY_RENDER = new LuaEvent();
         PRE_RENDER = new LuaEvent();
+        PARTICLE_CREATED = new LuaEvent();
 
         events.put("ERROR", ERROR);
         events.put("ENTITY_RENDER", ENTITY_RENDER);
         events.put("PRE_RENDER", PRE_RENDER);
+        events.put("PARTICLE_CREATED", PARTICLE_CREATED);
     }
 
     @Override
