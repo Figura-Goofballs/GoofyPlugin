@@ -15,7 +15,12 @@ public class GameRendererMixin {
     void render(float tickDelta, long startTime, boolean tick, CallbackInfo ci) {
         for (var avatar: AvatarManager.getLoadedAvatars()) {
             //noinspection DataFlowIssue: the `return null` is never reachable because of the error() call, but Java can't encode never types
-            if (avatar.luaRuntime != null && (Object) avatar.run(((EventsAPIAccess) avatar.luaRuntime.events).GoofyPlugin$getPreRenderEvent(), avatar.worldRender, tickDelta, startTime, tick) instanceof Varargs v && v.toboolean(1) && avatar.isHost) ci.cancel();
+            if (
+                avatar.luaRuntime != null && (Object) avatar.run(
+                    ((EventsAPIAccess) avatar.luaRuntime.events).GoofyPlugin$getPreRenderEvent(),
+                    avatar.worldRender, tickDelta, startTime, tick
+                ) instanceof Varargs v && v.toboolean(1) && avatar.isHost
+            ) ci.cancel();
         }
     }
 }
