@@ -19,6 +19,7 @@
   "figura.docs.goofy.error_to_log": "Logs data to the Minecraft Log as an error.\nThis will only show up if your Minecraft instance has\nerror logging enabled (it is by default).\nCheck with goofy:isErrorEnabled()",
   "figura.docs.goofy.trace_to_log": "Logs data to the Minecraft Log as a stacktrace.\nThis will only show up if your Minecraft instance has\ntrace logging enabled.\nCheck with goofy:isTraceEnabled()",
   "figura.docs.goofy.is_debug_enabled": "Checks if debug logging is enabled",
+  "figura.docs.goofy.get_cursor_item": "Gets the item currently held by the cursor, or air if none is held",
   "figura.docs.goofy.is_info_enabled": "Checks if info logging is enabled",
   "figura.docs.goofy.is_warn_enabled": "Checks if warn logging is enabled",
   "figura.docs.goofy.is_error_enabled": "Checks if error logging is enabled",
