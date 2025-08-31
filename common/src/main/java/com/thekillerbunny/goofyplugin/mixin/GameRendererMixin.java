@@ -16,7 +16,7 @@ public class GameRendererMixin {
     void render(DeltaTracker tracker, boolean tick, CallbackInfo ci) {
         for (var avatar: AvatarManager.getLoadedAvatars()) {
             //noinspection DataFlowIssue: the `return null` is never reachable because of the error() call, but Java can't encode never types
-            if (avatar.luaRuntime != null && (Object) avatar.run(((EventsAPIAccess) avatar.luaRuntime.events).GoofyPlugin$getPreRenderEvent(), avatar.worldRender, tracker.getGameTimeDeltaTicks(), null, tick) instanceof Varargs v && v.toboolean(1) && avatar.isHost) ci.cancel();
+            if (avatar.luaRuntime != null && (Object) avatar.run(((EventsAPIAccess) avatar.luaRuntime.events).GoofyPlugin$getPreRenderEvent(), avatar.worldRender, tracker.getGameTimeDeltaPartialTick(true), null, tick) instanceof Varargs v && v.toboolean(1) && avatar.isHost) ci.cancel();
         }
     }
 }
