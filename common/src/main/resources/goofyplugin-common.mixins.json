@@ -18,6 +18,7 @@
     "PlayerStatusWidgetMixin",
     "PlayerTabOverlayMixin",
     "ScreenMixin",
+    "ServerboundSignUpdatePacketMixin",
     "UserDataMixin"
   ],
   "injectors": {
