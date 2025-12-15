@@ -12,7 +12,6 @@
     "FiguraDocsManagerMixin",
     "FiguraGlobalsDocsMixin",
     "FiguraLuaRuntimeMixin",
-    "GameRendererMixin",
     "GuiMixin",
     "LevelRendererMixin",
     "PlayerStatusWidgetMixin",
