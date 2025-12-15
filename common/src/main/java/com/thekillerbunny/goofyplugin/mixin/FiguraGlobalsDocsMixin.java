@@ -12,7 +12,4 @@ public class FiguraGlobalsDocsMixin {
     
     @LuaFieldDoc("globals.collection")
     public CollectionAPI collection;
-    
-    @LuaFieldDoc("globals.backend")
-    public BackendAPI backend;
 }
