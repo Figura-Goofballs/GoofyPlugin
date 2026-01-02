@@ -14,7 +14,6 @@
     "FiguraLuaRuntimeMixin",
     "GameRendererMixin",
     "GuiMixin",
-    "LevelRendererMixin",
     "PlayerStatusWidgetMixin",
     "PlayerTabOverlayMixin",
     "ScreenMixin",

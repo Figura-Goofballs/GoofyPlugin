@@ -32,20 +32,13 @@ public class EventsAPIMixin implements EventsAPIAccess {
     @LuaFieldDoc("events.entity_render")
     public LuaEvent ENTITY_RENDER;
 
-    @Unique
-    @LuaWhitelist
-    @LuaFieldDoc("events.early_render")
-    public LuaEvent PRE_RENDER;
-
     @Inject(method = "<init>", at = @At("RETURN"))
     void a(CallbackInfo ci) {
         ERROR = new LuaEvent();
         ENTITY_RENDER = new LuaEvent();
-        PRE_RENDER = new LuaEvent();
 
         events.put("ERROR", ERROR);
         events.put("ENTITY_RENDER", ENTITY_RENDER);
-        events.put("PRE_RENDER", PRE_RENDER);
     }
 
     @Override
@@ -57,7 +50,4 @@ public class EventsAPIMixin implements EventsAPIAccess {
     public LuaEvent GoofyPlugin$getEntityRenderEvent() {
         return ENTITY_RENDER;
     }
-
-    @Override
-    public LuaEvent GoofyPlugin$getPreRenderEvent() { return PRE_RENDER; }
 }
