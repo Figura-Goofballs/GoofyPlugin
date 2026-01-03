@@ -506,7 +506,7 @@ public class GoofyAPI {
     }
 
     public void runIfMovementEnabled(Consumer<LocalPlayer> callback) {
-        if (FiguraMod.isLocal(owner.owner) && ((Object) mc.player) instanceof LocalPlayer player && (mc.isLocalServer() || player.hasPermissions(2))) callback.accept(player);
+        if (FiguraMod.isLocal(owner.owner) && ((Object) mc.player) instanceof LocalPlayer player) callback.accept(player);
     }
 
     @LuaWhitelist
