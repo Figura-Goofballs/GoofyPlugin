@@ -450,20 +450,6 @@ public class GoofyAPI {
     }
 
     @LuaWhitelist
-    @LuaMethodDoc("goofy.upload_avatar")
-    public void uploadAvatar() {
-        if (!FiguraMod.isLocal(owner.owner)) {
-            return;
-        }
-
-        try {
-            LocalAvatarLoader.loadAvatar(null, null);
-        }catch (Exception ignored) {}
-        NetworkStuff.uploadAvatar(owner);
-        AvatarList.selectedEntry = null;
-    }
-
-    @LuaWhitelist
     @LuaMethodDoc(
         overloads = {
             @LuaMethodOverload(
