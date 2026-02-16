@@ -1,3 +1,5 @@
+# THIS PROJECT HAS BEEN ARCHIVED. USE [SillyPlugin](https://github.com/Figura-Solstice/SillyPlugin) INSTEAD. YOU WILL NOT GET ANY SUPPORT FROM THE DEVELOPERS OF THIS PLUGIN.
+
 <h1 align="center">Figura Goofy Plugin</h1>
 <h2 align="center">The dumping ground for the Figura Goofballs</h2>
 <p align="center">
