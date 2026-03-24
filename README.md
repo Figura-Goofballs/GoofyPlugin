@@ -1,5 +1,7 @@
 # THIS PROJECT HAS BEEN ARCHIVED. USE [SillyPlugin](https://github.com/Figura-Solstice/SillyPlugin) INSTEAD. YOU WILL NOT GET ANY SUPPORT FROM THE DEVELOPERS OF THIS PLUGIN.
 
+Hey all, Bunny here! I decided to unarchive this for a bit so I can explain my reasoning. For a while, even before Silly started being developed by Niko, I've been wanting to move on from this project. It started as a collaboration between me and Pool, but around halfway through this project's life he stopped adding features and helping me fix bugs, so I've been the sole maintainer. The main reason I didn't stop maintaining this project earlier was that there wasn't a viable alternative for many people, and too many people relied on what it added. This changed when Niko told me they were developing Silly, and when it was finally finished, I felt that there was no longer a need for me to keep maintaining this project I've wanted to stop maintaining since long before then. I hope y'all have some silly endeavors and have a great day!
+
 <h1 align="center">Figura Goofy Plugin</h1>
 <h2 align="center">The dumping ground for the Figura Goofballs</h2>
 <p align="center">
